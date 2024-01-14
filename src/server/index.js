@@ -19,12 +19,13 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/auth/login', (req, res) => {
-})
+// app.get('/auth/login', (req, res) => {
+// TODO: Implement Spotify OAuth login handler
+// })
 
-app.get('/auth/callback', (req, res) => {
-
-})
+// app.get('/auth/callback', (req, res) => {
+// TODO: Implement Spotify OAuth callback handler
+// })
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
