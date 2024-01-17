@@ -1,0 +1,10 @@
+.sidebar {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 8px;
+
+    > * {
+        background-color: $background-main;
+        border-radius: $border-radius;
+    }
+}
