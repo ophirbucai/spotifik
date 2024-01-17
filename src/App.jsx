@@ -1,39 +1,22 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/images/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Layout } from "./components/Layout.jsx"
+import { Search, Home, Track, Playlist, Artist, NotFound } from './pages'
+import { Suspense } from 'react'
 
 function App() {
-    const [count, setCount] = useState(0)
-    useEffect(() => {
-        fetch('/api')
-            .then((res) => res.text())
-            .then(console.log) // uncomment to test proxy
-    }, [])
-
     return (
-        <>
-            he
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src={viteLogo} className="logo" alt="Vite logo"/>
-                </a>
-                <a href="https://react.dev" target="_blank" rel="noreferrer">
-                    <img src={reactLogo} className="logo react" alt="React logo"/>
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Suspense><Home /></Suspense>} />
+                    <Route path="/search" element={<Suspense><Search /></Suspense>} />
+                    <Route path="/artist/:id" element={<Suspense><Artist /></Suspense>} />
+                    <Route path="/playlist/:id" element={<Suspense><Playlist /></Suspense>} />
+                    <Route path="/track/:id" element={<Suspense><Track /></Suspense>} />
+                </Route>
+                <Route path="*" element={<Suspense><NotFound /></Suspense>} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

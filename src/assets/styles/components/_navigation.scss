@@ -1,0 +1,36 @@
+.navigation {
+    height: max-content;
+    list-style: none;
+    padding: 8px 12px;
+    margin: 0;
+    border-radius: $border-radius;
+    background: $background-base;
+
+    li {
+        padding: 4px 12px;
+    }
+
+    a {
+        width: 100%;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.2s ease-in-out;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 20px;
+        height: 40px;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        span {
+            display: inline-block;
+        }
+
+        &:hover {
+
+        }
+    }
+}
