@@ -1,5 +1,3 @@
-import { Navigation } from "./Navigation.jsx"
-import { Library } from "./Library.jsx"
 
 export const Sidebar = ({ children }) => {
     // TODO: Resize capabilities
