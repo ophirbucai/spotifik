@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 export const MainHeader = () => {
     const navigate = useNavigate()
-    console.log(document.referrer.indexOf(window.location.host) !== -1);
+    console.log(document.referrer.indexOf(window.location.host) !== -1)
     // TODO: Make the header position fixed with a blurred bg when scrolling down and static when scrolling up.
     return (
         <header className="main-header">
