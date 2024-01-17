@@ -4,7 +4,7 @@ export default function NotFound() {
     return (
         <div className="not-found">
             <div className="icon">
-                <img src="/vite.svg" />
+                <img src="/vite.svg" alt="Vite icon" />
             </div>
             <div className="content">
                 <h1>Page not found</h1>
