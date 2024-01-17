@@ -1,0 +1,8 @@
+import { lazy } from "react"
+
+export const Search = lazy(() => import('./Search'))
+export const Home = lazy(() => import('./Home'))
+export const Track = lazy(() => import('./Track'))
+export const Playlist = lazy(() => import('./Playlist'))
+export const Artist = lazy(() => import('./Artist'))
+export const NotFound = lazy(() => import('./NotFound'))
