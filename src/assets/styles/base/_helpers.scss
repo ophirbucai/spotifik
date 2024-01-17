@@ -1,0 +1,10 @@
+.btn {
+    @include btn;
+
+    &-primary {
+        @include btn($type: primary);
+        &-large {
+            @include btn($type: primary)
+        }
+    }
+}
