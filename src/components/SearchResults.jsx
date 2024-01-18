@@ -2,8 +2,13 @@ import PropTypes from 'prop-types'
 
 export const SearchResults = ({ results }) => {
     return (
-        <div className="search-results">
-            {results.map(({ thumbnail, trackName, artistName, trackLength, explicit }, i) => <div key={i} className="search-result">{artistName} - {trackName}</div>)}
+        <div className='search-results'>
+            {results.map(({ thumbnail, trackName, artistName, trackLength, explicit }, i) => (
+                <div key={i} className='search-result'>
+                    <img src={new URL(thumbnail)} alt={`Play ${trackName} by ${artistName}`}  />
+                    {artistName} - {trackName}
+                </div>
+            ))}
         </div>
     )
 }
