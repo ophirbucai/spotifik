@@ -3,9 +3,24 @@
 
     }
     .search-results {
+        display: flex;
 
         .search-result {
-
+            width: 200px;
+            height: 200px;
+            display: grid;
+            grid-template-areas: 'img / title';
+            align-items: end;
+            justify-items: center;
+            img {
+                grid-area: img;
+                width: 100%;
+                height: 100%;
+                border-radius: $border-radius;
+            }
+            span {
+                grid-area: title;
+            }
         }
     }
 }

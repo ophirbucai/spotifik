@@ -6,7 +6,7 @@ export const SearchResults = ({ results }) => {
             {results.map(({ thumbnail, trackName, artistName, trackLength, explicit }, i) => (
                 <div key={i} className='search-result'>
                     <img src={new URL(thumbnail)} alt={`Play ${trackName} by ${artistName}`}  />
-                    {artistName} - {trackName}
+                    <span>{artistName} - {trackName}</span>
                 </div>
             ))}
         </div>
