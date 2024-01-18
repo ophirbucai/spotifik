@@ -1,7 +1,7 @@
 export const searchService = {
     search: (searchTerm) => {
         try {
-            return dummyResults.filter(({ trackName, artistName }) => `${trackName}${artistName}`.includes(searchTerm))
+            return dummyResults.filter(({ trackName, artistName }) => `${trackName}${artistName}`.match(new RegExp(searchTerm, 'gi')))
         } catch (e) {
             console.log(e)
         }
