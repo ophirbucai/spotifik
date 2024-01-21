@@ -1,5 +1,3 @@
-$colorbtn: #b3b3b3;
-
 .navigation {
     height: max-content;
     list-style: none;
@@ -17,7 +15,7 @@ $colorbtn: #b3b3b3;
         text-decoration: none;
         color: $colorbtn;
         font-weight: 700;
-        transition: color 0.2s ease-in-out;
+        @include transition($property: color);
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -31,8 +29,36 @@ $colorbtn: #b3b3b3;
             display: inline-block;
         }
 
-        &:hover {
+        &:hover, &.active {
+            color: $colorbtnactive;
 
+            .home-icon {
+                stroke: $colorbtnactive;
+            }
+        }
+
+        &.active [class*="-icon"],
+        &:hover .search-icon {
+            fill: $colorbtnactive;
+        }
+
+        .home-icon {
+            stroke: $colorbtn;
+            stroke-width: 4px;
+            stroke-linecap: square;
+            @include transition($property: stroke);
+        }
+
+        .search-icon {
+            fill: $colorbtn;
+            @include transition($property: fill);
+
+            &-inner {
+                fill: transparent;
+                .active > & {
+                    fill: $colorbtnactive;
+                }
+            }
         }
     }
 }
