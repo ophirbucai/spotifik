@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom"
+import { GoBell} from "react-icons/go";
+import { SlUser} from "react-icons/sl";
+import { HiOutlineArrowDownCircle } from "react-icons/hi2";
 
 export const MainHeader = () => {
     const navigate = useNavigate()
@@ -11,8 +14,8 @@ export const MainHeader = () => {
                 {/*<button disabled={} onClick={() => navigate(1)}>{'>'}</button>*/}
             </div>
             <div>
-                <button>Install app</button>
-                <button>Bell</button>
+                <button>  Install app</button>
+                <button>Bell </button>
                 <button>Profile</button>
             </div>
         </header>
