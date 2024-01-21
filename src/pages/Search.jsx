@@ -1,6 +1,6 @@
 export default function Search() {
 
-    const API_KEY = 'AIzaSyDutAXa_YESM8IfZhYWTJiKp019avOc0iw';
+    const API_KEY = 'api_key';
     const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
     function searchMovies() {
