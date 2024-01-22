@@ -3,3 +3,58 @@
     grid-area: now-playing-row;
     padding: 8px 12px;
 }
+
+
+.switch-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.previous-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.pause-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.next-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.disablerepeat-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.nowplayingview-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.queue-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.connecttodevice-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
+
+.mute-icon{
+    stroke-width: 14px;
+    stroke-linecap: square;
+    fill: $colorbtn
+}
