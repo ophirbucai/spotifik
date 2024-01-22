@@ -1,0 +1,18 @@
+.genre {
+    margin-top: $panel-gap;
+    padding: 50px $panel-gap $panel-gap;
+    border-top-right-radius: $panel-border-radius;
+    border-top-left-radius: $panel-border-radius;
+    background-image: linear-gradient(
+        to bottom,
+        #f1dc70,
+        #f1dc70 50%,
+        transparent 100%,
+    );
+    h1 {
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: capitalize;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
