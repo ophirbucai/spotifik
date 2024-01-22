@@ -41,7 +41,7 @@
         &:hover .search-icon {
             fill: $colorbtnactive;
         }
-
+        
         .home-icon {
             stroke: $colorbtn;
             stroke-width: 4px;
@@ -60,5 +60,12 @@
                 }
             }
         }
+
+        .logo-icon{
+            stroke-width: 15px;
+            stroke-linecap: square;
+            fill:white
+        }
     }
+   
 }
