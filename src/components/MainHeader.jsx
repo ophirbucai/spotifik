@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { GoBell} from "react-icons/go";
-import { SlUser} from "react-icons/sl";
-import { HiOutlineArrowDownCircle } from "react-icons/hi2";
+import InstallIcon from "../assets/icons/install.svg?react"
+import ProfileIcon from "../assets/icons/profile.svg?react"
+import WhatsnewIcon from "../assets/icons/whatsnew.svg?react"
+
 
 export const MainHeader = () => {
     const navigate = useNavigate()
@@ -14,9 +15,9 @@ export const MainHeader = () => {
                 {/*<button disabled={} onClick={() => navigate(1)}>{'>'}</button>*/}
             </div>
             <div>
-                <button>  Install app</button>
-                <button>Bell </button>
-                <button>Profile</button>
+                <button><InstallIcon className="install-icon" />Install app</button>
+                <button> <WhatsnewIcon className="whatsnew-icon" /></button>
+                <button><ProfileIcon className="profile-icon" />Profile</button>
             </div>
         </header>
     )
