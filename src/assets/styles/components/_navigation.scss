@@ -13,7 +13,7 @@
     a {
         width: 100%;
         text-decoration: none;
-        color: $colorbtn;
+        color: $colorsubtle;
         font-weight: 700;
         @include transition($property: color);
         display: -webkit-box;
@@ -30,33 +30,33 @@
         }
 
         &:hover, &.active {
-            color: $colorbtnactive;
+            color: $coloractive;
 
             .home-icon {
-                stroke: $colorbtnactive;
+                stroke: $coloractive;
             }
         }
 
         &.active [class*="-icon"],
         &:hover .search-icon {
-            fill: $colorbtnactive;
+            fill: $coloractive;
         }
-        
+
         .home-icon {
-            stroke: $colorbtn;
+            stroke: $colorsubtle;
             stroke-width: 4px;
             stroke-linecap: square;
             @include transition($property: stroke);
         }
 
         .search-icon {
-            fill: $colorbtn;
+            fill: $colorsubtle;
             @include transition($property: fill);
 
             &-inner {
                 fill: transparent;
                 .active > & {
-                    fill: $colorbtnactive;
+                    fill: $coloractive;
                 }
             }
         }
@@ -67,5 +67,5 @@
             fill:white
         }
     }
-   
+
 }

@@ -1,5 +1,10 @@
 $background-base: #121212;
+$background-highlight: hsla(0,0%,100%,.1);
 $background-main: #282828;
+//$background-highlight: #1a1a1a;
+//$background-main: rgb(0 0 0 / 20%);
+
+
 /* Border Radius */
 
 $border-radius: 8px;
@@ -7,6 +12,6 @@ $border-radius-full: 9999px;
 
 $panel-gap: 8px;
 
-
-$colorbtn: #b3b3b3;
-$colorbtnactive: #fff;
+$colorsubtle: #b3b3b3;
+$colorsubdued: #a7a7a7;
+$coloractive: #fff;
