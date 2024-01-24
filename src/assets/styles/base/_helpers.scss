@@ -3,8 +3,54 @@
 
     &-primary {
         @include btn($type: primary);
+
         &-large {
             @include btn($type: primary)
         }
+    }
+}
+
+
+.wrapper {
+    display: grid;
+    justify-content: start;
+    grid-template-areas: 'img' 'content';
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    margin-top: $panel-gap;
+
+    &-overlay {
+        grid-area: img;
+        border-top-right-radius: $border-radius;
+        border-top-left-radius: $border-radius;
+        position: relative;
+        &:after {
+            content: '';
+            inset: 0;
+            position: absolute;
+            background: linear-gradient(to top, #000 0%, #000 5%, transparent 25%);
+        }
+
+        img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+        }
+    }
+    &-content {
+        grid-area: content;
+        padding: $panel-gap;
+    }
+
+    h1 {
+        margin-bottom: 32px;
+    }
+
+    h2 {
+        margin-bottom: 8px;
+    }
+    .btn-primary {
+        font-size: 1.2em;
+        padding: 12px 32px;
     }
 }

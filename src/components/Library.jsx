@@ -1,6 +1,7 @@
 import LibraryIcon from '../assets/icons/library.svg?react'
 import RecentsIcon from '../assets/icons/recents.svg?react'
 import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg?react'
+import PlusIcon from '../assets/icons/plus.svg?react'
 import { useState } from 'react'
 
 
@@ -10,7 +11,7 @@ export const Library = () => {
         <div className='library'>
             <header className='library-actions'>
                 <button className='toggle'><LibraryIcon className='icon' />Your Library</button>
-                <span><button className='add'>+</button></span>
+                <button className='add'><PlusIcon className='icon-plus' /></button>
             </header>
             <div className='library-filter'>
                 <div role='group'>

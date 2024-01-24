@@ -13,15 +13,13 @@
         display: flex;
         gap: 8px;
         position: relative;
-        position: relative;
         pointer-events: none;
         padding: 8px 16px;
         div[role='group'] {
             pointer-events: all;
-            max-width: 220px;
+            max-width: var(--sidebar-width, 200px);
             overflow-x: scroll;
             scroll-behavior: smooth;
-            scrollbar-width: none;
             flex-wrap: nowrap;
             display: flex;
             gap: 8px;
@@ -33,12 +31,13 @@
             button {
                 border-radius: $border-radius-full;
                 color: $coloractive;
-                background-color: $background-highlight;
+                background-color: $background-button;
+                @include transition(background-color);
                 span {
                     opacity: 0.5;
                 }
                 &:hover {
-                    background-color: $background-highlight;
+                    background-color: $background-hover;
                 }
             }
         }
@@ -63,10 +62,8 @@
             justify-self: end;
             font-size: 1.7rem;
             border-radius: 50%;
-            &:hover {
-                color: $coloractive;
-                background-color: $background-highlight;
-            }
+            background-color: $background-button;
+            fill: $coloractive;
         }
         .toggle {
             margin-right: auto;
@@ -78,17 +75,12 @@
             font-size: 1rem;
             transition: color 0.2s ease-in-out;
             font-weight: 700;
-            @include transition(color, 0.1s);
+            fill: $colorsubtle;
+            @include transition((color, fill), 0.1s);
 
-            svg {
-                @include transition(fill, 0.1s);
-                fill: $colorsubtle;
-            }
             &:hover {
                 color: $coloractive;
-                svg {
-                    fill: $coloractive;
-                }
+                fill: $coloractive;
             }
         }
 
@@ -103,30 +95,22 @@
             .search {
                 justify-self: start;
                 border-radius: 50%;
-                svg {
-                    fill: $colorsubtle;
-                }
+                fill: $colorsubtle;
+
                 &:hover {
                     background-color: $background-highlight;
-                    svg {
-                        fill: $coloractive;
-                    }
+                    fill: $coloractive;
                 }
             }
             .sort {
                 gap: 5px;
                 color: $colorsubdued;
+                fill: $colorsubdued;
                 @include transition(color, 0.05s);
-
-                svg {
-                    fill: $colorsubdued;
-                }
                 &:hover {
                     color: $coloractive;
                     scale: 1.04;
-                    svg {
-                        fill: $coloractive;
-                    }
+                    fill: $coloractive;
                 }
             }
 

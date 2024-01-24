@@ -11,6 +11,8 @@
 /* Pages */
 @import 'pages/app';
 @import 'pages/home';
+@import 'pages/search';
+@import 'pages/genre';
 @import 'pages/not-found';
 
 /* Components */
@@ -19,3 +21,4 @@
 @import 'components/sidebar';
 @import 'components/library';
 @import 'components/now-playing';
+@import 'components/playlists';
