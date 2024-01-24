@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 export const Sidebar = ({ children }) => {
@@ -23,7 +23,7 @@ export const Sidebar = ({ children }) => {
         return () => {
             document.removeEventListener('mousemove', handleMouseMove)
         }
-    }, [isResizing])
+    }, [isResizing, handleMouseMove])
 
 
     const style = { '--sidebar-width': `${width}px` }
@@ -34,7 +34,10 @@ export const Sidebar = ({ children }) => {
             <label
                 htmlFor='resize'
                 className={'resize-handle'}
-                onMouseDown={() => setIsResizing(true)}
+                onMouseDown={(e) => {
+                    e.stopPropagation()
+                    setIsResizing(true)
+                }}
             >
             </label>
         </nav>
