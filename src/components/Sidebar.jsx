@@ -1,50 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 export const Sidebar = ({ children }) => {
-    // TODO: Resize capabilities
     const [width, setWidth] = useState(200)
     const [isResizing, setIsResizing] = useState(false)
 
-    const ref = useRef(null)
-    // const handleResize = (event) => {
-    //     setWidth(event.target.value)
-    // }
-    // const ref = useRef(null)
-    // const [isResizing, setIsResizing] = useState(false)
-    // const handleMouseDown = (event) => {
-    //     setIsResizing(true)
-    //     setStartX(event.clientX)
-    //     setStartWidth(parseInt(document.defaultView.getComputedStyle(event.target).width, 10))
-    // // }
-    // const handleMouseUp = () => {
-    //     ref?.current.blur()
-    // }
-    // const handleMouseMove = (event) => {
-    //     if (!isResizing) return
-    //     const offset = startX - event.clientX
-    //     const newWidth = startWidth + offset
-    //     setWidth(newWidth)
-    // }
-
-    // useEffect(() => {
-    //     document.addEventListener('mouseup', handleMouseUp)
-    //     return () => {
-    //         document.removeEventListener('mouseup', handleMouseUp)
-    //     }
-    // }, [])
-
-
-    const handleMouseMove = (event) => {
+    const handleMouseMove = useCallback((event) => {
         if (!isResizing) return
+        const offset = 42
         const maxWidth = 400
         const minWidth = 180
-        if (event.clientX > maxWidth || event.clientX < minWidth) return
-        setWidth(event.clientX - 42)
-    }
+        if (event.clientX - offset > maxWidth || event.clientX - offset < minWidth) return
+        setWidth(() => event.clientX - offset)
+    }, [])
 
     useEffect(() => {
         if (!isResizing) return
+
         document.addEventListener('mousemove', handleMouseMove)
         document.addEventListener('mouseup', () => setIsResizing(false))
 
@@ -57,7 +29,7 @@ export const Sidebar = ({ children }) => {
     const style = { '--sidebar-width': `${width}px` }
 
     return (
-        <nav className='sidebar' style={style} ref={ref}>
+        <nav className='sidebar' style={style}>
             {children}
             <label
                 htmlFor='resize'
