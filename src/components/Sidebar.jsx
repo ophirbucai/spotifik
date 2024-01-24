@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export const Sidebar = ({ children }) => {
     // TODO: Resize capabilities
-    const [width, setWidth] = useState(220)
+    const [width, setWidth] = useState(200)
     const [isResizing, setIsResizing] = useState(false)
 
     const ref = useRef(null)
@@ -39,8 +39,8 @@ export const Sidebar = ({ children }) => {
         if (!isResizing) return
         const maxWidth = 400
         const minWidth = 180
-        if (event.screenX > maxWidth || event.screenX < minWidth) return
-        setWidth(event.screenX - 42)
+        if (event.clientX > maxWidth || event.clientX < minWidth) return
+        setWidth(event.clientX - 42)
     }
 
     useEffect(() => {
@@ -51,8 +51,6 @@ export const Sidebar = ({ children }) => {
         return () => {
             document.removeEventListener('mousemove', handleMouseMove)
         }
-        // if (!isResizing) return
-        // document.documentElement.style.setProperty('--sidebar-width', `${width}px`)
     }, [isResizing])
 
 
@@ -66,7 +64,6 @@ export const Sidebar = ({ children }) => {
                 className={'resize-handle'}
                 onMouseDown={() => setIsResizing(true)}
             >
-                <span className={isResizing ? 'is-resizing' : ''}></span>
             </label>
         </nav>
     )

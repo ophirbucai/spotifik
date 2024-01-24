@@ -62,8 +62,11 @@
             justify-self: end;
             font-size: 1.7rem;
             border-radius: 50%;
-            background-color: $background-button;
-            fill: $coloractive;
+            &:hover {
+                background-color: $background-button;
+                fill: $coloractive;
+            }
+            fill: $colorsubdued;
         }
         .toggle {
             margin-right: auto;
