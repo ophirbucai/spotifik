@@ -11,8 +11,8 @@ export const Sidebar = ({ children }) => {
         const maxWidth = 400
         const minWidth = 180
         if (event.clientX - offset > maxWidth || event.clientX - offset < minWidth) return
-        setWidth(() => event.clientX - offset)
-    }, [])
+        setWidth(event.clientX - offset)
+    }, [isResizing])
 
     useEffect(() => {
         if (!isResizing) return
