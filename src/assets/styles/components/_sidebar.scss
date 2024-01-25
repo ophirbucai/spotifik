@@ -23,7 +23,6 @@
             bottom: 0;
             width: 1px;
             @include transition(background-color);
-            background: none;
             content: '';
             position: absolute;
             opacity: 0.5;
