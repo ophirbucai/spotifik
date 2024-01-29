@@ -2,11 +2,20 @@ import LibraryIcon from '../assets/icons/library.svg?react'
 import RecentsIcon from '../assets/icons/recents.svg?react'
 import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg?react'
 import PlusIcon from '../assets/icons/plus.svg?react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { searchService } from '../services/search.service.js'
 
 
 export const Library = () => {
-    const [library] = useState([])
+    const [library, setLibrary] = useState([])
+    useEffect(() => {
+        const fetchLibrary = () => {
+            const res = searchService.getPlaylists()
+            setLibrary(res)
+        }
+        fetchLibrary()
+
+    }, [])
     return (
         <div className='library'>
             <header className='library-actions'>
@@ -29,7 +38,7 @@ export const Library = () => {
                     <ul>
                         {library.map((item) => (
                             <li key={item.id}>
-                                <img src={item.image} alt={item.name} />
+                                <img src={item.cover} alt={item.name} />
                                 <div>
                                     <h3>{item.name}</h3>
                                     <p>{item.artist}</p>
