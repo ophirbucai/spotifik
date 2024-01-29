@@ -1,6 +1,8 @@
 .library {
-    button {
-        color: $colorsubtle;
+    &-header-add,
+    &-header-toggle,
+    &-options-sort,
+    &-options-search {
         padding: 8px;
         justify-content: center;
         display: inline-flex;
@@ -8,63 +10,16 @@
         white-space: nowrap;
         background-color: transparent;
     }
-
+    &-header,
     &-filter {
-        display: flex;
-        gap: 8px;
-        position: relative;
-        pointer-events: none;
-        padding: 8px 16px;
-
-        div[role='group'] {
-            pointer-events: all;
-            max-width: var(--sidebar-width, 200px);
-            overflow-x: scroll;
-            scroll-behavior: smooth;
-            flex-wrap: nowrap;
-            display: flex;
-            gap: 8px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            button {
-                border-radius: $border-radius-full;
-                color: $coloractive;
-                background-color: $background-button;
-                @include transition(background-color);
-
-                span {
-                    opacity: 0.5;
-                }
-
-                &:hover {
-                    background-color: $background-hover;
-                }
-            }
-        }
-
-        &:after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: linear-gradient(to right, transparent 0, transparent 50%, $background-base 100%,);
-        }
-
+        padding: $panel-gap ($panel-gap * 2);
     }
 
-    &-actions {
+    &-header {
         display: flex;
         align-items: center;
-        padding: 8px 16px;
 
-        .add {
+        &-add {
             height: 30px;
             width: 30px;
             justify-self: end;
@@ -79,11 +34,12 @@
             fill: $colorsubdued;
         }
 
-        .toggle {
+        &-toggle {
             margin-right: auto;
             justify-self: start;
             align-self: center;
             gap: 12px;
+            color: $colorsubtle;
             background-color: transparent;
             cursor: pointer;
             font-size: 1rem;
@@ -100,44 +56,102 @@
 
     }
 
-    .library-list-wrapper {
-        padding-inline: $panel-gap;
+    &-filter {
+        display: flex;
+        gap: 8px;
+        position: relative;
+        pointer-events: none;
+        white-space: nowrap;
 
-        .library-list-actions {
+        div[role='group'] {
+            pointer-events: all;
+            max-width: var(--sidebar-width, 200px);
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            flex-wrap: nowrap;
             display: flex;
-            justify-content: space-between;
-            padding-bottom: 8px;
+            gap: 8px;
+            min-width: 100%;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            align-items: stretch;
 
-            .search {
-                justify-self: start;
-                border-radius: 50%;
-                fill: $colorsubtle;
-
-                &:hover {
-                    background-color: $background-highlight;
-                    fill: $coloractive;
-                }
+            &::-webkit-scrollbar {
+                display: none;
             }
 
-            .sort {
-                gap: 5px;
-                color: $colorsubdued;
-                fill: $colorsubdued;
-                @include transition(color, 0.05s);
+            button {
+                border-radius: $border-radius-full;
+                color: $coloractive;
+                background-color: $background-button;
+                @include transition(background-color);
+                font-size: 0.875rem;
+                padding: 8px 12px;
+                font-weight: 500;
+                pointer-events: all;
 
                 &:hover {
-                    color: $coloractive;
-                    scale: 1.04;
-                    fill: $coloractive;
+                    background-color: $background-hover;
+                    z-index: 1;
                 }
             }
         }
 
-        .library-list-item {
-            @include transition(background-color, 0.05s);
-            $cover-size: 40px;
-            $item-width: calc(var(--sidebar-width, 200px) - $cover-size);
+        &:after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, transparent 0, transparent 50%, $background-base 100%,);
+        }
 
+    }
+
+    &-options {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px $panel-gap 0;
+        padding-inline-end: 4px;
+
+        &-search {
+            justify-self: start;
+            border-radius: 50%;
+            fill: $colorsubtle;
+
+            &:hover {
+                background-color: $background-highlight;
+                fill: $coloractive;
+            }
+        }
+
+        &-sort {
+            gap: 5px;
+            color: $colorsubdued;
+            fill: $colorsubdued;
+            @include transition(color, 0.05s);
+
+            &:hover {
+                color: $coloractive;
+                scale: 1.04;
+                fill: $coloractive;
+            }
+        }
+    }
+
+    &-list {
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: $panel-gap;
+            padding-inline: $panel-gap;
+        }
+
+        &-item {
+            $cover-size: 48px;
+            $item-width: calc(var(--sidebar-width, 200px) - $cover-size);
+            @include transition(background-color, 0.05s);
 
             &-wrapper {
                 display: grid;
@@ -147,6 +161,7 @@
                 align-items: center;
                 padding: 8px;
             }
+
 
             > a {
                 border-radius: $border-radius-small;
@@ -201,4 +216,5 @@
 
         }
     }
+
 }

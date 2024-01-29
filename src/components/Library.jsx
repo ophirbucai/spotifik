@@ -22,9 +22,9 @@ export const Library = () => {
     }, [])
     return (
         <div className='library'>
-            <header className='library-actions'>
-                <button className='toggle'><LibraryIcon className='icon' />Your Library</button>
-                <button className='add'><PlusIcon className='icon-plus' /></button>
+            <header className='library-header'>
+                <button className='library-header-toggle'><LibraryIcon className='icon' />Your Library</button>
+                <button className='library-header-add'><PlusIcon className='icon-plus' /></button>
             </header>
             <div className='library-filter'>
                 <div role='group'>
@@ -34,7 +34,7 @@ export const Library = () => {
                 </div>
             </div>
             <div className='library-list-wrapper'>
-                {playlists?.length && <LibraryListActions />}
+                {playlists?.length && <LibraryOptions />}
                 <LibraryList
                     list={playlists} />
             </div>
@@ -42,9 +42,9 @@ export const Library = () => {
     )
 }
 
-const LibraryListActions = () => (
-    <div className='library-list-actions'>
-        <button className='search'><SearchinlibraryIcon className='searchinicon' /></button>
-        <button className='sort'>Recents<RecentsIcon className='recents-icon' /></button>
+const LibraryOptions = (LibraryOptions) => (
+    <div className='library-options'>
+        <button className='library-options-search'><SearchinlibraryIcon className='searchinicon' /></button>
+        <button className='library-options-sort'>Recents<RecentsIcon className='recents-icon' /></button>
     </div>
 )

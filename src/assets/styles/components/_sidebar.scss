@@ -3,14 +3,13 @@
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow: hidden;
     gap: $panel-gap;
     position: relative;
 
-    .library, .navigation {
+    .library, .navigation-wrapper {
         background-color: $background-base;
         border-radius: $border-radius;
-        padding: $panel-gap;
     }
 
     .library {
