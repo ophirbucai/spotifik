@@ -2,8 +2,10 @@ import { useCallback, useState } from 'react'
 import './useResize.css'
 
 /**
- * @param initialWidth {number}
- * @returns {[number,function(): void]}
+ * A custom hook for resizing the Sidebar
+ * @param initialWidth
+ * @param offset
+ * @returns {[number,(function(): void)|*]}
  */
 export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
     const [width, setWidth] = useState(initialWidth)
@@ -13,12 +15,12 @@ export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
         const minWidth = 180
         if (e.clientX - offset > maxWidth || e.clientX - offset < minWidth) return
         setWidth(e.clientX - offset)
-    }, [])
+    }, [offset])
 
     const handleMouseUp = useCallback(() => {
-        document.documentElement.removeAttribute('data-resizing')
         document.removeEventListener('mousemove', handleMouseMove)
         document.removeEventListener('mouseup', handleMouseUp)
+        document.documentElement.removeAttribute('data-resizing')
 
     }, [handleMouseMove])
 
