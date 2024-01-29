@@ -5,11 +5,10 @@ import './useResize.css'
  * @param initialWidth {number}
  * @returns {[number,function(): void]}
  */
-export const useResize = (initialWidth = 200) => {
+export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
     const [width, setWidth] = useState(initialWidth)
 
     const handleMouseMove = useCallback((e) => {
-        const offset = 42
         const maxWidth = 400
         const minWidth = 180
         if (e.clientX - offset > maxWidth || e.clientX - offset < minWidth) return
