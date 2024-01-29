@@ -1,7 +1,7 @@
 export const searchService = {
     getTracksBySearchTerm: (searchTerm) => {
         try {
-            const tracks =             dummyTracks.filter(({ name, artist }) => `${name}${artist}`.match(new RegExp(searchTerm, 'gi')))
+            const tracks = dummyTracks.filter(({ name, artist }) => `${name}${artist}`.match(new RegExp(searchTerm, 'gi')))
             if (!tracks) return searchService._onError('No track results found for ' + searchTerm + '.')
             return { tracks, status: 'success', error: null }
         } catch (e) {
@@ -54,6 +54,13 @@ export const searchService = {
             console.log(e)
         }
     },
+    getPlaylists: () => {
+        try {
+            return dummyPlaylists
+        } catch (e) {
+            console.log(e)
+        }
+    },
     getStationsByGenre: (genre) => {
         // TODO: Request the server by tag and receive a list of playlists that contain that tag.
         try {
@@ -81,7 +88,7 @@ export const searchService = {
     _onSuccess: (data) => ({
         status: 'success',
         data,
-        error: null,
+        error: null
     })
 }
 
@@ -113,7 +120,11 @@ const dummyTracks = [
     }
 ]
 
-export const dummyGenres = [{ _id: 'happy', name: 'Happy', color: 'yellow' }, { _id: 'funk', name: 'Funk', color: 'green' }]
+export const dummyGenres = [{ _id: 'happy', name: 'Happy', color: 'yellow' }, { _id: 'funk', name: 'Funk', color: 'green' }, {
+    _id: 'ambient',
+    name: 'Ambient',
+    color: 'blue'
+}]
 
 const dummyPlaylists = [
     {
@@ -125,7 +136,8 @@ const dummyPlaylists = [
         songs: [
             dummyTracks[1]._id,
             dummyTracks[0]._id
-        ]
+        ],
+        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png'
     },
     {
         _id: '2',
@@ -135,7 +147,8 @@ const dummyPlaylists = [
         ],
         songs: [
             dummyTracks[0]._id
-        ]
+        ],
+        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png'
     },
     {
         _id: '3',
@@ -147,7 +160,21 @@ const dummyPlaylists = [
         songs: [
             dummyTracks[0]._id,
             dummyTracks[1]._id
-        ]
+        ],
+        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png'
+    },
+    {
+        _id: '4',
+        name: 'Ambient 1970s',
+        description: 'Music from the early days of Ambient',
+        genres: [
+            dummyGenres[2]._id
+        ],
+        songs: [
+            dummyTracks[0]._id,
+            dummyTracks[1]._id
+        ],
+        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png'
     }
 ]
 
