@@ -15,7 +15,7 @@ export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
         const minWidth = 180
         if (e.clientX - offset > maxWidth || e.clientX - offset < minWidth) return
         setWidth(e.clientX - offset)
-    }, [])
+    }, [offset])
 
     const handleMouseUp = useCallback(() => {
         document.removeEventListener('mousemove', handleMouseMove)
