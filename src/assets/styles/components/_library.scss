@@ -101,9 +101,6 @@
     }
 
     .library-list-wrapper {
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
         padding-inline: $panel-gap;
 
         .library-list-actions {
