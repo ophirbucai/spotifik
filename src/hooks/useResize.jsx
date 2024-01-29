@@ -2,8 +2,10 @@ import { useCallback, useState } from 'react'
 import './useResize.css'
 
 /**
- * @param initialWidth {number}
- * @returns {[number,function(): void]}
+ * A custom hook for resizing the Sidebar
+ * @param initialWidth
+ * @param offset
+ * @returns {[number,(function(): void)|*]}
  */
 export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
     const [width, setWidth] = useState(initialWidth)
