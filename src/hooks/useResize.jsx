@@ -16,9 +16,9 @@ export const useResize = ({ initialWidth = 200, offset = 75 } = {}) => {
     }, [])
 
     const handleMouseUp = useCallback(() => {
-        document.documentElement.removeAttribute('data-resizing')
         document.removeEventListener('mousemove', handleMouseMove)
         document.removeEventListener('mouseup', handleMouseUp)
+        document.documentElement.removeAttribute('data-resizing')
 
     }, [handleMouseMove])
 
