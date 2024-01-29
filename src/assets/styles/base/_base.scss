@@ -1,14 +1,17 @@
 :root {
     font-family: "Proxima Nova", Gotham, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: white;
-}
-
-body {
-    margin: 0;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
     background: #121212;
 }
 
@@ -26,6 +29,11 @@ h1, h2, h3, h4, h5, h6, p, a {
 
 p, a {
     line-height: 24px;
+}
+
+[hidden] {
+    display: none;
+    visibility: hidden;
 }
 
 
