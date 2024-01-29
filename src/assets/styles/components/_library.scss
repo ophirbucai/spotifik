@@ -1,0 +1,138 @@
+.library {
+    button {
+        color: $colorsubtle;
+        padding: 8px;
+        justify-content: center;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        background-color: transparent;
+    }
+
+    &-filter {
+        display: flex;
+        gap: 8px;
+        position: relative;
+        pointer-events: none;
+        padding: 8px 16px;
+        div[role='group'] {
+            pointer-events: all;
+            max-width: var(--sidebar-width, 200px);
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            flex-wrap: nowrap;
+            display: flex;
+            gap: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            button {
+                border-radius: $border-radius-full;
+                color: $coloractive;
+                background-color: $background-button;
+                @include transition(background-color);
+                span {
+                    opacity: 0.5;
+                }
+                &:hover {
+                    background-color: $background-hover;
+                }
+            }
+        }
+        &:after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, transparent 0, transparent 50%, $background-base 100%,);
+        }
+
+    }
+    &-actions {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        .add {
+            height: 30px;
+            width: 30px;
+            justify-self: end;
+            font-size: 1.7rem;
+            border-radius: 50%;
+            &:hover {
+                background-color: $background-button;
+                fill: $coloractive;
+            }
+            fill: $colorsubdued;
+        }
+        .toggle {
+            margin-right: auto;
+            justify-self: start;
+            align-self: center;
+            gap: 12px;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.2s ease-in-out;
+            font-weight: 700;
+            fill: $colorsubtle;
+            @include transition((color, fill), 0.1s);
+
+            &:hover {
+                color: $coloractive;
+                fill: $coloractive;
+            }
+        }
+
+    }
+    .library-playlist {
+        display: flex;
+        flex-direction: column;
+        padding: 0 16px;
+        &-actions {
+            display: flex;
+            justify-content: space-between;
+            .search {
+                justify-self: start;
+                border-radius: 50%;
+                fill: $colorsubtle;
+
+                &:hover {
+                    background-color: $background-highlight;
+                    fill: $coloractive;
+                }
+            }
+            .sort {
+                gap: 5px;
+                color: $colorsubdued;
+                fill: $colorsubdued;
+                @include transition(color, 0.05s);
+                &:hover {
+                    color: $coloractive;
+                    scale: 1.04;
+                    fill: $coloractive;
+                }
+            }
+
+        }
+    }
+    //padding: 0 1rem;
+    //display: grid;
+    //button {
+    //    display: inline-flex;
+    //    align-items: center;
+    //    background: transparent;
+    //    border: none;
+    //    //color: $white;
+    //    cursor: pointer;
+    //    font-size: 1.5rem;
+    //    padding: 0;
+    //    transition: color 0.2s ease-in-out;
+    //    //&:hover {
+    //        //color: $light-grey;
+    //    //}
+    //}
+}

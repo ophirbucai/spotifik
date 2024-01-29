@@ -2,9 +2,37 @@
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 8px;
-
+    --sidebar-width: 200px;
+    min-width: var(--sidebar-width, 200px);
+    position: relative;
     > * {
-        background-color: $background-main;
+        background-color: $background-base;
         border-radius: $border-radius;
+    }
+    .resize-handle {
+        position: absolute;
+        left: 100%;
+        translate: -50% 0;
+        padding-inline: $panel-gap;
+        top: 0;
+        bottom: 0;
+        border-radius: 0;
+        background: none;
+        &:after {
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            @include transition(background-color);
+            content: '';
+            position: absolute;
+            opacity: 0.5;
+        }
+        @include transition(opacity);
+        &:hover {
+            cursor: ew-resize;
+            &:after {
+                background-color: $colorsubdued;
+            }
+        }
     }
 }

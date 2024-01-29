@@ -9,9 +9,28 @@
     button {
         border-radius: $border-radius-full;
         font-weight: 500;
-        background: dimgrey;
+        background: rgb(45, 43, 43);
         min-height: 40px;
         min-width: 40px;
         padding: 8px 12px;
     }
+
+    .install-icon{
+        fill: $coloractive;
+    }
+
+    .whatsnew-icon{
+        fill: $coloractive;
+    }
+
+    .profile-icon{
+        fill: $coloractive;
+    }
+    .goback-icon{
+        fill: $coloractive;
+    }
+    .goforward-icon{
+        fill: $coloractive;
+    }
+
 }

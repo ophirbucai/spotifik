@@ -12,10 +12,10 @@
 
     a {
         width: 100%;
-        color: white;
         text-decoration: none;
+        color: $colorsubtle;
         font-weight: 700;
-        transition: color 0.2s ease-in-out;
+        @include transition($property: color);
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -29,8 +29,43 @@
             display: inline-block;
         }
 
-        &:hover {
+        &:hover, &.active {
+            color: $coloractive;
 
+            .home-icon {
+                stroke: $coloractive;
+            }
+        }
+
+        &.active [class*="-icon"],
+        &:hover .search-icon {
+            fill: $coloractive;
+        }
+
+        .home-icon {
+            stroke: $colorsubtle;
+            stroke-width: 4px;
+            stroke-linecap: square;
+            @include transition($property: stroke);
+        }
+
+        .search-icon {
+            fill: $colorsubtle;
+            @include transition($property: fill);
+
+            &-inner {
+                fill: transparent;
+                .active > & {
+                    fill: $coloractive;
+                }
+            }
+        }
+
+        .logo-icon{
+            stroke-width: 15px;
+            stroke-linecap: square;
+            fill:white
         }
     }
+
 }

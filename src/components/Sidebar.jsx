@@ -1,13 +1,20 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useResize } from '../hooks/useResize.jsx'
 
 export const Sidebar = ({ children }) => {
-    // TODO: Resize capabilities
-    const [width] = useState(250)
+    const [width, handleMouseDown] = useResize(200)
+
+    const style = { '--sidebar-width': `${width}px` }
 
     return (
-        <nav className="sidebar" style={{ width }}>
+        <nav className='sidebar' style={style}>
             {children}
+            <label
+                htmlFor='resize'
+                className={'resize-handle'}
+                onMouseDown={handleMouseDown}
+            >
+            </label>
         </nav>
     )
 }
