@@ -12,17 +12,15 @@ import MuteIcon from "../assets/icons/mute.svg?react"
 export const NowPlaying = () => {
     return (
         <>
-            <SwitchIcon className="switch-icon" />
-            <PreviousIcon className="previous-icon" />
-            <PauseIcon className="pause-icon" />
-            <NextIcon className="next-icon" />
-            <DisablerepeatIcon className="disablerepeat-icon" />
-            <NowplayingviewIcon className="nowplayingview-icon" />
-            <QueueIcon className="queue-icon" />
-            <ConnecttodeviceIcon className="connecttodevice-icon" />
-            <MuteIcon className="mute-icon" />
-
-            Now playing
+            <button><SwitchIcon className="switch-icon" /></button>
+            <button><PreviousIcon className="previous-icon" /></button>
+            <button><PauseIcon className="pause-icon" /></button>
+            <button><NextIcon className="next-icon" /></button>
+            <button><DisablerepeatIcon className="disablerepeat-icon" /></button>
+            <button><NowplayingviewIcon className="nowplayingview-icon" /></button>
+            <button><QueueIcon className="queue-icon" /></button>
+            <button><ConnecttodeviceIcon className="connecttodevice-icon" /></button>
+            <button><MuteIcon className="mute-icon" /></button>
         </>
     )
 }
