@@ -1,17 +1,19 @@
 import LibraryIcon from '../assets/icons/library.svg?react'
-import RecentsIcon from '../assets/icons/recents.svg?react'
-import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg?react'
 import PlusIcon from '../assets/icons/plus.svg?react'
 import { useEffect, useState } from 'react'
 import { searchService } from '../services/search.service.js'
+import { LibraryList } from './LibraryList.jsx'
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export const Library = () => {
-    const [library, setLibrary] = useState([])
+    const [playlists, setPlaylists] = useState(null)
+
     useEffect(() => {
-        const fetchLibrary = () => {
+        const fetchLibrary = async () => {
             const res = searchService.getPlaylists()
-            setLibrary(res)
+            await sleep(3000)
+            setPlaylists(res)
         }
         fetchLibrary()
 
@@ -29,25 +31,7 @@ export const Library = () => {
                     ))}
                 </div>
             </div>
-            {library && (
-                <div className='library-playlist'>
-                    <div className='library-playlist-actions'>
-                        <button className='search'><SearchinlibraryIcon className='searchinicon' /></button>
-                        <button className='sort'>Recents<RecentsIcon className='recents-icon' /></button>
-                    </div>
-                    <ul>
-                        {library.map((item) => (
-                            <li key={item.id}>
-                                <img src={item.cover} alt={item.name} />
-                                <div>
-                                    <h3>{item.name}</h3>
-                                    <p>{item.artist}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <LibraryList list={playlists} />
         </div>
     )
 }
