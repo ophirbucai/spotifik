@@ -42,7 +42,7 @@ export const Library = () => {
     )
 }
 
-const LibraryOptions = (LibraryOptions) => (
+const LibraryOptions = () => (
     <div className='library-options'>
         <button className='library-options-search'><SearchinlibraryIcon className='searchinicon' /></button>
         <button className='library-options-sort'>Recents<RecentsIcon className='recents-icon' /></button>
