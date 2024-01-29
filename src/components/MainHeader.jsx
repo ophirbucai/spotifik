@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom"
 import InstallIcon from "../assets/icons/install.svg?react"
 import ProfileIcon from "../assets/icons/profile.svg?react"
 import WhatsnewIcon from "../assets/icons/whatsnew.svg?react"
+import GobackIcon from "../assets/icons/goback.svg?react"
+import GoforwardIcon from "../assets/icons/goforward.svg?react"
+
+
 
 
 export const MainHeader = () => {
@@ -11,8 +15,9 @@ export const MainHeader = () => {
     return (
         <header className="main-header">
             <div>
-                <button onClick={() => navigate(-1)}>{'<'}</button>
-                {/*<button disabled={} onClick={() => navigate(1)}>{'>'}</button>*/}
+                <button onClick={() => navigate(-1)}>{<GobackIcon className="goback-icon" />}</button>
+                <button onClick={() => navigate(1)}>{<GoforwardIcon className="goforward-icon" />}</button>
+                {/* <button disabled={} onClick={() => navigate(1)}>{'>'}</button> */}
             </div>
             <div>
                 <button><InstallIcon className="install-icon" />Install app</button>
