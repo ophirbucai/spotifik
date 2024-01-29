@@ -15,6 +15,7 @@
         position: relative;
         pointer-events: none;
         padding: 8px 16px;
+
         div[role='group'] {
             pointer-events: all;
             max-width: var(--sidebar-width, 200px);
@@ -25,22 +26,27 @@
             gap: 8px;
             scrollbar-width: none;
             -ms-overflow-style: none;
+
             &::-webkit-scrollbar {
                 display: none;
             }
+
             button {
                 border-radius: $border-radius-full;
                 color: $coloractive;
                 background-color: $background-button;
                 @include transition(background-color);
+
                 span {
                     opacity: 0.5;
                 }
+
                 &:hover {
                     background-color: $background-hover;
                 }
             }
         }
+
         &:after {
             content: '';
             width: 100%;
@@ -52,22 +58,27 @@
         }
 
     }
+
     &-actions {
         display: flex;
         align-items: center;
         padding: 8px 16px;
+
         .add {
             height: 30px;
             width: 30px;
             justify-self: end;
             font-size: 1.7rem;
             border-radius: 50%;
+
             &:hover {
                 background-color: $background-button;
                 fill: $coloractive;
             }
+
             fill: $colorsubdued;
         }
+
         .toggle {
             margin-right: auto;
             justify-self: start;
@@ -88,13 +99,18 @@
         }
 
     }
-    .library-playlist {
-        display: flex;
-        flex-direction: column;
-        padding: 0 16px;
-        &-actions {
+
+    .library-list-wrapper {
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-inline: $panel-gap;
+
+        .library-list-actions {
             display: flex;
             justify-content: space-between;
+            padding-bottom: 8px;
+
             .search {
                 justify-self: start;
                 border-radius: 50%;
@@ -105,34 +121,87 @@
                     fill: $coloractive;
                 }
             }
+
             .sort {
                 gap: 5px;
                 color: $colorsubdued;
                 fill: $colorsubdued;
                 @include transition(color, 0.05s);
+
                 &:hover {
                     color: $coloractive;
                     scale: 1.04;
                     fill: $coloractive;
                 }
             }
+        }
+
+        .library-list-item {
+            @include transition(background-color, 0.05s);
+            $cover-size: 40px;
+            $item-width: calc(var(--sidebar-width, 200px) - $cover-size);
+
+
+            &-wrapper {
+                display: grid;
+                gap: 8px 12px;
+                grid-template-columns: $cover-size $item-width auto;
+                grid-template-rows: $cover-size;
+                align-items: center;
+                padding: 8px;
+            }
+
+            > a {
+                border-radius: $border-radius-small;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $background-hover;
+                    border-radius: $border-radius-small;
+                }
+
+                &.active {
+                    background-color: $background-highlight;
+                }
+            }
+
+            &-name, &-author {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 600;
+
+                &:empty {
+                    height: 1em;
+                    max-width: 150px;
+                    background-color: $background-placeholder;
+                    border-radius: $border-radius-small;
+                }
+            }
+
+            &-name {
+                color: $coloractive;
+                font-size: 1rem;
+            }
+
+            &-author {
+                color: $colorsubdued;
+                font-size: 13px;
+
+                &:empty {
+                    width: 120px;
+                    margin-top: 4px;
+                }
+            }
+
+            &-cover {
+                background-color: $background-placeholder;
+                border-radius: $border-radius-small;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
 
         }
     }
-    //padding: 0 1rem;
-    //display: grid;
-    //button {
-    //    display: inline-flex;
-    //    align-items: center;
-    //    background: transparent;
-    //    border: none;
-    //    //color: $white;
-    //    cursor: pointer;
-    //    font-size: 1.5rem;
-    //    padding: 0;
-    //    transition: color 0.2s ease-in-out;
-    //    //&:hover {
-    //        //color: $light-grey;
-    //    //}
-    //}
 }
