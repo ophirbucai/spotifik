@@ -3,6 +3,8 @@ import PlusIcon from '../assets/icons/plus.svg?react'
 import { useEffect, useState } from 'react'
 import { searchService } from '../services/search.service.js'
 import { LibraryList } from './LibraryList.jsx'
+import RecentsIcon from '../assets/icons/recents.svg?react'
+import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg?react'
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -31,7 +33,18 @@ export const Library = () => {
                     ))}
                 </div>
             </div>
-            <LibraryList list={playlists} />
+            <div className='library-list-wrapper'>
+                {playlists?.length && <LibraryListActions />}
+                <LibraryList
+                    list={playlists} />
+            </div>
         </div>
     )
 }
+
+const LibraryListActions = () => (
+    <div className='library-list-actions'>
+        <button className='search'><SearchinlibraryIcon className='searchinicon' /></button>
+        <button className='sort'>Recents<RecentsIcon className='recents-icon' /></button>
+    </div>
+)
