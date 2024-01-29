@@ -1,32 +1,23 @@
-import RecentsIcon from '../assets/icons/recents.svg?react'
-import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg?react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 export const LibraryList = ({ list }) => {
     return (
-        <div className='library-list-wrapper'>
-            {list && <LibraryActions />}
-            <ul className='library-list'>
-                {list && list.length === 0 ? (
-                    <LibraryEmpty />
-                ) : (
+        <ul className='library-list'>
+            {list ? list.length > 0 ? (
                     list.map((item) => (
                         <LibraryItem key={item._id} item={item} />
-                    ))
+                    ))) : (
+                    <LibraryEmpty />
+                )
+                : (
+                    <LibraryItemPlaceholders items={5} />
                 )}
-                {!list && <LibraryItemPlaceholders items={5} />}
-            </ul>
-        </div>
+        </ul>
+
     )
 }
 
-const LibraryActions = () => (
-    <div className='library-list-actions'>
-        <button className='search'><SearchinlibraryIcon className='searchinicon' /></button>
-        <button className='sort'>Recents<RecentsIcon className='recents-icon' /></button>
-    </div>
-)
 
 const LibraryEmpty = () => (
     <div className='library-empty'>
