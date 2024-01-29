@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useResize } from '../hooks/useResize.jsx'
+import { useResize } from '../hooks/useResize'
 
 export const Sidebar = ({ children }) => {
     const [width, handleMouseDown] = useResize()
