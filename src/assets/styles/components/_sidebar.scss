@@ -46,7 +46,7 @@
             @include transition(background-color);
             content: '';
             position: absolute;
-            opacity: 0.5;
+            opacity: .5;
         }
 
         @include transition(opacity);

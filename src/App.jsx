@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Layout } from './components/Layout'
+import { Layout } from './components/Layout.jsx'
 import { Search, Home, Track, Playlist, Artist, NotFound, Genre } from './pages'
 import { Suspense } from 'react'
-import { Browse } from './pages/Browse'
-import { Results } from './pages/Results'
+import { Browse } from './pages/Browse.jsx'
+import { Results } from './pages/Results.jsx'
 
 function App() {
     return (

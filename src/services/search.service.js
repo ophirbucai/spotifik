@@ -19,17 +19,17 @@ export const searchService = {
         try {
             let result
             switch (type) {
-                case 'track':
-                    result = dummyTracks.find(({ _id }) => _id === id)
-                    break
-                case 'artist':
-                    result = dummyArtists.find(({ _id }) => _id === id)
-                    break
-                case 'playlist':
-                    result = dummyPlaylists.find(({ _id }) => _id === id)
-                    break
-                case 'album':
-                    throw 'Not implemented yet'
+            case 'track':
+                result = dummyTracks.find(({ _id }) => _id === id)
+                break
+            case 'artist':
+                result = dummyArtists.find(({ _id }) => _id === id)
+                break
+            case 'playlist':
+                result = dummyPlaylists.find(({ _id }) => _id === id)
+                break
+            case 'album':
+                throw 'Not implemented yet'
             }
             if (!result) throw `No ${type} found`
             return searchService._onSuccess(result)
