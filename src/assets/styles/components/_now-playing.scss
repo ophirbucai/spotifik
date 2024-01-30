@@ -1,60 +1,37 @@
-.now-playing {
-    background: #000;
+.player {
     grid-area: now-playing-row;
-    padding: 8px 12px;
-}
+    //padding: 8px 12px;
+    height: 72px;
+    display: flex;
+
+    &-details {
+        flex: 0.3;
+        padding-inline-start: 8px;
+        background-color: aqua;
+    }
+
+    &-controls {
+        flex: 0.4;
+        background-color: bisque;
+    }
+
+    &-deck {
+        flex: 0.3;
+        background-color: aquamarine;
+    }
+
+    .switch-icon,
+    .previous-icon,
+    .pause-icon,
+    .next-icon,
+    .disablerepeat-icon,
+    .nowplayingview-icon,
+    .queue-icon,
+    .connecttodevice-icon,
+    .mute-icon {
+        stroke-width: 14px;
+        fill: $colorsubtle;
+    }
 
 
-.switch-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.previous-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.pause-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.next-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.disablerepeat-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.nowplayingview-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.queue-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.connecttodevice-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.mute-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
 }
