@@ -7,6 +7,7 @@ import { Results } from './pages/Results'
 
 function App() {
     return (
+        /* prettier-ignore */
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Layout />}>
