@@ -4,25 +4,21 @@ import PropTypes from 'prop-types'
 export const LibraryList = ({ list }) => {
     return (
         <ul className='library-list'>
-            {list ? list.length > 0 ? (
-                    list.map((item) => (
-                        <LibraryItem key={item._id} item={item} />
-                    ))) : (
-                    <LibraryEmpty />
-                )
-                : (
-                    <LibraryItemPlaceholders items={5} />
-                )}
+            {list ?
+                list.length > 0 ?
+                    list.map(item => <LibraryItem key={item._id} item={item} />)
+                :   <LibraryEmpty />
+            :   <LibraryItemPlaceholders items={5} />}
         </ul>
-
     )
 }
-
 
 const LibraryEmpty = () => (
     <div className='library-empty'>
         <h2 className='library-empty-title'>It's a bit empty here...</h2>
-        <p className='library-empty-text'>Find more of the music you love, or let us recommend something amazing for you.</p>
+        <p className='library-empty-text'>
+            Find more of the music you love, or let us recommend something amazing for you.
+        </p>
     </div>
 )
 
@@ -49,9 +45,11 @@ LibraryItem.propTypes = {
 
 const LibraryItemPlaceholders = ({ items }) => (
     <>
-        {Array(items).fill(null).map((_, i) => (
-            <LibraryItemPlaceholder key={i} />
-        ))}
+        {Array(items)
+            .fill(null)
+            .map((_, i) => (
+                <LibraryItemPlaceholder key={i} />
+            ))}
     </>
 )
 
@@ -71,8 +69,6 @@ const LibraryItemPlaceholder = () => (
     </li>
 )
 
-
 LibraryList.propTypes = {
     list: PropTypes.arrayOf(LibraryItem.propTypes.item)
 }
-
