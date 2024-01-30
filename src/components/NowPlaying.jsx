@@ -7,13 +7,26 @@ import NowplayingviewIcon from "../assets/icons/nowplayingview.svg?react"
 import QueueIcon from "../assets/icons/queue.svg?react"
 import ConnecttodeviceIcon from "../assets/icons/connecttodevice.svg?react"
 import MuteIcon from "../assets/icons/mute.svg?react"
+import TrackIcon from "../assets/icons/track.svg?react"
+
+
+import { useGetEntity } from '../hooks/useGetEntity.jsx'
+
+
 
 
 export const NowPlaying = () => {
+    const { track, error, status } = useGetEntity('track', 'skyfall')
+    console.log(track);
+
     return (
         <div className="player">
             <div className="player-details">
-
+                <div className="player-details-cover">
+                    {track?.thumbnail ?<img src={track.thumbnail}
+                        alt='image song' />:<TrackIcon className="track-icon" />}
+                
+                </div>
             </div>
             <div className="player-controls">
 
