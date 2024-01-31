@@ -102,6 +102,7 @@ const dummyTracks = [
         _id: 'skyfall',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         name: 'Skyfall',
+        youtubeId: 'DeumyOzKqgI',
         artist: dummyArtists[0].name,
         trackLength: 60 * 4 + 46,
         explicit: false,
