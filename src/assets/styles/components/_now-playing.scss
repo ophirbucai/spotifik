@@ -25,7 +25,27 @@
 
     &-controls {
         flex: .4;
-        background-color: bisque;
+        text-align: center;
+        align-self: center;
+
+        // background-color: bisque;
+        button {
+            
+            padding: 5px;
+            &:has(.play-icon),
+            &:has(.pause-icon)
+            {
+                fill:black;
+                border-radius: $border-radius-full;
+                background-color: white;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 32px;
+                height: 32px;
+            }
+            
+        }
     }
 
     &-deck {
@@ -35,7 +55,6 @@
 
     .switch-icon,
     .previous-icon,
-    .pause-icon,
     .next-icon,
     .disablerepeat-icon,
     .nowplayingview-icon,
