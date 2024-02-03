@@ -4,13 +4,13 @@ import PauseIcon from '../assets/icons/pause.svg'
 import PlayIcon from '../assets/icons/play.svg'
 import NextIcon from '../assets/icons/next.svg'
 import DisableRepeatIcon from '../assets/icons/disableRepeat.svg'
-import NowplayingviewIcon from '../assets/icons/nowplayingview.svg'
-import QueueIcon from '../assets/icons/queue.svg'
-import ConnecttodeviceIcon from '../assets/icons/connecttodevice.svg'
-import MuteIcon from '../assets/icons/mute.svg'
+//import NowplayingviewIcon from '../assets/icons/nowplayingview.svg'
+//import QueueIcon from '../assets/icons/queue.svg'
+// import ConnecttodeviceIcon from '../assets/icons/connecttodevice.svg'
+// import MuteIcon from '../assets/icons/mute.svg'
 import TrackIcon from '../assets/icons/track.svg'
 import { useGetEntity } from '../hooks/useGetEntity.jsx'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import style from '../assets/styles/modules/youtube.module.scss'
 
@@ -18,14 +18,26 @@ export const NowPlaying = () => {
     const { track, /*error, status*/ } = useGetEntity('track', 'skyfall')
     console.log(track)
 
-    const [songStatus, setSongStatus] = useState({ play: false, duration: null })
+    const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
     const [player, setPlayer] = useState(null)
+
+    useEffect(() => { 
+        const interval = setInterval(() => {
+            if (player && songStatus.play) {
+                const currentTime = player.getCurrentTime()
+                setSongStatus(prevStatus => ({ ...prevStatus, currentTime }))
+            }
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [player, songStatus.play])
 
     const onReady = (e) => {
         setPlayer(e.target)
         const duration = e.target.getDuration()
+
         setSongStatus({
-            ...songStatus, duration
+            ...songStatus, duration,
         })
     }
     function playSong() {
@@ -52,6 +64,12 @@ export const NowPlaying = () => {
         }
     }
 
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60)
+        const seconds = Math.floor(time % 60)
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    }
+
     return (
         <div className='player'>
             <div className='player-details'>
@@ -73,6 +91,8 @@ export const NowPlaying = () => {
                 </div>
                 <div className='player-controls-bottom'>
                     <input type='range' min={0} max={songStatus.duration || 0} onChange={onDurationChange()} onMouseUp={onDurationChange(true)} />
+                    <div className='progress-time-now'>{formatTime(songStatus.currentTime)}</div>
+                    <div className='progress-time-end'>{formatTime(songStatus.duration)}</div>
                 </div>
             </div>
             <div className='player-deck'>
