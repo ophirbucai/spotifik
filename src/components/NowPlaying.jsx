@@ -18,9 +18,6 @@ export const NowPlaying = () => {
     const { track, /*error, status*/ } = useGetEntity('track', 'skyfall')
     console.log(track)
 
-    // Function to construct the YouTube URL
-
-    //const constructYouTubeUrl = ``
     const [songStatus, setSongStatus] = useState({ play: false, duration: null })
     const [player, setPlayer] = useState(null)
 
@@ -66,13 +63,13 @@ export const NowPlaying = () => {
             </div>
             <div className='player-controls'>
                 <div className='player-controls-top'>
-                    <button><SwitchIcon className="switch-icon" /></button>
-                    <button onClick={player?.previousVideo}><PreviousIcon className="previous-icon" /></button>
+                    <button><SwitchIcon className='switch-icon' /></button>
+                    <button onClick={player?.previousVideo}><PreviousIcon className='previous-icon' /></button>
                     <button onClick={songStatus.play ? pauseSong : playSong}>
-                        {songStatus.play ? <PauseIcon className="pause-icon" /> : <PlayIcon className="play-icon" />}
+                        {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
                     </button>
-                    <button onClick={player?.nextVideo}><NextIcon className="next-icon" /></button>
-                    <button><DisableRepeatIcon className="disablerepeat-icon" /></button>
+                    <button onClick={player?.nextVideo}><NextIcon className='next-icon' /></button>
+                    <button><DisableRepeatIcon className='disablerepeat-icon' /></button>
                 </div>
                 <div className='player-controls-bottom'>
                     <input type='range' min={0} max={songStatus.duration || 0} onChange={onDurationChange()} onMouseUp={onDurationChange(true)} />
@@ -85,18 +82,18 @@ export const NowPlaying = () => {
                 {track && (<YouTube
                     videoId={track.youtubeId}
                     // id={string}                       // defaults -> ''
-                    className={style.youtube}                // defaults -> ''
+                    className={style.youtube} // defaults -> ''
                     // iframeClassName={string}          // defaults -> ''
 
                     // title={string}                    // defaults -> ''
                     // loading={string}                  // defaults -> undefined
                     // opts={obj}                        // defaults -> {}
-                    onReady={onReady}                    // defaults -> noop
-                    onPlay={playSong}                     // defaults -> noop
-                    onPause={pauseSong}                    // defaults -> noop
+                    onReady={onReady} // defaults -> noop
+                    onPlay={playSong} // defaults -> noop
+                    onPause={pauseSong} // defaults -> noop
                     // onEnd={func}                      // defaults -> noop
                     // onError={func}                    // defaults -> noop
-                    onStateChange={console.log}              // defaults -> noop
+                    onStateChange={console.log} // defaults -> noop
                 // onPlaybackRateChange={func}       // defaults -> noop
                 // onPlaybackQualityChange={func}    // defaults -> noop
                 />)}</div>
