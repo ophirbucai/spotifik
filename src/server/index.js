@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import { searchRouter } from './api/search/search.routes.js'
 
 const port = 5000
 
@@ -13,6 +14,8 @@ const app = express()
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.use('/search', searchRouter)
 
 // app.get('/auth/login', (req, res) => {
 // TODO: Implement Spotify OAuth login handler
