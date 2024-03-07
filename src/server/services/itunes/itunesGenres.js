@@ -1,8 +1,8 @@
 /**
  * @module itunesGenres
  * @desc A map of iTunes genres to their respective IDs.
- *    Map<kebab-cased, [label, genre, subgenre]>
- * @type {Map<string, [string, number, number]>}
+ *    Map<kebab-cased, [name, category, genre, subgenre]>
+ * @type {Map<string, (string|number)[]>}
  */
 
 export const itunesGenres = new Map([
