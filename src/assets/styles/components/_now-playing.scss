@@ -1,60 +1,67 @@
-.now-playing {
-    background: #000;
+.player {
     grid-area: now-playing-row;
-    padding: 8px 12px;
-}
+    height: 72px;
+    display: flex;
 
+    &-details {
+        flex: .3;
+        padding-inline-start: 8px;
+        background-color: aqua;
+        align-self: center;
 
-.switch-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
+        &-cover {
+            border-radius: 4px;
+            overflow: hidden;
+            width: 56px;
+            height: 56px;
 
-.previous-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
 
-.pause-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
+    &-controls {
+        flex: .4;
+        text-align: center;
+        align-self: center;
 
-.next-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
+        // background-color: bisque;
+        button {
+            
+            padding: 5px;
+            &:has(.play-icon),
+            &:has(.pause-icon)
+            {
+                fill:black;
+                border-radius: $border-radius-full;
+                background-color: white;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 32px;
+                height: 32px;
+            }
+            
+        }
+    }
 
-.disablerepeat-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
+    &-deck {
+        flex: .3;
+        background-color: aquamarine;
+    }
 
-.nowplayingview-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.queue-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.connecttodevice-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
-}
-
-.mute-icon{
-    stroke-width: 14px;
-    stroke-linecap: square;
-    fill: $colorsubtle
+    .switch-icon,
+    .previous-icon,
+    .next-icon,
+    .disablerepeat-icon,
+    .nowplayingview-icon,
+    .queue-icon,
+    .connecttodevice-icon,
+    .mute-icon {
+        stroke-width: 14px;
+        fill: $colorsubtle;
+    }
 }

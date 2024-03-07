@@ -19,17 +19,17 @@ export const searchService = {
         try {
             let result
             switch (type) {
-                case 'track':
-                    result = dummyTracks.find(({ _id }) => _id === id)
-                    break
-                case 'artist':
-                    result = dummyArtists.find(({ _id }) => _id === id)
-                    break
-                case 'playlist':
-                    result = dummyPlaylists.find(({ _id }) => _id === id)
-                    break
-                case 'album':
-                    throw 'Not implemented yet'
+            case 'track':
+                result = dummyTracks.find(({ _id }) => _id === id)
+                break
+            case 'artist':
+                result = dummyArtists.find(({ _id }) => _id === id)
+                break
+            case 'playlist':
+                result = dummyPlaylists.find(({ _id }) => _id === id)
+                break
+            case 'album':
+                throw 'Not implemented yet'
             }
             if (!result) throw `No ${type} found`
             return searchService._onSuccess(result)
@@ -102,6 +102,7 @@ const dummyTracks = [
         _id: 'skyfall',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         name: 'Skyfall',
+        youtubeId: 'DeumyOzKqgI',
         artist: dummyArtists[0].name,
         trackLength: 60 * 4 + 46,
         explicit: false,

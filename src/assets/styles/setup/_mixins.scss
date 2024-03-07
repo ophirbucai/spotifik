@@ -21,7 +21,7 @@
     }
 }
 
-
-@mixin transition($property: all, $dur: 0.2s, $timing-func: linear, $delay: 0s) {
+/* prettier-ignore */
+@mixin transition($property: all, $dur: 200ms, $timing-func: linear, $delay: 0s) {
     transition: $property $dur $timing-func $delay;
 }

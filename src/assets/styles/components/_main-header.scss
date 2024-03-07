@@ -1,7 +1,7 @@
 .main-header {
     display: flex;
     justify-content: space-between;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 200ms ease-in-out;
     > div {
         display: flex;
         gap: 4px;
