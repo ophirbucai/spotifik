@@ -20,8 +20,16 @@ button {
     color: inherit;
     font-family: inherit;
     padding: 0;
-    cursor: pointer;
     background-color: transparent;
+    transition: all 0.2s ease;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 ul {
