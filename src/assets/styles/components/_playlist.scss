@@ -20,6 +20,7 @@
             font-weight: 600;
         }
         .name {
+            margin-left: -0.05em;
             letter-spacing: -1px;
             font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 600px, 4.5rem);
         }
