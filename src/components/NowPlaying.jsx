@@ -9,25 +9,24 @@ import DisableRepeatIcon from '../assets/icons/disableRepeat.svg'
 // import ConnecttodeviceIcon from '../assets/icons/connecttodevice.svg'
 // import MuteIcon from '../assets/icons/mute.svg'
 import { useGetEntity } from '../hooks/useGetEntity.jsx'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import style from '../assets/styles/modules/youtube.module.scss'
 import { Thumbnail } from './Thumbnail.jsx'
 
 export const NowPlaying = () => {
-    const { track, /*error, status*/ } = useGetEntity('track', 'skyfall')
-    console.log(track)
-
+    const { track /*error, status*/ } = useGetEntity('track', 'skyfall')
+    const [progress, setProgress] = useState(null)
     const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
     const [player, setPlayer] = useState(null)
 
-    useEffect(() => { 
+    useEffect(() => {
         const interval = setInterval(() => {
             if (player && songStatus.play) {
                 const currentTime = player.getCurrentTime()
                 setSongStatus(prevStatus => ({ ...prevStatus, currentTime }))
             }
-        }, 1000)
+        }, 100)
 
         return () => clearInterval(interval)
     }, [player, songStatus.play])
@@ -37,7 +36,7 @@ export const NowPlaying = () => {
         const duration = e.target.getDuration()
 
         setSongStatus({
-            ...songStatus, duration,
+            ...songStatus, duration
         })
     }
     function playSong() {
@@ -45,7 +44,6 @@ export const NowPlaying = () => {
         setSongStatus({
             ...songStatus,
             play: true
-
         })
     }
     function pauseSong() {
@@ -55,21 +53,25 @@ export const NowPlaying = () => {
             play: false
         })
     }
-    function onDurationChange(mouseUp = false) {
-
-        return function (event) {
-            if (mouseUp)
-                player.seekTo(event.target.value, mouseUp)
-            //console.log("mouseUp", event.target.value)
-        }
-    }
+    const onDurationChange = useCallback(() => {
+        setTimeout(setProgress, 150, null)
+        player.seekTo(progress, true)
+    }, [progress, player])
 
     function formatTime(time) {
         const minutes = Math.floor(time / 60)
         const seconds = Math.floor(time % 60)
-        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+        return `${String(minutes).padStart(1, '0')}:${String(seconds).padStart(2, '0')}`
     }
 
+    useEffect(() => {
+        if (progress !== null) {
+            window.addEventListener('mouseup', onDurationChange)
+        }
+        return () => window.removeEventListener('mouseup', onDurationChange)
+    }, [onDurationChange, progress])
+
+    const progressBarStyle = { width: `${(Math.max(1, progress || songStatus.currentTime) / songStatus.duration * 100)}%` }
     return (
         <div className='player'>
             <div className='player-details'>
@@ -90,8 +92,17 @@ export const NowPlaying = () => {
                     <button><DisableRepeatIcon className='disablerepeat-icon' /></button>
                 </div>
                 <div className='player-controls-bottom'>
-                    <input type='range' min={0} max={songStatus.duration || 0} onChange={onDurationChange()} onMouseUp={onDurationChange(true)} />
                     <div className='progress-time-now'>{formatTime(songStatus.currentTime)}</div>
+                    <div className='progress-bar'>
+                        <div className='progress-bar-fill' style={progressBarStyle}></div>
+                        <input
+                            type='range'
+                            min={0}
+                            max={songStatus.duration || 0}
+                            value={(progress || songStatus.currentTime) || 0}
+                            onChange={(event) => setProgress(event.target.value)}
+                        />
+                    </div>
                     <div className='progress-time-end'>{formatTime(songStatus.duration)}</div>
                 </div>
             </div>
@@ -114,11 +125,11 @@ export const NowPlaying = () => {
                     // onEnd={func}                      // defaults -> noop
                     // onError={func}                    // defaults -> noop
                     onStateChange={console.log} // defaults -> noop
-                // onPlaybackRateChange={func}       // defaults -> noop
-                // onPlaybackQualityChange={func}    // defaults -> noop
+                    // onPlaybackRateChange={func}       // defaults -> noop
+                    // onPlaybackQualityChange={func}    // defaults -> noop
                 />)}</div>
 
-            {/* 
+            {/*
             <button><NowplayingviewIcon className="nowplayingview-icon" /></button>
             <button><QueueIcon className="queue-icon" /></button>
             <button><ConnecttodeviceIcon className="connecttodevice-icon" /></button>
