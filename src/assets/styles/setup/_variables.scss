@@ -1,4 +1,8 @@
 /* New naming convention */
+$bg-library: rgb(18, 18, 18);
+$bg-library-hover: rgb(25, 25, 25);
+$bg-library-active-hover: rgb(50, 50, 50);
+$bg-library-active: rgb(28, 28, 28);
 $bg-thumbnail: rgb(36, 36, 36);
 $icon-thumbnail-small: rgb(175, 175, 175);
 $icon-thumbnail-large: rgb(116, 116, 116);
@@ -22,5 +26,6 @@ $panel-gap: 8px;
 $panel-border-radius: 8px;
 
 $colorsubtle: #b3b3b3;
+
 $colorsubdued: #a7a7a7;
 $coloractive: #fff;

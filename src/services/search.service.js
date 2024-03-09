@@ -19,17 +19,17 @@ export const searchService = {
         try {
             let result
             switch (type) {
-            case 'track':
-                result = dummyTracks.find(({ _id }) => _id === id)
-                break
-            case 'artist':
-                result = dummyArtists.find(({ _id }) => _id === id)
-                break
-            case 'playlist':
-                result = dummyPlaylists.find(({ _id }) => _id === id)
-                break
-            case 'album':
-                throw 'Not implemented yet'
+                case 'track':
+                    result = dummyTracks.find(({ _id }) => _id === id)
+                    break
+                case 'artist':
+                    result = dummyArtists.find(({ _id }) => _id === id)
+                    break
+                case 'playlist':
+                    result = dummyPlaylists.find(({ _id }) => _id === id)
+                    break
+                case 'album':
+                    throw 'Not implemented yet'
             }
             if (!result) throw `No ${type} found`
             return searchService._onSuccess(result)
@@ -147,10 +147,9 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[1]._id,
-            dummyTracks[0]._id
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -160,9 +159,8 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[0]._id
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -173,10 +171,9 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[0]._id,
-            dummyTracks[1]._id
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id },
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -187,10 +184,9 @@ const dummyPlaylists = [
             dummyGenres[2]._id
         ],
         songs: [
-            dummyTracks[0]._id,
-            dummyTracks[1]._id
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     }
 ]
