@@ -7,7 +7,7 @@ export const TrackCard = ({ trackId }) => {
     return (
         track ? (
             <div className='track'>
-                <button className="btn">Play</button>
+                <button className='btn'>Play</button>
                 {track.name}
             </div>
         ) : null
