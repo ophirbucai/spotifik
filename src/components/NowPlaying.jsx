@@ -14,16 +14,16 @@ export const NowPlaying = () => {
     const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
     const [player, setPlayer] = useState(null)
     const updateProgress = useCallback(() => {
-        if (songStatus.play) {
-            setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
-        }
-    }, [player, songStatus.play])
+        setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
+    }, [player])
 
     useEffect(() => {
-        currentTime.current = setInterval(updateProgress, 250)
+        if (songStatus.play) {
+            currentTime.current = setInterval(updateProgress, 250)
+        }
 
         return () => clearInterval(currentTime.current)
-    }, [updateProgress])
+    }, [updateProgress, songStatus.play])
 
     const onReady = (e) => {
         setPlayer(e.target)
