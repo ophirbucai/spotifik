@@ -7,6 +7,7 @@ import { PlayerProgress } from './PlayerProgress.jsx'
 import { PlayerAside } from './PlayerAside.jsx'
 import style from '../assets/styles/modules/youtube.module.scss'
 
+const { PlayerState } = YouTube
 export const NowPlaying = () => {
     const currentTime = useRef(null)
     const { track /*error, status*/ } = useGetEntity('track', 'talk_is_cheap')
@@ -33,14 +34,14 @@ export const NowPlaying = () => {
 
     const onStateChange = ({ data }) => {
         switch (data) {
-            case 0:
+            case PlayerState.ENDED:
                 setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 150)
                 break
-            case 1:
+            case PlayerState.PLAYING:
                 setTimeout(setProgress, 150, null)
                 setSongStatus((prev) => ({ ...prev, play: true }))
                 break
-            case 2:
+            case PlayerState.PAUSED:
                 setSongStatus((prev) => ({ ...prev, play: false }))
                 break
         }
