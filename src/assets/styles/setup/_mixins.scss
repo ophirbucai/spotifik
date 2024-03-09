@@ -6,8 +6,8 @@
         color: inherit;
         text-underline-offset: .1em;
         padding: 8px 12px;
-        &:not(:hover) {
-            text-decoration: none;
+        &:hover {
+            text-decoration: underline;
         }
     }
     @if $type == primary {
