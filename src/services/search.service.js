@@ -108,6 +108,10 @@ const dummyArtists = [
     {
         _id: 'adele',
         name: 'Adele'
+    },
+    {
+        _id: 'chet_faker',
+        name: 'Chet Faker'
     }
 ]
 
@@ -126,10 +130,21 @@ const dummyTracks = [
         _id: 'rolling_in_the_deep',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/74/Adele_-_Rolling_in_the_Deep.png',
         name: 'Rolling in the Deep',
+        youtubeId: 'bDtjO-R0QSo',
         artist: dummyArtists[0].name,
         trackLength: 60 * 3 + 48,
         explicit: true,
         genre: 'pop'
+    },
+    {
+        _id: 'talk_is_cheap',
+        thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/73/Talk_Is_Cheap_%28Chet_Faker%29.jpg',
+        name: 'Talk is Cheap',
+        youtubeId: 'aP_-P_BS6KY',
+        artist: dummyArtists[1].name,
+        trackLength: 60 * 3 + 39,
+        explicit: false,
+        genre: 'funk'
     }
 ]
 
@@ -171,6 +186,7 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
+            { youtubeId: dummyTracks[2].youtubeId, _id: dummyTracks[2]._id },
             { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id },
             { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id }
         ],

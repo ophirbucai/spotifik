@@ -1,141 +1,66 @@
-import SwitchIcon from '../assets/icons/switch.svg'
-import PreviousIcon from '../assets/icons/previous.svg'
-import PauseIcon from '../assets/icons/pause.svg'
-import PlayIcon from '../assets/icons/play.svg'
-import NextIcon from '../assets/icons/next.svg'
-import DisableRepeatIcon from '../assets/icons/disableRepeat.svg'
-//import NowplayingviewIcon from '../assets/icons/nowplayingview.svg'
-//import QueueIcon from '../assets/icons/queue.svg'
-// import ConnecttodeviceIcon from '../assets/icons/connecttodevice.svg'
-// import MuteIcon from '../assets/icons/mute.svg'
-import { useGetEntity } from '../hooks/useGetEntity.jsx'
-import { useCallback, useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useGetEntity } from '../hooks/useGetEntity.jsx'
+import { PlayerDetails } from './PlayerDetails.jsx'
+import { PlayerControls } from './PlayerControls.jsx'
+import { PlayerProgress } from './PlayerProgress.jsx'
+import { PlayerAside } from './PlayerAside.jsx'
 import style from '../assets/styles/modules/youtube.module.scss'
-import { Thumbnail } from './Thumbnail.jsx'
 
 export const NowPlaying = () => {
-    const { track /*error, status*/ } = useGetEntity('track', 'skyfall')
+    const currentTime = useRef(null)
+    const { track /*error, status*/ } = useGetEntity('track', 'talk_is_cheap')
     const [progress, setProgress] = useState(null)
     const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
     const [player, setPlayer] = useState(null)
+    const updateProgress = useCallback(() => {
+        if (songStatus.play) {
+            setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
+        }
+    }, [player, songStatus.play])
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (player && songStatus.play) {
-                const currentTime = player.getCurrentTime()
-                setSongStatus(prevStatus => ({ ...prevStatus, currentTime }))
-            }
-        }, 100)
+        currentTime.current = setInterval(updateProgress, 250)
 
-        return () => clearInterval(interval)
-    }, [player, songStatus.play])
+        return () => clearInterval(currentTime.current)
+    }, [updateProgress])
 
     const onReady = (e) => {
         setPlayer(e.target)
         const duration = e.target.getDuration()
-
-        setSongStatus({
-            ...songStatus, duration
-        })
-    }
-    function playSong() {
-        player.playVideo()
-        setSongStatus({
-            ...songStatus,
-            play: true
-        })
-    }
-    function pauseSong() {
-        player.pauseVideo()
-        setSongStatus({
-            ...songStatus,
-            play: false
-        })
-    }
-    const onDurationChange = useCallback(() => {
-        setTimeout(setProgress, 150, null)
-        player.seekTo(progress, true)
-    }, [progress, player])
-
-    function formatTime(time) {
-        const minutes = Math.floor(time / 60)
-        const seconds = Math.floor(time % 60)
-        return `${String(minutes).padStart(1, '0')}:${String(seconds).padStart(2, '0')}`
+        setSongStatus({ ...songStatus, duration })
     }
 
-    useEffect(() => {
-        if (progress !== null) {
-            window.addEventListener('mouseup', onDurationChange)
+    const onStateChange = ({ data }) => {
+        switch (data) {
+            case 1:
+                setTimeout(setProgress, 150, null)
+                setSongStatus((prev) => ({ ...prev, play: true }))
+                break
+            case 2:
+                setSongStatus((prev) => ({ ...prev, play: false }))
+                break
         }
-        return () => window.removeEventListener('mouseup', onDurationChange)
-    }, [onDurationChange, progress])
+    }
 
-    const progressBarStyle = { width: `${(progress || songStatus.currentTime) / songStatus.duration * 100}%` }
     return (
         <div className='player'>
-            <div className='player-details'>
-                <Thumbnail youtubeId={track?.youtubeId} alt={track?.name} />
-                <div className='player-details-info'>
-                    <h3>{track?.name}</h3>
-                    <p>{track?.artist}</p>
-                </div>
-            </div>
+            <PlayerDetails track={track} />
             <div className='player-controls'>
-                <div className='player-controls-top'>
-                    <button><SwitchIcon className='switch-icon' /></button>
-                    <button onClick={player?.previousVideo}><PreviousIcon className='previous-icon' /></button>
-                    <button onClick={songStatus.play ? pauseSong : playSong}>
-                        {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
-                    </button>
-                    <button onClick={player?.nextVideo}><NextIcon className='next-icon' /></button>
-                    <button><DisableRepeatIcon className='disablerepeat-icon' /></button>
-                </div>
-                <div className='player-controls-bottom'>
-                    <div className='progress-time-now'>{formatTime(songStatus.currentTime)}</div>
-                    <div className='progress-bar'>
-                        <div className='progress-bar-fill' style={progressBarStyle}></div>
-                    </div>
-                    <input
-                        type='range'
-                        min={0}
-                        max={songStatus.duration || 0}
-                        value={(progress || songStatus.currentTime) || 0}
-                        onChange={(event) => setProgress(event.target.value)}
-                    />
-                    <div className='progress-time-end'>{formatTime(songStatus.duration)}</div>
-                </div>
+                <PlayerControls player={player} songStatus={songStatus} />
+                <PlayerProgress player={player} songStatus={songStatus} progress={progress} setProgress={setProgress} />
             </div>
-            <div className='player-deck'>
-                {/* {track && (<iframe allow="autoplay; encrypted-media" width={"20px"} height={"20px"} ref={playerRef}
-                    src={`https://www.youtube.com/embed/${track.youtubeId}/?origin=${import.meta.env.BASE_URL}&autoplay=1&enablejsapi=1`}></iframe>)}
-            */}
-                {track && (<YouTube
+            <PlayerAside />{/* TODO: Implement queue and volume control*/}
+            {track && (
+                <YouTube
+                    key={track.youtubeId}
                     videoId={track.youtubeId}
-                    // id={string}                       // defaults -> ''
-                    className={style.youtube} // defaults -> ''
-                    // iframeClassName={string}          // defaults -> ''
-
-                    // title={string}                    // defaults -> ''
-                    // loading={string}                  // defaults -> undefined
-                    // opts={obj}                        // defaults -> {}
-                    onReady={onReady} // defaults -> noop
-                    onPlay={playSong} // defaults -> noop
-                    onPause={pauseSong} // defaults -> noop
-                    // onEnd={func}                      // defaults -> noop
-                    // onError={func}                    // defaults -> noop
-                    onStateChange={console.log} // defaults -> noop
-                    // onPlaybackRateChange={func}       // defaults -> noop
-                    // onPlaybackQualityChange={func}    // defaults -> noop
-                />)}</div>
-
-            {/*
-            <button><NowplayingviewIcon className="nowplayingview-icon" /></button>
-            <button><QueueIcon className="queue-icon" /></button>
-            <button><ConnecttodeviceIcon className="connecttodevice-icon" /></button>
-            <button><MuteIcon className="mute-icon" /></button> */}
+                    className={style.youtube}
+                    onReady={onReady}
+                    onEnd={console.log}
+                    onStateChange={onStateChange}
+                />
+            )}
         </div>
     )
 }
-
-
