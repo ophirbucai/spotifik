@@ -1,39 +1,74 @@
-import { useNavigate } from 'react-router-dom'
-import InstallIcon from '../assets/icons/install.svg'
-import ProfileIcon from '../assets/icons/profile.svg'
-import WhatsnewIcon from '../assets/icons/whatsnew.svg'
 import GobackIcon from '../assets/icons/goback.svg'
 import GoforwardIcon from '../assets/icons/goforward.svg'
+import { useNavigate, useNavigationType } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export const MainHeader = () => {
+    const [historyForward, setHistoryForward] = useState(0)
     const navigate = useNavigate()
-    // console.log(document.referrer.indexOf(window.location.host) !== -1)
-    // TODO: Make the header position fixed with a blurred bg when scrolling down and static when scrolling up.
+    const navType = useNavigationType()
+
+    function navigateBack() {
+        setHistoryForward(prev => prev + 1)
+        navigate(-1)
+    }
+
+    function navigateForward() {
+        setHistoryForward(prev => prev - 1)
+        navigate(1)
+    }
+
+    useEffect(() => {
+        if (navType === 'PUSH') {
+            setHistoryForward(0)
+        }
+    }, [navType])
+
     return (
         <header className='main-header'>
             <div>
-                <button onClick={() => navigate(-1)}>
+                <button onClick={navigateBack} disabled={window.history.state.idx === 0}>
                     {<GobackIcon className='goback-icon' />}
                 </button>
-                <button onClick={() => navigate(1)}>
+                <button onClick={navigateForward} disabled={historyForward <= 0}>
                     {<GoforwardIcon className='goforward-icon' />}
-                </button>
-                {/* <button disabled={} onClick={() => navigate(1)}>{'>'}</button> */}
-            </div>
-            <div>
-                <button>
-                    <InstallIcon className='install-icon' />
-                    Install app
-                </button>
-                <button>
-                    {' '}
-                    <WhatsnewIcon className='whatsnew-icon' />
-                </button>
-                <button>
-                    <ProfileIcon className='profile-icon' />
-                    Profile
                 </button>
             </div>
         </header>
     )
+}
+
+
+//TODO: Implement profile, notifications, and install app buttons
+// import InstallIcon from '../assets/icons/install.svg'
+// import ProfileIcon from '../assets/icons/profile.svg'
+// import WhatsnewIcon from '../assets/icons/whatsnew.svg'
+
+{/*<div>*/
+}
+{/*    <button>*/
+}
+{/*        <InstallIcon className='install-icon' />*/
+}
+{/*        Install app*/
+}
+{/*    </button>*/
+}
+{/*    <button>*/
+}
+{/*        {' '}*/
+}
+{/*        <WhatsnewIcon className='whatsnew-icon' />*/
+}
+{/*    </button>*/
+}
+{/*    <button>*/
+}
+{/*        <ProfileIcon className='profile-icon' />*/
+}
+{/*        Profile*/
+}
+{/*    </button>*/
+}
+{/*</div>*/
 }
