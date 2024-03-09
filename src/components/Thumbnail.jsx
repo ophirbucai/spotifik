@@ -41,5 +41,5 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
 Thumbnail.propTypes = {
     youtubeId: PropTypes.string,
     large: PropTypes.bool,
-    alt: PropTypes.string.isRequired
+    alt: PropTypes.string
 }
