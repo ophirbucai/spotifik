@@ -33,6 +33,9 @@ export const NowPlaying = () => {
 
     const onStateChange = ({ data }) => {
         switch (data) {
+            case 0:
+                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 150)
+                break
             case 1:
                 setTimeout(setProgress, 150, null)
                 setSongStatus((prev) => ({ ...prev, play: true }))
