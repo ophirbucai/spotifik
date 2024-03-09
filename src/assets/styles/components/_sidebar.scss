@@ -1,5 +1,4 @@
 .sidebar {
-    --sidebar-width: 200px;
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
@@ -8,7 +7,7 @@
     position: relative;
 
     .library, .navigation-wrapper {
-        background-color: $background-base;
+        background-color: $bg-library;
         border-radius: $border-radius;
     }
 
