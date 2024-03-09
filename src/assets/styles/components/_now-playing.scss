@@ -70,20 +70,20 @@
                 height: 4px;
                 background-color: $color-player-bar;
                 border-radius: $border-radius-full;
-                z-index: 1;
+                position: relative;
+                overflow: hidden;
 
-                &:hover .progress-bar-fill {
-                    background-color: $color-primary;
-                }
 
                 .progress-bar-fill {
                     position: absolute;
                     border-radius: inherit;
                     background-color: white;
                     top: 0;
-                    left: 0;
                     height: 100%;
                 }
+            }
+            &:hover .progress-bar .progress-bar-fill {
+                background-color: $color-primary;
             }
 
             input {
@@ -91,14 +91,15 @@
                 appearance: none;
                 background-color: transparent;
                 accent-color: white;
-                z-index: 1;
                 position: absolute;
                 top: -8px;
+                z-index: 1;
                 bottom: -8px;
                 right: -4px;
                 width: calc(100% + 8px);
                 left: -4px;
                 outline: none;
+
                 &:hover {
                     &::-webkit-slider-thumb {
                         opacity: 1;

@@ -71,7 +71,7 @@ export const NowPlaying = () => {
         return () => window.removeEventListener('mouseup', onDurationChange)
     }, [onDurationChange, progress])
 
-    const progressBarStyle = { width: `${(Math.max(1, progress || songStatus.currentTime) / songStatus.duration * 100)}%` }
+    const progressBarStyle = { width: `${(progress || songStatus.currentTime) / songStatus.duration * 100}%` }
     return (
         <div className='player'>
             <div className='player-details'>
@@ -95,14 +95,14 @@ export const NowPlaying = () => {
                     <div className='progress-time-now'>{formatTime(songStatus.currentTime)}</div>
                     <div className='progress-bar'>
                         <div className='progress-bar-fill' style={progressBarStyle}></div>
-                        <input
-                            type='range'
-                            min={0}
-                            max={songStatus.duration || 0}
-                            value={(progress || songStatus.currentTime) || 0}
-                            onChange={(event) => setProgress(event.target.value)}
-                        />
                     </div>
+                    <input
+                        type='range'
+                        min={0}
+                        max={songStatus.duration || 0}
+                        value={(progress || songStatus.currentTime) || 0}
+                        onChange={(event) => setProgress(event.target.value)}
+                    />
                     <div className='progress-time-end'>{formatTime(songStatus.duration)}</div>
                 </div>
             </div>
