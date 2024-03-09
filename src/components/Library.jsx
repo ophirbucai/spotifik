@@ -2,6 +2,7 @@ import LibraryIcon from '../assets/icons/library.svg'
 import PlusIcon from '../assets/icons/plus.svg'
 import { useEffect, useState } from 'react'
 import { searchService } from '../services/search.service.js'
+import { useNavigate } from 'react-router-dom'
 import { LibraryList } from './LibraryList.jsx'
 import RecentsIcon from '../assets/icons/recents.svg'
 import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg'
@@ -10,15 +11,27 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 export const Library = () => {
     const [playlists, setPlaylists] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchLibrary = async () => {
             const res = searchService.getPlaylists()
-            await sleep(3000)
+            await sleep(1000)
             setPlaylists(res)
         }
         fetchLibrary()
     }, [])
+
+    const createPlaylist = () => {
+        try {
+            const { data: playlists } = searchService.createPlaylist()
+            setPlaylists(playlists)
+            navigate(`/playlist/${playlists[0]._id}`)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <div className='library'>
             <header className='library-header'>
@@ -26,7 +39,7 @@ export const Library = () => {
                     <LibraryIcon className='icon' />
                     Your Library
                 </button>
-                <button className='library-header-add'>
+                <button onClick={createPlaylist} className='library-header-add'>
                     <PlusIcon className='icon-plus' />
                 </button>
             </header>

@@ -77,17 +77,31 @@ export const searchService = {
             return searchService._onError('Something went wrong! Please try again in a few moments.')
         }
     },
-    _isInvalidType: (type) => !['track', 'album', 'artist', 'playlist'].includes(type),
-    _onError: (msg) => ({
-        status: 'error',
-        data: null,
-        error: msg
-    }),
-    _onSuccess: (data) => ({
-        status: 'success',
-        data,
-        error: null
-    })
+    createPlaylist: () => {
+        const _id = String(dummyPlaylists.length + 1)
+        dummyPlaylists.unshift({
+            _id,
+            name: `My Playlist #${_id}`,
+            genres: [],
+            songs: [],
+            author: 'Ophir'
+        })
+        return searchService._onSuccess(dummyPlaylists)
+    },
+    _isInvalidType: (type) => !['track', 'album', 'artist', 'playlist']
+        .includes(type),
+    _onError:
+        (msg) => ({
+            status: 'error',
+            data: null,
+            error: msg
+        }),
+    _onSuccess:
+        (data) => ({
+            status: 'success',
+            data,
+            error: null
+        })
 }
 
 const dummyArtists = [
