@@ -1,0 +1,39 @@
+.playlist {
+    display: grid;
+    grid-template-areas: 'img details'
+                         'content content';
+    grid-template-columns: clamp(128px,128px + (100vw - var(--sidebar-width, 0px) -  728px), 232px) 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 18px 24px;
+    padding-inline: 16px;
+    .thumbnail {
+        grid-area: img;
+    }
+    &__details {
+        grid-area: details;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 8px;
+        .entity {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .name {
+            letter-spacing: -1px;
+            font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 600px, 4.5rem);
+        }
+        .description {
+            color: $color-text-faded;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .author {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
+    &__content {
+        grid-area: content;
+    }
+}
