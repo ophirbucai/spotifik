@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import TrackIcon from '../assets/icons/track.svg'
+import PropTypes from 'prop-types'
 
 export const Thumbnail = ({ youtubeId, alt, large = false }) => {
     const imgRef = useRef(null)
@@ -34,4 +35,11 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
                 <img key={src} src={src} alt={alt} ref={imgRef} onLoad={onImageLoad} style={style} />}
         </div>
     )
+}
+
+
+Thumbnail.propTypes = {
+    youtubeId: PropTypes.string,
+    large: PropTypes.bool,
+    alt: PropTypes.string.isRequired
 }
