@@ -1,0 +1,31 @@
+.thumbnail {
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:has(.track-icon) {
+        background-color: $bg-thumbnail;
+
+        &.large .track-icon {
+            fill: $icon-thumbnail-large;
+            width: 35%;
+            height: 35%;
+        }
+        &:not(.large) .track-icon {
+            fill: $icon-thumbnail-small;
+            width: 50%;
+            height: 50%;
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-position: 50%;
+        object-fit: cover;
+    }
+}

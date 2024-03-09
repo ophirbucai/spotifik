@@ -8,11 +8,11 @@ import DisableRepeatIcon from '../assets/icons/disableRepeat.svg'
 //import QueueIcon from '../assets/icons/queue.svg'
 // import ConnecttodeviceIcon from '../assets/icons/connecttodevice.svg'
 // import MuteIcon from '../assets/icons/mute.svg'
-import TrackIcon from '../assets/icons/track.svg'
 import { useGetEntity } from '../hooks/useGetEntity.jsx'
 import { useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import style from '../assets/styles/modules/youtube.module.scss'
+import { Thumbnail } from './Thumbnail.jsx'
 
 export const NowPlaying = () => {
     const { track, /*error, status*/ } = useGetEntity('track', 'skyfall')
@@ -73,10 +73,10 @@ export const NowPlaying = () => {
     return (
         <div className='player'>
             <div className='player-details'>
-                <div className='player-details-cover'>
-                    {track?.thumbnail ?
-                        <img src={track.thumbnail} alt='song' />
-                        : <TrackIcon className='track-icon' />}
+                <Thumbnail youtubeId={track?.youtubeId} alt={track?.name} />
+                <div className='player-details-info'>
+                    <h3>{track?.name}</h3>
+                    <p>{track?.artist}</p>
                 </div>
             </div>
             <div className='player-controls'>
