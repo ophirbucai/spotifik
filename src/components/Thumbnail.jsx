@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export const Thumbnail = ({ youtubeId, alt, large = false }) => {
     const imgRef = useRef(null)
-    const [showPlaceholder, setShowPlaceholder] = useState(false)
+    const [showPlaceholder, setShowPlaceholder] = useState(!youtubeId)
     function getCoverArt(youtubeId) {
         return `https://i.ytimg.com/vi/${youtubeId}/mqdefault.jpg`
     }
@@ -17,13 +17,9 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
     }
 
     useEffect(() => {
-        let timeout
         if (youtubeId) {
-            imgRef.current.src = getCoverArt(youtubeId)
-        } else {
-            timeout = setTimeout(() => setShowPlaceholder(true), 75)
+            setShowPlaceholder(false)
         }
-        return () => clearTimeout(timeout)
     }, [youtubeId])
 
     const src = getCoverArt(youtubeId)
@@ -32,7 +28,7 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
         <div className={'thumbnail' + (large ? ' large' : '')}>
             {showPlaceholder && <TrackIcon className='track-icon' />}
             {!showPlaceholder && youtubeId &&
-                <img key={src} src={src} alt={alt} ref={imgRef} onLoad={onImageLoad} style={style} />}
+                <img key={youtubeId} src={src} alt={alt} ref={imgRef} onLoad={onImageLoad} style={style} />}
         </div>
     )
 }
