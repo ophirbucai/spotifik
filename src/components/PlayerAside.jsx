@@ -9,7 +9,13 @@ import PropTypes from 'prop-types'
 export const PlayerAside = ({ player }) => {
     const [currentVolume, setCurrentVolume] = useState(100)
     function onMute() {
-        player.isMuted() ? player.unMute() : player.mute()
+        if (currentVolume === 0) {
+            player.unMute()
+            setCurrentVolume(player.getVolume())
+        } else {
+            player.mute()
+            setCurrentVolume(0)
+        }
     }
     function onVolumeChange(e) {
         setCurrentVolume(e.target.valueAsNumber)
@@ -18,14 +24,14 @@ export const PlayerAside = ({ player }) => {
 
     return (
         <div className='player-aside'>
-            <button onClick={onMute}>
+            <button onClick={onMute} disabled={player === null}>
                 {currentVolume === 0 && <VolumeOffIcon />}
                 {currentVolume > 0 && currentVolume <= 30 && <VolumeLowIcon />}
                 {currentVolume > 30 && currentVolume <= 70 && <VolumeMediumIcon />}
                 {currentVolume > 70 && <VolumeHighIcon />}
             </button>
             <div className='volume'>
-                <TrackBar value={currentVolume} onChange={onVolumeChange} />
+                <TrackBar value={currentVolume} onChange={onVolumeChange} disabled={player === null} />
             </div>
         </div>
     )

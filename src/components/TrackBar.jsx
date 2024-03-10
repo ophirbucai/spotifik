@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const TrackBar = ({ max = 100, value, onChange }) => {
+export const TrackBar = ({ max = 100, value, onChange, disabled }) => {
     const trackBarStyle = { width: `${value / max * 100}%` }
     return (
         <div className='track-bar'>
             <input
+                disabled={disabled}
                 className='track-bar-range'
                 type='range'
                 min={0}
@@ -23,5 +24,6 @@ export const TrackBar = ({ max = 100, value, onChange }) => {
 TrackBar.propTypes = {
     max: PropTypes.number,
     value: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
 }
