@@ -38,7 +38,7 @@ export const NowPlaying = () => {
                 setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 250)
                 break
             case PlayerState.PLAYING:
-                setTimeout(setProgress, 150, null)
+                setTimeout(() => setProgress(null), 150)
                 setSongStatus((prev) => ({ ...prev, play: true }))
                 break
             case PlayerState.PAUSED:
