@@ -7,13 +7,13 @@ import { TrackBar } from './TrackBar.jsx'
 import PropTypes from 'prop-types'
 
 export const PlayerAside = ({ player }) => {
-    const [currentVolume, setCurrentVolume] = useState(0)
+    const [currentVolume, setCurrentVolume] = useState(100)
     function onMute() {
         player.isMuted() ? player.unMute() : player.mute()
     }
     function onVolumeChange(e) {
-        setCurrentVolume(Number(e.target.value))
-        player.setVolume(e.target.value)
+        setCurrentVolume(e.target.valueAsNumber)
+        player.setVolume(e.target.valueAsNumber)
     }
 
     return (

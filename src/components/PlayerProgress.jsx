@@ -28,7 +28,11 @@ export const PlayerProgress = ({ player, songStatus, progress, setProgress }) =>
     return (
         <div className='player-controls-bottom'>
             <div className='progress-time-now'>{formatTime(songStatus.currentTime)}</div>
-            <TrackBar max={songStatus.duration || 0} value={(progress || songStatus.currentTime) || 0} onChange={(event) => setProgress(event.target.value)} />
+            <TrackBar
+                max={songStatus.duration || 0}
+                value={(progress || songStatus.currentTime) || 0}
+                onChange={(event) => setProgress(event.target.valueAsNumber)}
+            />
             <div className='progress-time-end'>{formatTime(songStatus.duration)}</div>
         </div>
     )
