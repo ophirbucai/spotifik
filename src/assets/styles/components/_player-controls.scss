@@ -7,23 +7,11 @@
     &-top {
         display: flex;
         justify-content: center;
-        gap: 16px;
+        @media screen and (max-width: 480px) {
+            --gap: 8px;
+        }
+        gap: var(--gap, 16px);
         margin-bottom: 12px;
-
-        button svg {
-            transition: fill 50ms;
-        }
-
-        button:has(.play-icon),
-        button:has(.pause-icon) {
-            &:hover, &:focus-within {
-                scale: 1.1;
-            }
-        }
-
-        button:hover svg:not(.play-icon):not(.pause-icon) {
-            fill: white;
-        }
     }
 
     &-bottom {
@@ -47,22 +35,6 @@
             position: absolute;
             font-size: 12px;
             color: $color-player-faded;
-        }
-    }
-
-    button {
-        padding: 5px;
-
-        &:has(.play-icon),
-        &:has(.pause-icon) {
-            fill: black;
-            border-radius: $border-radius-full;
-            background-color: white;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            height: 32px;
         }
     }
 }

@@ -1,9 +1,41 @@
-.player {
+.now-playing {
     grid-area: now-playing-row;
     height: 72px;
     display: flex;
-    grid-auto-flow: column;
-    grid-template-columns: 1fr auto 1fr;
+
+    button {
+        padding: 5px;
+
+        &:hover {
+            svg:not(.play-icon):not(.pause-icon),
+            #volume-icon {
+                fill: white;
+            }
+        }
+
+        svg,
+        #volume-icon {
+            transition: fill 50ms;
+        }
+
+        &:has(.play-icon),
+        &:has(.pause-icon) {
+            fill: black;
+            border-radius: $border-radius-full;
+            background-color: white;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+
+            &:hover, &:focus-within {
+                scale: 1.1;
+            }
+        }
+
+    }
 
     .switch-icon,
     .previous-icon,

@@ -1,22 +1,20 @@
 .player-details {
     min-width: 180px;
     width: 30%;
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
     gap: 18px;
     align-items: center;
     padding-inline-start: $panel-gap;
 
     .thumbnail {
+        min-width: 56px;
+        flex-basis: 56px;
         margin-top: 4px;
         align-self: flex-start;
     }
 
     &-info {
-        width: 100%;
-        overflow: hidden;
-
+        max-width: calc(100% - 56px - 18px - $panel-gap);
         h3 {
             font-size: 14px;
             font-weight: 500;

@@ -48,7 +48,7 @@ export const NowPlaying = () => {
     }
 
     return (
-        <div className='player'>
+        <div className='now-playing'>
             <PlayerDetails track={track} />
             <div className='player-controls'>
                 <PlayerControls player={player} songStatus={songStatus} />
