@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 export const TrackBar = ({ max = 100, value, onChange, disabled }) => {
-    const trackBarStyle = { width: `${value / max * 100}%` }
+    const trackBarStyle = useMemo(() => ({ width: value ? `${value / max * 100}%` : '0%' }), [value, max])
     return (
         <div className='track-bar'>
             <input

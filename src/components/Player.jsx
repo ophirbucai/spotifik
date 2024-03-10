@@ -9,12 +9,14 @@ import style from '../assets/styles/modules/youtube.module.scss'
 import { useQueue } from '../store/useQueue.js'
 
 const { PlayerState } = YouTube
+
+const initialSongStatus = { play: false, duration: null, currentTime: 0 }
 export const Player = () => {
     const currentTime = useRef(null)
-    const { queue } = useQueue()
-    const { track /*error, status*/ } = useGetEntity('track', queue[0])
+    const { queue: [first] } = useQueue()
+    const { track /*error, status*/ } = useGetEntity('track', first)
     const [progress, setProgress] = useState(null)
-    const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
+    const [songStatus, setSongStatus] = useState(initialSongStatus)
     const [player, setPlayer] = useState(null)
     const updateProgress = useCallback(() => {
         setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
@@ -22,20 +24,23 @@ export const Player = () => {
 
     useEffect(() => {
         if (songStatus.play) {
-            currentTime.current = setInterval(updateProgress, 250)
+            currentTime.current = setTimeout(updateProgress, 100)
+        } else {
+            clearTimeout(currentTime.current)
         }
 
-        return () => clearInterval(currentTime.current)
-    }, [updateProgress, songStatus.play])
+        return () => setTimeout(currentTime.current)
+    }, [updateProgress, songStatus])
 
     const onReady = (e) => {
         setPlayer(e.target)
         e.target.playVideo()
         const duration = e.target.getDuration()
-        setSongStatus({ ...songStatus, duration })
+        setSongStatus({ ...initialSongStatus, duration })
     }
 
     const onStateChange = ({ data }) => {
+        console.log(data)
         switch (data) {
             case PlayerState.ENDED:
                 setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 250)
@@ -49,6 +54,11 @@ export const Player = () => {
                 break
         }
     }
+
+    useEffect(() => {
+        setSongStatus(initialSongStatus)
+
+    }, [first])
 
     return (
         <div className='player'>
