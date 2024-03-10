@@ -42,6 +42,7 @@
 
         .progress-time-now,
         .progress-time-end {
+            white-space: nowrap;
             top: 50%;
             position: absolute;
             font-size: 12px;
