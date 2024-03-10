@@ -21,13 +21,13 @@ export const PlayerControls = ({ player, songStatus }) => {
     }
     return (
         <div className='player-controls-top'>
-            <button><SwitchIcon className='switch-icon' /></button>
-            <button onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
-            <button onClick={songStatus.play ? onPause : onPlay}>
+            <button disabled={player === null}><SwitchIcon className='switch-icon' /></button>
+            <button disabled={player === null} onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
+            <button disabled={player === null} onClick={songStatus.play ? onPause : onPlay}>
                 {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
             </button>
-            <button onClick={nextSong}><NextIcon className='next-icon' /></button>
-            <button><RepeatIcon className='repeat-icon' /></button>
+            <button disabled={player === null} onClick={nextSong}><NextIcon className='next-icon' /></button>
+            <button disabled={player === null}><RepeatIcon className='repeat-icon' /></button>
         </div>
     )
 }

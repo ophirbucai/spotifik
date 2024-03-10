@@ -27,7 +27,7 @@
             cursor: pointer;
         }
 
-        &:hover {
+        &:hover:not(:disabled) {
             + .track-bar-back .track-bar-fill {
                 background-color: $color-primary;
             }
