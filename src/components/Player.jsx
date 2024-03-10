@@ -6,11 +6,13 @@ import { PlayerControls } from './PlayerControls.jsx'
 import { PlayerProgress } from './PlayerProgress.jsx'
 import { PlayerAside } from './PlayerAside.jsx'
 import style from '../assets/styles/modules/youtube.module.scss'
+import { useQueue } from '../store/useQueue.js'
 
 const { PlayerState } = YouTube
 export const Player = () => {
     const currentTime = useRef(null)
-    const { track /*error, status*/ } = useGetEntity('track', 'talk_is_cheap')
+    const { queue } = useQueue()
+    const { track /*error, status*/ } = useGetEntity('track', queue[0])
     const [progress, setProgress] = useState(null)
     const [songStatus, setSongStatus] = useState({ play: false, duration: null, currentTime: 0 })
     const [player, setPlayer] = useState(null)
@@ -28,6 +30,7 @@ export const Player = () => {
 
     const onReady = (e) => {
         setPlayer(e.target)
+        e.target.playVideo()
         const duration = e.target.getDuration()
         setSongStatus({ ...songStatus, duration })
     }

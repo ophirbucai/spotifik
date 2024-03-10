@@ -34,7 +34,7 @@ export const useGetEntity = (type, id) => {
     useEffect(() => {
         fetchEntity()
 
-    }, [id])
+    }, [id, fetchEntity])
 
     return {
         [type]: entity,
