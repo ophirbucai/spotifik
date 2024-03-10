@@ -35,7 +35,7 @@ export const NowPlaying = () => {
     const onStateChange = ({ data }) => {
         switch (data) {
             case PlayerState.ENDED:
-                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 150)
+                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 250)
                 break
             case PlayerState.PLAYING:
                 setTimeout(setProgress, 150, null)
