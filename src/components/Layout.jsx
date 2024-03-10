@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { MainHeader } from './MainHeader'
 import { Sidebar } from './Sidebar'
-import { NowPlaying } from './NowPlaying'
+import { Player } from './Player.jsx'
 
 export const Layout = () => {
     return (
@@ -12,7 +12,7 @@ export const Layout = () => {
                 <Outlet />
             </main>
             <footer className='now-playing'>
-                <NowPlaying />
+                <Player />
             </footer>
         </div>
     )

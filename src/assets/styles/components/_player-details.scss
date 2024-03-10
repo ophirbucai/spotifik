@@ -14,13 +14,13 @@
     }
 
     &-info {
-        max-width: calc(100% - 56px - 18px - $panel-gap);
         h3 {
             font-size: 14px;
             font-weight: 500;
         }
 
         p {
+            max-width: calc(100% - 56px - 18px - $panel-gap);
             font-size: 12px;
             color: $color-player-faded;
         }

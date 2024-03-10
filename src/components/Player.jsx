@@ -8,7 +8,7 @@ import { PlayerAside } from './PlayerAside.jsx'
 import style from '../assets/styles/modules/youtube.module.scss'
 
 const { PlayerState } = YouTube
-export const NowPlaying = () => {
+export const Player = () => {
     const currentTime = useRef(null)
     const { track /*error, status*/ } = useGetEntity('track', 'talk_is_cheap')
     const [progress, setProgress] = useState(null)
@@ -48,7 +48,7 @@ export const NowPlaying = () => {
     }
 
     return (
-        <div className='now-playing'>
+        <div className='player'>
             <PlayerDetails track={track} />
             <div className='player-controls'>
                 <PlayerControls player={player} songStatus={songStatus} />
