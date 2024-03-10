@@ -4,7 +4,7 @@ import PreviousIcon from '../assets/icons/previous.svg'
 import PauseIcon from '../assets/icons/pause.svg'
 import PlayIcon from '../assets/icons/play.svg'
 import NextIcon from '../assets/icons/next.svg'
-import DisableRepeatIcon from '../assets/icons/disablerepeat.svg'
+import RepeatIcon from '../assets/icons/repeat.svg'
 
 export const PlayerControls = ({ player, songStatus }) => {
     function onPlay() {
@@ -27,7 +27,7 @@ export const PlayerControls = ({ player, songStatus }) => {
                 {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
             </button>
             <button onClick={nextSong}><NextIcon className='next-icon' /></button>
-            <button><DisableRepeatIcon className='disablerepeat-icon' /></button>
+            <button><RepeatIcon className='repeat-icon' /></button>
         </div>
     )
 }
