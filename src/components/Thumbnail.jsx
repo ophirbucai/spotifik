@@ -21,7 +21,7 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
         if (youtubeId) {
             imgRef.current.src = getCoverArt(youtubeId)
         } else {
-            timeout = setTimeout(setShowPlaceholder, 75, true)
+            timeout = setTimeout(() => setShowPlaceholder(true), 75)
         }
         return () => clearTimeout(timeout)
     }, [youtubeId])
