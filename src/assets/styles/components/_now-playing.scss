@@ -33,22 +33,27 @@
         }
     }
 
-
-
     &-aside {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-inline-end: 8px;
         min-width: 180px;
+        gap: 8px;
         width: 30%;
+
+        .volume {
+            width: clamp(50px, 100%, 100px);
+        }
     }
 
     .switch-icon,
     .previous-icon,
-    .next-icon,
-    .disablerepeat-icon,
-    .nowplayingview-icon,
-    .queue-icon,
-    .connecttodevice-icon,
-    .mute-icon {
-        stroke-width: 14px;
+    .repeat-icon,
+    .next-icon, {
         fill: $color-player-deck;
+    }
+    #volume-icon {
+        fill: $color-player-aside;
     }
 }

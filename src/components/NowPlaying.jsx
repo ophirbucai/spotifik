@@ -54,7 +54,7 @@ export const NowPlaying = () => {
                 <PlayerControls player={player} songStatus={songStatus} />
                 <PlayerProgress player={player} songStatus={songStatus} progress={progress} setProgress={setProgress} />
             </div>
-            <PlayerAside />{/* TODO: Implement queue and volume control*/}
+            <PlayerAside player={player} />
             {track && (
                 <YouTube
                     key={track.youtubeId}
