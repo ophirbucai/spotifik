@@ -21,7 +21,6 @@ export const Player = () => {
     const updateProgress = useCallback(() => {
         setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
     }, [player])
-
     useEffect(() => {
         if (songStatus.play) {
             currentTime.current = setTimeout(updateProgress, 100)
@@ -35,6 +34,7 @@ export const Player = () => {
     const onReady = (e) => {
         setPlayer(e.target)
         e.target.playVideo()
+        // e.target.setVolume(currentVolume)
         const duration = e.target.getDuration()
         setSongStatus({ ...initialSongStatus, duration })
     }
