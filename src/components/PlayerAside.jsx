@@ -1,13 +1,17 @@
-import VolumeOffIcon from '../assets/icons/volume-off.svg'
-import VolumeLowIcon from '../assets/icons/volume-low.svg'
-import VolumeMediumIcon from '../assets/icons/volume-medium.svg'
-import VolumeHighIcon from '../assets/icons/volume-high.svg'
-import { useState } from 'react'
+import VolumeOffIcon from '../assets/icons/volume-off.svg?react'
+import VolumeLowIcon from '../assets/icons/volume-low.svg?react'
+import VolumeMediumIcon from '../assets/icons/volume-medium.svg?react'
+import VolumeHighIcon from '../assets/icons/volume-high.svg?react'
 import { TrackBar } from './TrackBar.jsx'
 import PropTypes from 'prop-types'
 
-export const PlayerAside = ({ player }) => {
-    const [currentVolume, setCurrentVolume] = useState(100)
+import { usePlayer } from '../store/usePlayer'
+
+export const PlayerAside = ({ player}) => {
+
+    // const [currentVolume, setCurrentVolume] = usePlayer(state => state.currVolume)
+    const { setCurrentVolume, currentVolume } = usePlayer() //TODO
+
     function onMute() {
         if (currentVolume === 0) {
             player.unMute()
@@ -21,6 +25,7 @@ export const PlayerAside = ({ player }) => {
         setCurrentVolume(e.target.valueAsNumber)
         player.setVolume(e.target.valueAsNumber)
     }
+
 
     return (
         <div className='player-aside'>
@@ -38,7 +43,10 @@ export const PlayerAside = ({ player }) => {
 }
 
 PlayerAside.propTypes = {
-    player: PropTypes.object
+    player: PropTypes.object,
+    // currentVolume: PropTypes.number,
+    // onVolumeChange: PropTypes.func,
+    // onMute: PropTypes.func
 }
 
 //import QueueIcon from '../assets/icons/queue.svg'
