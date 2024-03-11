@@ -13,7 +13,7 @@ const { PlayerState } = YouTube
 const initialSongStatus = { play: false, duration: null, currentTime: 0 }
 export const Player = () => {
     const currentTime = useRef(null)
-    const { queue: [first] } = useQueue()
+    const { queue: [first, ...queue], remove } = useQueue()
     const { track /*error, status*/ } = useGetEntity('track', first)
     const [progress, setProgress] = useState(null)
     const [songStatus, setSongStatus] = useState(initialSongStatus)
@@ -43,10 +43,16 @@ export const Player = () => {
         console.log(data)
         switch (data) {
             case PlayerState.ENDED:
-                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false })), 250)
+                if (queue.length) {
+                    remove()
+                    console.log('next song')
+                } else {
+                    console.log('no more songs')
+                }
+                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false, currentTime: 0 })), 250)
                 break
             case PlayerState.PLAYING:
-                setTimeout(() => setProgress(null), 150)
+                setTimeout(() => setProgress(null), 250)
                 setSongStatus((prev) => ({ ...prev, play: true }))
                 break
             case PlayerState.PAUSED:
@@ -54,11 +60,6 @@ export const Player = () => {
                 break
         }
     }
-
-    useEffect(() => {
-        setSongStatus(initialSongStatus)
-
-    }, [first])
 
     return (
         <div className='player'>
@@ -74,7 +75,6 @@ export const Player = () => {
                     videoId={track.youtubeId}
                     className={style.youtube}
                     onReady={onReady}
-                    onEnd={console.log}
                     onStateChange={onStateChange}
                 />
             )}
