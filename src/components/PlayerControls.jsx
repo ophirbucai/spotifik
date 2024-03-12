@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import SwitchIcon from '../assets/icons/switch.svg?react'
-import PreviousIcon from '../assets/icons/previous.svg?react'
-import PauseIcon from '../assets/icons/pause.svg?react'
-import PlayIcon from '../assets/icons/play.svg?react'
-import NextIcon from '../assets/icons/next.svg?react'
-import RepeatIcon from '../assets/icons/repeat.svg?react'
+import SwitchIcon from '../assets/icons/switch.svg'
+import PreviousIcon from '../assets/icons/previous.svg'
+import PauseIcon from '../assets/icons/pause.svg'
+import PlayIcon from '../assets/icons/play.svg'
+import NextIcon from '../assets/icons/next.svg'
+import RepeatIcon from '../assets/icons/repeat.svg'
 import { useQueue } from '../store/useQueue'
 
 
