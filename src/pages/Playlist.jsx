@@ -18,20 +18,22 @@ export default function Playlist() {
             {status === 'loading' && 'Loading track details...'}
             {status === 'error' && <ErrorMessage error={error} />}
             {status === 'success' && (
-                <div className='wrapper playlist'>
-                    <Thumbnail alt={playlist.name} large />
-                    <header className='playlist__details'>
-                        <small className='entity'>Playlist</small>
-                        <h1 className='name'>{playlist.name}</h1>
-                        {playlist.description && <p className='description'>{playlist.description}</p>}
-                        <div>
-                            {playlist.author && <span className='author'>{playlist.author}</span>}
-                            {playlist.songs.length > 0 && <small> • {count} song{count > 1 ? 's' : ''}</small>}
-                        </div>
-                    </header>
-                    <button>
-                        <PlayIcon />
-                    </button>
+                <div className='playlist'>
+                    <div className='playlist__header bg' >
+                        <Thumbnail youtubeId={playlist?.songs[0]?.youtubeId} alt={playlist.name} large />
+                        <header className='details'>
+                            <small className='entity'>Playlist</small>
+                            <h1 className='name'>{playlist.name}</h1>
+                            {playlist.description && <p className='description'>{playlist.description}</p>}
+                            <div>
+                                {playlist.author && <span className='author'>{playlist.author}</span>}
+                                {playlist.songs.length > 0 && <small> • {count} song{count > 1 ? 's' : ''}</small>}
+                            </div>
+                        </header>
+                        {/* <button>
+                            <PlayIcon />
+                        </button> */}
+                    </div>
                     <div className='playlist__content'>
                         {playlist.songs.map(({ _id }) => {
                             return <TrackCard key={_id} trackId={_id} />
