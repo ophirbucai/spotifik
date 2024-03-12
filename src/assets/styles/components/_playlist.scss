@@ -1,40 +1,61 @@
+.main-header:has( + .playlist) {
+    z-index: 1;
+    position: fixed;
+}
+
+main.content:has(.playlist){
+    position: relative;
+}
+
 .playlist {
-    display: grid;
-    grid-template-areas: 'img details'
-                         'content content';
-    grid-template-columns: clamp(128px,128px + (100vw - var(--sidebar-width, 0px) -  728px), 232px) 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 18px 24px;
-    padding-inline: 16px;
-    .thumbnail {
-        grid-area: img;
+    position: absolute;
+    top: 0;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+    width: 100%;
+    &__header {
+        display: grid;
+        grid-template-areas: 'img details';
+        grid-template-columns: clamp(128px, 128px + (100vw - var(--sidebar-width, 0px) - 728px), 232px) 1fr;
+        gap: 18px 24px;
+        padding: 106px 16px 16px 16px;
+        .thumbnail {
+            grid-area: img;
+            align-self: end;
+            //TODO shadow
+        }
+
+        .details {
+            grid-area: details;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 8px;
+
+            .entity {
+                font-size: 0.8rem;
+                font-weight: 600;
+            }
+
+            .name {
+                margin-left: -0.05em;
+                letter-spacing: -1px;
+                font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 750px, 4.5rem);
+                line-height: 1;
+            }
+
+            .description {
+                color: $color-text-faded;
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            .author {
+                font-weight: 700;
+                font-size: 0.9rem;
+            }
+        }
     }
-    &__details {
-        grid-area: details;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        gap: 8px;
-        .entity {
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .name {
-            margin-left: -0.05em;
-            letter-spacing: -1px;
-            font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 600px, 4.5rem);
-        }
-        .description {
-            color: $color-text-faded;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        .author {
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-    }
-    &__content {
-        grid-area: content;
-    }
+
+    &__content {}
 }
