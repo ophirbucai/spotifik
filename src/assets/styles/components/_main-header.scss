@@ -5,10 +5,12 @@
     display: flex;
     justify-content: space-between;
     transition: background-color 200ms ease-in-out;
-    > div {
+
+    >div {
         display: flex;
-        gap: 4px;
+        gap: 8px;
     }
+
     button {
         border-radius: $border-radius-full;
         font-weight: 500;
@@ -20,21 +22,23 @@
         min-width: 32px;
     }
 
-    .install-icon{
+    .install-icon {
         fill: $coloractive;
     }
 
-    .whatsnew-icon{
+    .whatsnew-icon {
         fill: $coloractive;
     }
 
-    .profile-icon{
+    .profile-icon {
         fill: $coloractive;
     }
-    .goback-icon{
+
+    .goback-icon {
         fill: $coloractive;
     }
-    .goforward-icon{
+
+    .goforward-icon {
         fill: $coloractive;
     }
 
