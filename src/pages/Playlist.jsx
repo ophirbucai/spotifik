@@ -51,20 +51,6 @@ export default function Playlist() {
                             })}
                         </div>
                     </div>
-
-                    {/* <div className='playlist__table'>
-                        <div className='playlist__table row'>
-                            <div># Title</div>
-                            <div>Album</div>
-                            <div>Date added</div>
-                            <div> <ClockIcon /></div>
-                        </div>
-                        <div className='playlist__table content'>
-                            {playlist.songs.map(({ _id }) => {
-                                return <TrackCard key={_id} trackId={_id} />
-                            })}
-                        </div>
-                    </div> */}
                 </div>
             )}
         </>
