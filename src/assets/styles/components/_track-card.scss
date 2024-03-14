@@ -1,0 +1,43 @@
+.track {
+    display: grid;
+    grid-template-columns: 16px minmax(120px, 4fr) minmax(120px, 2fr) minmax(120px, 1fr);
+}
+
+.track .index {
+    grid-column: 1;
+}
+
+.track .info {
+    display: flex;
+    grid-column: 2; /* Set the info to be in the second column */
+    grid-row: 1;
+    // align-items: center; /* Align items vertically */
+    align-self: flex-start;
+    .thumbnail {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px; /* Add margin to the right of the thumbnail */
+    
+    }
+.info-song {
+    grid-row: 2;
+    margin-left: 5px; /* Add margin to the left of the info (song) */
+}
+}
+
+
+.track .info > * {
+    margin-bottom: 5px; /* Add space between elements */
+}
+
+.track .album {
+    grid-column: 3; /* Adjust column number as per your layout */
+}
+
+.track .date {
+    grid-column: 4; /* Adjust column number as per your layout */
+}
+
+.track .length {
+    grid-column: 5; /* Adjust column number as per your layout */
+}
