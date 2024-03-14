@@ -1,9 +1,9 @@
-.main-header:has( + .playlist) {
+.main-header:has(+ .playlist) {
     z-index: 1;
     position: fixed;
 }
 
-main.content:has(.playlist){
+main.content:has(.playlist) {
     position: relative;
 }
 
@@ -13,16 +13,18 @@ main.content:has(.playlist){
     border-radius: 4px 4px 0 0;
     overflow: hidden;
     width: 100%;
+
     &__header {
         display: grid;
         grid-template-areas: 'img details';
         grid-template-columns: clamp(128px, 128px + (100vw - var(--sidebar-width, 0px) - 728px), 232px) 1fr;
         gap: 18px 24px;
         padding: 106px 16px 16px 16px;
+
         .thumbnail {
             grid-area: img;
             align-self: end;
-            //TODO shadow
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
         }
 
         .details {
@@ -54,8 +56,68 @@ main.content:has(.playlist){
                 font-weight: 700;
                 font-size: 0.9rem;
             }
+
         }
     }
 
-    &__content {}
+    &__table {
+        --row-height: 56px;
+        display: grid;
+        padding: 0 16px;
+        color: red;
+
+        .col {
+
+            color: $colorsubdued;
+            display: grid;
+            align-items: center;
+            gap: 16px; 
+            grid-template-columns: 16px minmax(120px, 4fr) minmax(120px, 2fr) minmax(120px, 1fr);
+
+            .one {
+                grid-column: 1;
+            }
+            .two {
+                grid-column: 2;
+            }
+
+            .three {
+                grid-column: 3;
+            }
+
+            .four {
+                grid-column: 4;
+            }
+
+            .five {
+                grid-column: 5;
+            }
+
+
+        }
+
+        .divider {
+
+            border-bottom: 1px solid $colorsubdued;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            box-sizing: content-box;
+            height: 1px;
+            position: sticky;
+            z-index: 2;
+            border-bottom: 1px solid $colorsubdued;
+            margin-bottom: 16px;
+        }
+
+    }
+    .content {
+        grid-gap: 16px;
+
+        color: $colorsubdued;
+    }
+
+}
+
+.clock-icon {
+    fill: $colorsubdued;
 }
