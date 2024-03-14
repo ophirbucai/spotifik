@@ -1,4 +1,5 @@
 import PlayIcon from '../assets/icons/play.svg'
+import ClockIcon from '../assets/icons/clock.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetEntity } from '../hooks/useGetEntity.jsx'
 import { ErrorMessage } from './Track.jsx'
@@ -30,15 +31,40 @@ export default function Playlist() {
                                 {playlist.songs.length > 0 && <small> • {count} song{count > 1 ? 's' : ''}</small>}
                             </div>
                         </header>
-                        {/* <button>
+                        <button>
                             <PlayIcon />
-                        </button> */}
+                        </button>
                     </div>
-                    <div className='playlist__content'>
-                        {playlist.songs.map(({ _id }) => {
-                            return <TrackCard key={_id} trackId={_id} />
-                        })}
+
+                    <div className='playlist__table'>
+                        <div className='playlist__table col'>
+                            <div className='one'>#</div>
+                            <div className='two'>Title</div>
+                            <div className='three'>Album</div>
+                            <div className='four'>Date Added</div>
+                            <div className='five'><ClockIcon /></div>
+                        </div>
+                        <div className='divider'></div>
+                        <div className='playlist__table content'>
+                            {playlist.songs.map(({ _id }, index) => {
+                                return <TrackCard key={_id} trackId={_id} index={index + 1} />
+                            })}
+                        </div>
                     </div>
+
+                    {/* <div className='playlist__table'>
+                        <div className='playlist__table row'>
+                            <div># Title</div>
+                            <div>Album</div>
+                            <div>Date added</div>
+                            <div> <ClockIcon /></div>
+                        </div>
+                        <div className='playlist__table content'>
+                            {playlist.songs.map(({ _id }) => {
+                                return <TrackCard key={_id} trackId={_id} />
+                            })}
+                        </div>
+                    </div> */}
                 </div>
             )}
         </>
