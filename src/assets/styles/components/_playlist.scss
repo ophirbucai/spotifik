@@ -64,8 +64,6 @@ main.content:has(.playlist) {
         --row-height: 56px;
         display: grid;
         padding: 0 16px;
-        color: red;
-
         .col {
 
             color: $colorsubdued;
@@ -92,8 +90,6 @@ main.content:has(.playlist) {
             .five {
                 grid-column: 5;
             }
-
-
         }
 
         .divider {
