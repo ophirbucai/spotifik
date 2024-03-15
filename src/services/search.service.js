@@ -19,17 +19,17 @@ export const searchService = {
         try {
             let result
             switch (type) {
-            case 'track':
-                result = dummyTracks.find(({ _id }) => _id === id)
-                break
-            case 'artist':
-                result = dummyArtists.find(({ _id }) => _id === id)
-                break
-            case 'playlist':
-                result = dummyPlaylists.find(({ _id }) => _id === id)
-                break
-            case 'album':
-                throw 'Not implemented yet'
+                case 'track':
+                    result = dummyTracks.find(({ _id }) => _id === id)
+                    break
+                case 'artist':
+                    result = dummyArtists.find(({ _id }) => _id === id)
+                    break
+                case 'playlist':
+                    result = dummyPlaylists.find(({ _id }) => _id === id)
+                    break
+                case 'album':
+                    throw 'Not implemented yet'
             }
             if (!result) throw `No ${type} found`
             return searchService._onSuccess(result)
@@ -77,23 +77,41 @@ export const searchService = {
             return searchService._onError('Something went wrong! Please try again in a few moments.')
         }
     },
-    _isInvalidType: (type) => !['track', 'album', 'artist', 'playlist'].includes(type),
-    _onError: (msg) => ({
-        status: 'error',
-        data: null,
-        error: msg
-    }),
-    _onSuccess: (data) => ({
-        status: 'success',
-        data,
-        error: null
-    })
+    createPlaylist: () => {
+        const _id = String(dummyPlaylists.length + 1)
+        dummyPlaylists.unshift({
+            _id,
+            name: `My Playlist #${_id}`,
+            genres: [],
+            songs: [],
+            author: 'Ophir'
+        })
+        return searchService._onSuccess(dummyPlaylists)
+    },
+    _isInvalidType: (type) => !['track', 'album', 'artist', 'playlist']
+        .includes(type),
+    _onError:
+        (msg) => ({
+            status: 'error',
+            data: null,
+            error: msg
+        }),
+    _onSuccess:
+        (data) => ({
+            status: 'success',
+            data,
+            error: null
+        })
 }
 
 const dummyArtists = [
     {
         _id: 'adele',
         name: 'Adele'
+    },
+    {
+        _id: 'chet_faker',
+        name: 'Chet Faker'
     }
 ]
 
@@ -112,10 +130,21 @@ const dummyTracks = [
         _id: 'rolling_in_the_deep',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/74/Adele_-_Rolling_in_the_Deep.png',
         name: 'Rolling in the Deep',
+        youtubeId: 'bDtjO-R0QSo',
         artist: dummyArtists[0].name,
         trackLength: 60 * 3 + 48,
         explicit: true,
         genre: 'pop'
+    },
+    {
+        _id: 'talk_is_cheap',
+        thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/73/Talk_Is_Cheap_%28Chet_Faker%29.jpg',
+        name: 'Talk is Cheap',
+        youtubeId: 'aP_-P_BS6KY',
+        artist: dummyArtists[1].name,
+        trackLength: 60 * 3 + 39,
+        explicit: false,
+        genre: 'funk'
     }
 ]
 
@@ -133,10 +162,9 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[1]._id,
-            dummyTracks[0]._id
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -146,9 +174,8 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[0]._id
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -159,10 +186,10 @@ const dummyPlaylists = [
             dummyGenres[0]._id
         ],
         songs: [
-            dummyTracks[0]._id,
-            dummyTracks[1]._id
+            { youtubeId: dummyTracks[2].youtubeId, _id: dummyTracks[2]._id },
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id },
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     },
     {
@@ -173,10 +200,9 @@ const dummyPlaylists = [
             dummyGenres[2]._id
         ],
         songs: [
-            dummyTracks[0]._id,
-            dummyTracks[1]._id
+            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
+            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
         ],
-        cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
         author: 'Ophir'
     }
 ]

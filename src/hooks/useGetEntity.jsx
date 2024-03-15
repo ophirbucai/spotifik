@@ -13,6 +13,7 @@ export const useGetEntity = (type, id) => {
     const [error, setError] = useState(null)
 
     const onError = (msg) => {
+        setEntity(null)
         setStatus('error')
         setError(msg)
     }
@@ -34,7 +35,7 @@ export const useGetEntity = (type, id) => {
     useEffect(() => {
         fetchEntity()
 
-    }, [id])
+    }, [id, fetchEntity])
 
     return {
         [type]: entity,

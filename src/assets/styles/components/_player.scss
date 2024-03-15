@@ -1,0 +1,50 @@
+.player {
+    grid-area: now-playing-row;
+    height: 72px;
+    display: flex;
+
+    button {
+        padding: 5px;
+
+        &:hover {
+            svg:not(.play-icon):not(.pause-icon),
+            #volume-icon {
+                fill: white;
+            }
+        }
+
+        svg,
+        #volume-icon {
+            transition: fill 50ms;
+        }
+
+        &:has(.play-icon),
+        &:has(.pause-icon) {
+            fill: black;
+            border-radius: $border-radius-full;
+            background-color: white;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+
+            &:hover, &:focus-within {
+                scale: 1.1;
+            }
+        }
+
+    }
+
+    .switch-icon,
+    .previous-icon,
+    .repeat-icon,
+    .next-icon, {
+        fill: $icon-player-controls;
+    }
+
+    #volume-icon {
+        fill: $icon-player-aside;
+    }
+}

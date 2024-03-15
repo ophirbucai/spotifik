@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { Thumbnail } from './Thumbnail.jsx'
 
 export const LibraryList = ({ list }) => {
     return (
@@ -7,8 +8,8 @@ export const LibraryList = ({ list }) => {
             {list ?
                 list.length > 0 ?
                     list.map(item => <LibraryItem key={item._id} item={item} />)
-                :   <LibraryEmpty />
-            :   <LibraryItemPlaceholders items={5} />}
+                    : <LibraryEmpty />
+                : <LibraryItemPlaceholders items={5} />}
         </ul>
     )
 }
@@ -22,10 +23,10 @@ const LibraryEmpty = () => (
     </div>
 )
 
-const LibraryItem = ({ item: { _id, author, name, cover } }) => (
+const LibraryItem = ({ item: { _id, author, name, songs } }) => (
     <li className='library-list-item'>
         <NavLink to={`/playlist/${_id}`} className='library-list-item-wrapper'>
-            <img src={cover} alt={name} className='library-list-item-cover' />
+            <Thumbnail youtubeId={songs[0]?.youtubeId} alt={name} className='library-list-item-cover' />
             <div>
                 <p className='library-list-item-name'>{name}</p>
                 <p className='library-list-item-author'>{author}</p>
@@ -38,8 +39,8 @@ LibraryItem.propTypes = {
     item: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        cover: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired
+        author: PropTypes.string.isRequired,
+        songs: PropTypes.array.isRequired
     })
 }
 

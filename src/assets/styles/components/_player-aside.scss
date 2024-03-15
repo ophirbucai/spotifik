@@ -1,0 +1,13 @@
+.player-aside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-inline-end: 8px;
+    min-width: 180px;
+    gap: 8px;
+    width: 30%;
+
+    .volume {
+        width: clamp(50px, 100%, 100px);
+    }
+}
