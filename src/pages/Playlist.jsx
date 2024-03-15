@@ -41,7 +41,7 @@ export default function Playlist() {
                             <div className='one'>#</div>
                             <div className='two'>Title</div>
                             <div className='three'>Album</div>
-                            <div className='four'>Date Added</div>
+                            <div className='four'>Date added</div>
                             <div className='five'><ClockIcon /></div>
                         </div>
                         <div className='divider'></div>
