@@ -7,8 +7,7 @@ export const TrackCard = ({ trackId, index }) => {
     const { track } = useGetEntity('track', trackId)
     const { addNext, add } = useQueue()
 
-    const formattedTrackLength = formatTime(track.trackLength)
-    console.log(formattedTrackLength)
+    const formattedTrackLength = formatTime(track?.trackLength)
 
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60)
