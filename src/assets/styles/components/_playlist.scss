@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: 'img details'
                          'content content';
-    grid-template-columns: clamp(128px,128px + (100vw - var(--sidebar-width, 0px) -  728px), 232px) 1fr;
+    grid-template-columns: clamp(128px, calc(100vw - var(--sidebar-width, 0px) - 728px + 128px), 232px) 1fr;
     grid-template-rows: auto 1fr;
     gap: 18px 24px;
     padding-inline: 16px;
@@ -22,7 +22,10 @@
         .name {
             margin-left: -0.05em;
             letter-spacing: -1px;
-            font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 600px, 4.5rem);
+            line-height: 1.1;
+            font-size: clamp(var(--font-min, 2rem), 100vw - var(--sidebar-width, 0px) - 728px, var(--font-max, 4rem));
+            overflow: hidden;
+            max-height: 2lh;
         }
         .description {
             color: $color-text-faded;
