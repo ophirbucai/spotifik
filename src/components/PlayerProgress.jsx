@@ -24,7 +24,7 @@ export const PlayerProgress = ({ player, songStatus, progress, setProgress }) =>
         return () => window.removeEventListener('mouseup', onDurationChange)
     }, [onDurationChange, progress])
 
-    const value = (progress || songStatus.currentTime) || 0
+    const value = (progress ?? songStatus.currentTime) || 0
     return (
         <div className='player-controls-bottom'>
             <div className='progress-time-now'>{player === null ? '-:--' : formatTime(value)}</div>
