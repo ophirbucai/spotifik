@@ -47,6 +47,10 @@ export const Player = () => {
                     remove()
                     console.log('next song')
                 } else {
+                    clearTimeout(currentTime.current)
+                    setTimeout(() => {
+                        setSongStatus((prev) => ({ ...prev, play: false, currentTime: 0 }))
+                    }, 100)
                     console.log('no more songs')
                 }
                 setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false, currentTime: 0 })), 250)
