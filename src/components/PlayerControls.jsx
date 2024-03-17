@@ -22,15 +22,20 @@ export const PlayerControls = ({ player, songStatus }) => {
     function previousSong() {
         prev()
     }
+
+    const noPlayerAvailable = player === null
+    const isNextDisabled = noPlayerAvailable && queue.length <= 1
+    const isPreviousDisabled = noPlayerAvailable && pastQueue.length === 0
+
     return (
         <div className='player-controls-top'>
-            <button disabled={player === null}><SwitchIcon className='switch-icon' /></button>
-            <button disabled={player === null && pastQueue.length === 0} onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
-            <button disabled={player === null} onClick={songStatus.play ? onPause : onPlay}>
+            <button disabled={true}><SwitchIcon className='switch-icon' /></button>
+            <button disabled={isPreviousDisabled} onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
+            <button disabled={noPlayerAvailable || !queue.length} onClick={songStatus.play ? onPause : onPlay}>
                 {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
             </button>
-            <button disabled={player === null && queue.length <= 1} onClick={nextSong}><NextIcon className='next-icon' /></button>
-            <button disabled={player === null}><RepeatIcon className='repeat-icon' /></button>
+            <button disabled={isNextDisabled} onClick={nextSong}><NextIcon className='next-icon' /></button>
+            <button disabled={true}><RepeatIcon className='repeat-icon' /></button>
         </div>
     )
 }
