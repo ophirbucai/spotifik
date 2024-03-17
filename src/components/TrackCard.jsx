@@ -7,8 +7,6 @@ export const TrackCard = ({ trackId, index }) => {
     const { track } = useGetEntity('track', trackId)
     const { addNext, add } = useQueue()
 
-    const formattedTrackLength = formatTime(track?.trackLength)
-
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60)
         const remainingSeconds = seconds % 60
@@ -30,7 +28,7 @@ export const TrackCard = ({ trackId, index }) => {
                     </div>
                 </div>
                 <div className='album'> Album </div>
-                <div className='date'> Date </div>
+                <div className='date'> {track.dateAt} </div>
                 <div className='length'>{formatTime(track.trackLength)} </div>
                 {/* <button className='btn' onClick={() => add(trackId)}>Add To Queue</button> */}
             </div>
