@@ -31,10 +31,15 @@ export default function Playlist() {
                                 {playlist.songs.length > 0 && <small> • {count} song{count > 1 ? 's' : ''}</small>}
                             </div>
                         </header>
-                        <button>
+                    </div>
+
+                    <div className='playlist__panel'>
+                        <button className='btn-play'>
                             <PlayIcon />
                         </button>
                     </div>
+
+
 
                     <div className='playlist__table'>
                         <div className='playlist__table col'>
