@@ -8,131 +8,47 @@ main.content:has(.playlist) {
 }
 
 .playlist {
-    --bg-base: 150, 150, 150;
-    --bg-bottom: #{'rgba(var(--bg-base), 0.5)'};
-    --bg-top:#{rgb(var(--bg-base))};
-    background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
-
-    position: absolute;
-    top: 0;
-    border-radius: 4px 4px 0 0;
-    overflow: hidden;
-    width: 100%;
-
-    &__header {
-        display: grid;
-        grid-template-areas: 'img details';
-        grid-template-columns: clamp(128px, 128px + (100vw - var(--sidebar-width, 0px) - 728px), 232px) 1fr;
-        gap: 18px 24px;
-        padding: 106px 16px 16px 16px;
-
-        .thumbnail {
-            grid-area: img;
-            align-self: end;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-areas: 'img details'
+                         'content content';
+    grid-template-columns: clamp(128px, calc(100vw - var(--sidebar-width, 0px) - 728px + 128px), 232px) 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 18px 24px;
+    padding-inline: 16px;
+    .thumbnail {
+        grid-area: img;
+    }
+    &__details {
+        grid-area: details;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 8px;
+        .entity {
+            font-size: 0.8rem;
+            font-weight: 600;
         }
-
-        .details {
-            grid-area: details;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            gap: 8px;
-
-            .entity {
-                font-size: 0.8rem;
-                font-weight: 600;
-            }
-
-            .name {
-                margin-left: -0.05em;
-                letter-spacing: -1px;
-                font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 750px, 4.5rem);
-                line-height: 1;
-            }
-
-            .description {
-                color: $color-text-faded;
-                font-size: 0.9rem;
-                line-height: 1.4;
-            }
-
-            .author {
-                font-weight: 700;
-                font-size: 0.9rem;
-            }
-
+        .name {
+            margin-left: -0.05em;
+            letter-spacing: -1px;
+            font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 600px, 4.5rem);
+            line-height: 1.1;
+            font-size: clamp(var(--font-min, 2rem), 100vw - var(--sidebar-width, 0px) - 728px, var(--font-max, 4rem));
+            overflow: hidden;
+            max-height: 2lh;
+        }
+        .description {
+            color: $color-text-faded;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .author {
+            font-weight: 700;
+            font-size: 0.9rem;
         }
     }
-
-    &__table {
-        --row-height: 56px;
-        display: grid;
-        padding: 0 16px;
-
-        .col {
-
-            color: $colorsubdued;
-            display: grid;
-            align-items: center;
-            gap: 16px;
-            grid-template-columns: 16px minmax(120px, 4fr) minmax(120px, 2fr) minmax(120px, 1fr);
-
-            .one {
-                grid-column: 1;
-            }
-
-            .two {
-                grid-column: 2;
-            }
-
-            .three {
-                grid-column: 3;
-            }
-
-            .four {
-                grid-column: 4;
-            }
-
-            .five {
-                grid-column: 5;
-            }
-        }
-
-        .divider {
-
-            border-bottom: 1px solid $colorsubdued;
-            border-bottom-width: 1px;
-            border-bottom-style: solid;
-            box-sizing: content-box;
-            height: 1px;
-            position: sticky;
-            z-index: 2;
-            border-bottom: 1px solid $colorsubdued;
-            margin-bottom: 16px;
-        }
-
-        
-    }
-    &__panel {
-        width: 100%;
-        height: 56px;
-        padding-left: 10px;
-        padding-bottom: 10px;
-        .btn-play{
-            background-color:   $color-primary;
-            border-radius: 9999px;
-            height: 56px;
-            width: 56px;
-            
-        }      
-    }
-
-
-    .content {
-        grid-gap: 16px;
-
-        color: $colorsubdued;
+    &__content {
+        grid-area: content;
     }
     
     
