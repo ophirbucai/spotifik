@@ -124,6 +124,7 @@ const dummyTracks = [
         artist: dummyArtists[0].name,
         trackLength: 60 * 4 + 46,
         explicit: false,
+        dateAt:'1 week ago',
         genre: 'pop'
     },
     {
@@ -134,6 +135,7 @@ const dummyTracks = [
         artist: dummyArtists[0].name,
         trackLength: 60 * 3 + 48,
         explicit: true,
+        dateAt:'5 days ago',
         genre: 'pop'
     },
     {
@@ -144,6 +146,7 @@ const dummyTracks = [
         artist: dummyArtists[1].name,
         trackLength: 60 * 3 + 39,
         explicit: false,
+        dateAt:'3 days ago',
         genre: 'funk'
     }
 ]
