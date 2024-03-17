@@ -11,10 +11,10 @@
 }
 
 .bg {
-    --bg-base: 150, 150, 150;
-    --bg-bottom: #{'rgba(var(--bg-base), 0.5)'};
-    --bg-top:#{rgb(var(--bg-base))};
-    background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+    // --bg-base: 150, 150, 150;
+    // --bg-bottom: #{'rgba(var(--bg-base), 0.5)'};
+    // --bg-top:#{rgb(var(--bg-base))};
+    // background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
 }
 
 .wrapper {
