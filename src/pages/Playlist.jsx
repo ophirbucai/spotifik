@@ -5,11 +5,13 @@ import { useGetEntity } from '../hooks/useGetEntity.jsx'
 import { ErrorMessage } from './Track.jsx'
 import { TrackCard } from '../components/TrackCard.jsx'
 import { Thumbnail } from '../components/Thumbnail.jsx'
+import { useQueue } from '../store/useQueue.js'
 
 export default function Playlist() {
     const { id } = useParams()
     const navigate = useNavigate()
     const { playlist, error, status } = useGetEntity('playlist', id)
+    const { add } = useQueue()
     if (error) {
         navigate('/404', { relative: 'path' })
     }
@@ -20,7 +22,7 @@ export default function Playlist() {
             {status === 'error' && <ErrorMessage error={error} />}
             {status === 'success' && (
                 <div className='playlist'>
-                    <div className='playlist__header bg' >
+                    <div className='playlist__header bg'>
                         <Thumbnail youtubeId={playlist?.songs[0]?.youtubeId} alt={playlist.name} large />
                         <header className='details'>
                             <small className='entity'>Playlist</small>
@@ -34,7 +36,7 @@ export default function Playlist() {
                     </div>
 
                     <div className='playlist__panel'>
-                        <button className='btn-play'>
+                        <button className='btn-play' onClick={() => add(...playlist.songs.map(({ _id }) => _id))}>
                             <PlayIcon />
                         </button>
                     </div>
