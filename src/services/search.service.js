@@ -151,7 +151,7 @@ const dummyTracks = [
     }
 ]
 
-export const dummyGenres = [{ _id: 'happy', name: 'Happy', color: 'yellow' }, { _id: 'funk', name: 'Funk', color: 'green' }, {
+export const dummyGenres = [{ _id: 'Happy', name: 'Happy', color: 'yellow' }, { _id: 'Funk', name: 'Funk', color: 'green' }, {
     _id: 'ambient',
     name: 'Ambient',
     color: 'blue'
