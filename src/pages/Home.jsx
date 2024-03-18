@@ -51,7 +51,7 @@ export default function Home() {
     return (
         <div className='home'>
             {colors.map((color, index) => (
-                <Link key={index} to={`/genre/${musicGenres[index]}`} className='card-link'> {/* Change this line */}
+                <Link key={index} to={`/genre/${musicGenres[index]}`} className='card-link'>
                     <div className='card' style={{ background: `#${color}` }}>
                         <img className='card__img' loading='lazy' src={imageUrls[index % imageUrls.length]} alt='' />
                         {musicGenres[index]}
