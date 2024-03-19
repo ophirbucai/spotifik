@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 import react from '@vitejs/plugin-react'
-import uglify from './plugins/vite-plugin-uglify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,8 +9,7 @@ export default defineConfig({
         svgr({
             svgrOptions: { exportType: 'default', ref: true, svgo: false, titleProp: true },
             include: '**/*.svg'
-        }),
-        uglify()
+        })
     ],
     server: {
         proxy: {

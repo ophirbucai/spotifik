@@ -24,13 +24,13 @@ export const PlayerProgress = ({ player, songStatus, progress, setProgress }) =>
         return () => window.removeEventListener('mouseup', onDurationChange)
     }, [onDurationChange, progress])
 
-
+    const value = (progress ?? songStatus.currentTime) || 0
     return (
         <div className='player-controls-bottom'>
-            <div className='progress-time-now'>{player === null ? '-:--' : formatTime(songStatus.currentTime)}</div>
+            <div className='progress-time-now'>{player === null ? '-:--' : formatTime(value)}</div>
             <TrackBar
                 max={songStatus.duration || 0}
-                value={(progress || songStatus.currentTime) || 0}
+                value={value}
                 onChange={(event) => setProgress(event.target.valueAsNumber)}
             />
             <div className='progress-time-end'>{player === null ? '-:--' : formatTime(songStatus.duration)}</div>

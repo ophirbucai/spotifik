@@ -27,7 +27,7 @@ export const TrackCard = ({ trackId, index }) => {
                     <Thumbnail youtubeId={track.youtubeId} />
                 </div>
                 <div className='info-song'>
-                    <div className='name'>{track.name}</div>
+                    <div className='name'>{track.trackName}</div>
                     <Link to={`/artist/${track.artist?._id}`} className='artist'>{track.artist?.name}</Link>
                 </div>
             </div>
