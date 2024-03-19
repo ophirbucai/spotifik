@@ -15,6 +15,10 @@ body {
     background: #121212;
 }
 
+input {
+    @include outline(#fff);
+}
+
 button {
     border: none;
     color: inherit;
@@ -22,6 +26,7 @@ button {
     padding: 0;
     background-color: transparent;
     transition: all 0.2s ease;
+    @include outline;
 
     &:not(:disabled) {
         cursor: pointer;
@@ -41,6 +46,7 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
+    outline-color: $color-outline;
 }
 
 h1, h2, h3, h4, h5, h6, p, a {
