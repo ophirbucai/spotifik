@@ -1,4 +1,3 @@
-import PlayIcon from '../assets/icons/play.svg'
 import ClockIcon from '../assets/icons/clock.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetEntity } from '../hooks/useGetEntity.jsx'
@@ -6,11 +5,14 @@ import { ErrorMessage } from './Track.jsx'
 import { TrackCard } from '../components/TrackCard.jsx'
 import { Thumbnail } from '../components/Thumbnail.jsx'
 import { useQueue } from '../store/useQueue.js'
+import { useColorThief } from '../hooks/useColorThief.js'
+import { PlayButton } from '../components/PlayButton.jsx'
 
 export default function Playlist() {
     const { id } = useParams()
     const navigate = useNavigate()
     const { playlist, error, status } = useGetEntity('playlist', id)
+    const { color, onImageLoad } = useColorThief(playlist?.songs[0]?.youtubeId)
     const { add } = useQueue()
     if (error) {
         navigate('/404', { relative: 'path' })
@@ -21,9 +23,9 @@ export default function Playlist() {
             {status === 'loading' && 'Loading track details...'}
             {status === 'error' && <ErrorMessage error={error} />}
             {status === 'success' && (
-                <div className='playlist'>
+                <div key={id} className='playlist' style={color ? { '--bg-base': color } : undefined}>
                     <div className='playlist__header bg'>
-                        <Thumbnail youtubeId={playlist?.songs[0]?.youtubeId} alt={playlist.name} large />
+                        <Thumbnail onImageLoad={onImageLoad} youtubeId={playlist?.songs[0]?.youtubeId} alt={playlist.name} large />
                         <header className='details'>
                             <small className='entity'>Playlist</small>
                             <h1 className='name'>{playlist.name}</h1>
@@ -34,30 +36,26 @@ export default function Playlist() {
                             </div>
                         </header>
                     </div>
-
-                    <div className='playlist__panel'>
-                        <button className='btn-play' onClick={() => add(...playlist.songs.map(({ _id }) => _id))}>
-                            <PlayIcon />
-                        </button>
-                    </div>
-
-
-
-                    <div className='playlist__table'>
-                        <div className='playlist__table col'>
-                            <div className='one'>#</div>
-                            <div className='two'>Title</div>
-                            <div className='three'>Album</div>
-                            <div className='four'>Date added</div>
-                            <div className='five'><ClockIcon /></div>
+                    <section className='playlist__content'>
+                        <div className='playlist__panel'>
+                            <PlayButton onClick={() => add(...playlist.songs.map(({ _id }) => _id))} />
                         </div>
-                        <div className='divider'></div>
-                        <div className='playlist__table content'>
-                            {playlist.songs.map(({ _id }, index) => {
-                                return <TrackCard key={_id} trackId={_id} index={index + 1} />
-                            })}
+                        <div className='playlist__table'>
+                            <div className='playlist__table__header'>
+                                <div className='one'>#</div>
+                                <div className='two'>Title</div>
+                                {/*<div className='three'>Album</div>*/}
+                                {/*<div className='four'>Date added</div>*/}
+                                <div className='five'><ClockIcon /></div>
+                            </div>
+                            <div className='divider'></div>
+                            <div className='playlist__table__content'>
+                                {playlist.songs.map(({ _id }, index) => {
+                                    return <TrackCard key={_id} trackId={_id} index={index + 1} />
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             )}
         </>
