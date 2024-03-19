@@ -5,14 +5,14 @@ import { ErrorMessage } from './Track.jsx'
 import { TrackCard } from '../components/TrackCard.jsx'
 import { Thumbnail } from '../components/Thumbnail.jsx'
 import { useQueue } from '../store/useQueue.js'
-import { useColorThief } from '../hooks/useColorThief.js'
+import { useColorPicker } from '../hooks/useColorPicker.js'
 import { PlayButton } from '../components/PlayButton.jsx'
 
 export default function Playlist() {
     const { id } = useParams()
     const navigate = useNavigate()
     const { playlist, error, status } = useGetEntity('playlist', id)
-    const { color, onImageLoad } = useColorThief(playlist?.songs[0]?.youtubeId)
+    const { color, onImageLoad } = useColorPicker(playlist?.songs[0]?.youtubeId)
     const { add } = useQueue()
     if (error) {
         navigate('/404', { relative: 'path' })

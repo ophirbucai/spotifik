@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useColorBlotter = (id) => {
+export const useColorPicker = (id) => {
     const [color, setColor] = useState(getColorFromLocalStorage())
 
     const onImageLoad = (e) => {
