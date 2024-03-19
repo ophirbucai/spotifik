@@ -8,7 +8,7 @@ export const PlayerDetails = ({ track }) => {
             <Thumbnail youtubeId={track?.youtubeId} alt={track?.name} />
             <div className='player-details-info'>
                 <h3>{track?.name}</h3>
-                <p>{track?.artist}</p>
+                <p>{track?.artist?.name}</p>
             </div>
         </div>
     )
