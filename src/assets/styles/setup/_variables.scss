@@ -3,15 +3,21 @@ $bg-library: rgb(18, 18, 18);
 $bg-library-hover: rgb(25, 25, 25);
 $bg-library-active-hover: rgb(50, 50, 50);
 $bg-library-active: rgb(28, 28, 28);
-$bg-thumbnail: rgb(36, 36, 36);
+$bg-entity: rgb(36, 36, 36);
+$bg-faded: rgb(0 0 0 / 70%);
+$bg-highlight: rgb(26, 26, 26);
 $icon-thumbnail-small: rgb(175, 175, 175);
 $icon-thumbnail-large: rgb(116, 116, 116);
 $icon-player-controls: rgb(179 179 179);
 $icon-player-aside: rgb(167, 167, 167);
 $color-text-faded: rgb(255 255 255 / 70%);
+$color-text-subdued: rgb(106, 106, 106);
 $color-player-faded: rgb(167 167 167);
 $color-player-bar: rgb(77 77 77);
+$color-outline: rgb(179, 179, 179);
 $color-primary: rgb(27 176 74);
+$color-primary-light: rgb(78 203 98);
+$color-primary-light-hover: rgb(82 212 103);
 
 /* Out with the old (obsolete naming) */
 $background-base: #0f0f0f;
