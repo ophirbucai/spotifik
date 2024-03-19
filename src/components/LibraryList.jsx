@@ -29,7 +29,7 @@ const LibraryItem = ({ item: { _id, author, name, songs } }) => (
             <Thumbnail youtubeId={songs[0]?.youtubeId} alt={name} />
             <div>
                 <p className='library-list-item-name'>{name}</p>
-                <p className='library-list-item-author'>{author}</p>
+                <p className='library-list-item-author'>Playlist • {author}</p>
             </div>
         </NavLink>
     </li>
