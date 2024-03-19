@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { searchService } from '../services/search.service.js'
 
 export function Results() {
+export default function Results() {
     const { term } = useParams()
     const [results, setResults] = useState([])
 
