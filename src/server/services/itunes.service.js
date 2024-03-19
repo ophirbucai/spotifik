@@ -43,10 +43,11 @@ async function getTracksByGenre(query, sort) {
             genreId,
             sort,
             ...defaultParams,
-            limit: 50
+            limit: 80
         }
     })
-    return data.results.filter(({ primaryGenreName }) => primaryGenreName === genreName)
+    return data.results
+    // return data.results.filter(({ primaryGenreName }) => primaryGenreName === genreName)
 }
 
 async function getTracksByArtist(artist, sort) {
