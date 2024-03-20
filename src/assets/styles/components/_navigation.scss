@@ -1,12 +1,13 @@
 .navigation-wrapper {
 
     .navigation-logo {
-        margin-top: 12px;
-        padding: 0 24px;
-        height: 40px;
-
-        a svg {
-            fill: $coloractive;
+        margin-top: 15px;
+        padding: 0 20px;
+        font-size: 0.9rem;
+        .logo {
+            gap: 2px;
+            display: flex;
+            align-items: flex-end;
         }
     }
 
