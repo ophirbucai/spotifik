@@ -1,0 +1,40 @@
+.player-controls {
+    max-width: 722px;
+    width: 40%;
+    text-align: center;
+    align-self: center;
+
+    &-top {
+        display: flex;
+        justify-content: center;
+        @media screen and (max-width: 480px) {
+            --gap: 8px;
+        }
+        gap: var(--gap, 16px);
+        margin-bottom: 12px;
+    }
+
+    &-bottom {
+        position: relative;
+        margin-bottom: 4px;
+
+        .progress-time-now {
+            right: 100%;
+            transform: translate(-50%, -50%);
+        }
+
+        .progress-time-end {
+            left: 100%;
+            transform: translate(50%, -50%);
+        }
+
+        .progress-time-now,
+        .progress-time-end {
+            white-space: nowrap;
+            top: 50%;
+            position: absolute;
+            font-size: 12px;
+            color: $color-player-faded;
+        }
+    }
+}

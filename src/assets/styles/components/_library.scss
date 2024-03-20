@@ -145,6 +145,7 @@
             flex-direction: column;
             gap: $panel-gap;
             padding-inline: $panel-gap;
+            height: 100%;
         }
 
         &-item {
@@ -165,14 +166,18 @@
             > a {
                 border-radius: $border-radius-small;
                 cursor: pointer;
+                @include transition(background-color, 50ms);
 
                 &:hover {
-                    background-color: $background-hover;
+                    background-color: $bg-library-hover;
                     border-radius: $border-radius-small;
                 }
 
                 &.active {
-                    background-color: $background-highlight;
+                    background-color: $bg-library-active;
+                    &:hover {
+                        background-color: $bg-library-active-hover;
+                    }
                 }
             }
 
@@ -180,7 +185,6 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                font-weight: 600;
 
                 &:empty {
                     height: 1em;
@@ -192,12 +196,13 @@
 
             &-name {
                 color: $coloractive;
-                font-size: 1rem;
+                font-weight: 500;
+                font-size: rem(16px);
             }
 
             &-author {
                 color: $colorsubdued;
-                font-size: 13px;
+                font-size: rem(14px);
 
                 &:empty {
                     width: 120px;

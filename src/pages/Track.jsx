@@ -12,12 +12,12 @@ export default function Track() {
             {status === 'error' && <ErrorMessage error={error} />}
             {status === 'success' && (
                 <div className='wrapper'>
-                    <div className="wrapper-overlay">
+                    <div className='wrapper-overlay'>
                         <img className='wrapper-cover' src={track.thumbnail} alt={track.name + ' by ' + track.artist} />
                     </div>
                     <div className='wrapper-content'>
                         <h1>{track.name}</h1>
-                        <h2>{track.artist}</h2>
+                        <h2>{track.artist.name}</h2>
                         <button className='btn-primary'>Listen now :)</button>
                     </div>
                 </div>

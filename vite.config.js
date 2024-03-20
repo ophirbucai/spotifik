@@ -17,6 +17,11 @@ export default defineConfig({
                 target: 'http://localhost:5000',
                 changeOrigin: true,
                 rewrite: path => path.replace(/^\/api/, '')
+            },
+            '/images': {
+                target: 'https://i.ytimg.com/vi/',
+                changeOrigin: true,
+                rewrite: path => (path.replace(/^\/images/, '') + '/mqdefault.jpg')
             }
         }
     }

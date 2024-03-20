@@ -1,24 +1,21 @@
-import PropTypes from 'prop-types'
 import { useResize } from '../hooks/useResize'
+import { Navigation } from './Navigation.jsx'
+import { Library } from './Library.jsx'
+import { useEffect } from 'react'
 
-export const Sidebar = ({ children }) => {
+export const Sidebar = () => {
     const [width, handleMouseDown] = useResize()
+    
+    useEffect(() => {
+        document.documentElement.style.setProperty('--sidebar-width', `${width}px`)
 
-    const style = { '--sidebar-width': `${width}px` }
+    }, [width])
 
     return (
-        <nav className='sidebar' style={style}>
-            {children}
-            <label
-                htmlFor='resize'
-                className={'resize-handle'}
-                onMouseDown={handleMouseDown}
-            >
-            </label>
+        <nav className='sidebar'>
+            <Navigation />
+            <Library />
+            <button className={'resize-handle'} tabIndex={-1} onMouseDown={handleMouseDown}></button>
         </nav>
     )
-}
-
-Sidebar.propTypes = {
-    children: PropTypes.node.isRequired
 }

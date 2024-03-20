@@ -1,27 +1,51 @@
 @mixin btn($type: regular) {
-    font-weight: 700;
-    display: inline-block;
+  font-weight: 700;
+  display: inline-block;
 
-    @if $type == regular {
-        color: inherit;
-        text-underline-offset: .1em;
-        padding: 8px 12px;
-        &:not(:hover) {
-            text-decoration: none;
-        }
+  @if $type == regular {
+    color: inherit;
+    text-underline-offset: .1em;
+    padding: 8px 12px;
+    &:hover {
+      text-decoration: underline;
     }
-    @if $type == primary {
-        background: white;
-        color: #121212;
-        text-decoration: none;
-        border-radius: $border-radius-full;
-        &:hover {
-            scale: 1.05;
-        }
+  }
+  @if $type == primary {
+    background: white;
+    color: #121212;
+    text-decoration: none;
+    border-radius: $border-radius-full;
+    &:hover {
+      scale: 1.05;
     }
+  }
 }
 
-/* prettier-ignore */
 @mixin transition($property: all, $dur: 200ms, $timing-func: linear, $delay: 0s) {
-    transition: $property $dur $timing-func $delay;
+  transition: $property $dur $timing-func $delay;
+}
+
+@mixin outline($color: $color-outline, $width: 2px) {
+  &:focus-visible {
+    outline-offset: 0;
+    outline: $width solid $color;
+  }
+}
+
+@mixin media($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (min-width: 768px) and (max-width: 1024px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  }
 }

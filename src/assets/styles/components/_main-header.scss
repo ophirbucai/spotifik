@@ -1,35 +1,44 @@
 .main-header {
+    padding: 0 16px;
+    height: 64px;
+    align-items: center;
     display: flex;
     justify-content: space-between;
     transition: background-color 200ms ease-in-out;
-    > div {
+
+    >div {
         display: flex;
-        gap: 4px;
+        gap: 8px;
     }
+
     button {
         border-radius: $border-radius-full;
         font-weight: 500;
-        background: rgb(45, 43, 43);
-        min-height: 40px;
-        min-width: 40px;
-        padding: 8px 12px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $bg-faded;
+        min-height: 32px;
+        min-width: 32px;
     }
 
-    .install-icon{
-        fill: $coloractive;
-    }
-
-    .whatsnew-icon{
+    .install-icon {
         fill: $coloractive;
     }
 
-    .profile-icon{
+    .whatsnew-icon {
         fill: $coloractive;
     }
-    .goback-icon{
+
+    .profile-icon {
         fill: $coloractive;
     }
-    .goforward-icon{
+
+    .goback-icon {
+        fill: $coloractive;
+    }
+
+    .goforward-icon {
         fill: $coloractive;
     }
 

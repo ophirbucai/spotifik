@@ -1,9 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { searchService } from '../services/search.service.js'
 import { Playlists } from '../components/Playlists.jsx'
 
 export default function Genre() {
+    const location = useLocation()
+    const color = location.state?.color
     const { id } = useParams()
     const [genre, setGenre] = useState(null)
     const [playlists, setPlaylists] = useState(null)
@@ -23,19 +25,12 @@ export default function Genre() {
     }, [])
 
     return (
-        <div className='genre wrapper'>
-            <div className='wrapper-content'>
-                {genre ? <h1>{genre.name}</h1> : 'Loading...'}
-                {playlists ? (
-                    playlists.length ? (
-                        <Playlists playlists={playlists} />
-                    ) : (
-                        'No results'
-                    )
-                ) : (
-                    'Loading...'
-                )}
-            </div>
+        <div className='genre' style={color ? { '--bg-base': color.join(' ') } : undefined}>
+            <header className='genre__header'>{genre ? <h1>{genre.name}</h1> : 'Loading...'}</header>
+            <section className='genre__content'>
+                <h2>Discover new music with these playlists</h2>
+                {playlists ? <Playlists playlists={playlists} /> : 'Loading...'}
+            </section>
         </div>
     )
 }

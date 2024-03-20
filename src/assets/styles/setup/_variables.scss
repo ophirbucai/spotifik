@@ -1,4 +1,25 @@
-//$background-base: #121212;
+/* New naming convention */
+$bg-library: rgb(18, 18, 18);
+$bg-library-hover: rgb(25, 25, 25);
+$bg-library-active-hover: rgb(50, 50, 50);
+$bg-library-active: rgb(28, 28, 28);
+$bg-entity: rgb(36, 36, 36);
+$bg-faded: rgb(0 0 0 / 70%);
+$bg-highlight: rgb(26, 26, 26);
+$icon-thumbnail-small: rgb(175, 175, 175);
+$icon-thumbnail-large: rgb(116, 116, 116);
+$icon-player-controls: rgb(179 179 179);
+$icon-player-aside: rgb(167, 167, 167);
+$color-text-faded: rgb(255 255 255 / 70%);
+$color-text-subdued: rgb(106, 106, 106);
+$color-player-faded: rgb(167 167 167);
+$color-player-bar: rgb(77 77 77);
+$color-outline: rgb(179, 179, 179);
+$color-primary: rgb(27 176 74);
+$color-primary-light: rgb(78 203 98);
+$color-primary-light-hover: rgb(82 212 103);
+
+/* Out with the old (obsolete naming) */
 $background-base: #0f0f0f;
 $background-tinted-base: rgb(0 0 0 / 8%);
 $background-highlight: rgb(255 255 255 / 10%);
@@ -6,11 +27,8 @@ $background-button: #1A1A1A;
 $background-hover: #1F1F1F;
 $background-main: #282828;
 $background-placeholder: #1e1e1e;
-//$background-main: rgb(0 0 0 / 20%);
-
 
 /* Border Radius */
-
 $border-radius-small: 6px;
 $border-radius: 8px;
 $border-radius-full: 9999px;
@@ -19,5 +37,6 @@ $panel-gap: 8px;
 $panel-border-radius: 8px;
 
 $colorsubtle: #b3b3b3;
+
 $colorsubdued: #a7a7a7;
 $coloractive: #fff;

@@ -1,0 +1,11 @@
+@function rem($pxValue: 16px) {
+  @return #{calc(stripUnit($pxValue) / stripUnit(16px))}rem;
+}
+
+@function em($pxValue, $context: 16px) {
+  @return #{calc(stripUnit($pxValue) / stripUnit($context))}em;
+}
+
+@function stripUnit($value) {
+  @return calc($value / $value) * $value;
+}
