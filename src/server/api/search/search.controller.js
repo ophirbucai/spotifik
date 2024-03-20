@@ -16,7 +16,11 @@ async function getTracks(req, res) {
         switch (by) {
             case 'genre':
                 tracks = await itunesService.getTracksByGenre(query, sort)
-                tracks = await Promise.all(tracks.map(youtubeService.searchTracks))
+                tracks = await Promise.all(tracks.map(({
+                    trackName,
+                    artistName,
+                    trackId
+                }) => youtubeService.searchTracks(`${artistName} ${trackName}`, trackId)))
                 tracks.forEach(track => {
                     track.genre = query
                 })
@@ -43,11 +47,10 @@ async function getGenres(req, res) {
 }
 
 async function getTracksFromYoutube(req, res) {
-    const { query } = req.query
-    console.log('req.params', req.query)
+    const { query, trackId } = req.query
     try {
         let song
-        song = await youtubeService.searchTracks(query)
+        song = await youtubeService.searchTracks(query, trackId)
         res.json(song)
     } catch (e) {
         res.status(500).send(e.message)
