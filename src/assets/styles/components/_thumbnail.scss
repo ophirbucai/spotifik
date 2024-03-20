@@ -1,14 +1,13 @@
 .thumbnail {
     border-radius: 4px;
-    overflow: hidden;
     aspect-ratio: 1;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    width: 100%;
 
     &:has(.track-icon) {
-        background-color: $bg-thumbnail;
+        background-color: $bg-entity;
 
         &.large .track-icon {
             fill: $icon-thumbnail-large;
@@ -27,5 +26,6 @@
         height: 100%;
         object-position: 50%;
         object-fit: cover;
+        border-radius: inherit;
     }
 }

@@ -5,8 +5,11 @@ import PauseIcon from '../assets/icons/pause.svg'
 import PlayIcon from '../assets/icons/play.svg'
 import NextIcon from '../assets/icons/next.svg'
 import RepeatIcon from '../assets/icons/repeat.svg'
+import { useQueue } from '../store/useQueue'
+
 
 export const PlayerControls = ({ player, songStatus }) => {
+    const { remove, prev, queue, pastQueue} = useQueue()
     function onPlay() {
         player.playVideo()
     }
@@ -14,20 +17,25 @@ export const PlayerControls = ({ player, songStatus }) => {
         player.pauseVideo()
     }
     function nextSong() {
-        player.nextVideo()
+        remove()
     }
     function previousSong() {
-        player.previousVideo()
+        prev()
     }
+
+    const noPlayerAvailable = player === null
+    const isNextDisabled = noPlayerAvailable && queue.length <= 1
+    const isPreviousDisabled = noPlayerAvailable && pastQueue.length === 0
+
     return (
         <div className='player-controls-top'>
-            <button disabled={player === null}><SwitchIcon className='switch-icon' /></button>
-            <button disabled={player === null} onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
-            <button disabled={player === null} onClick={songStatus.play ? onPause : onPlay}>
+            <button disabled={true}><SwitchIcon className='switch-icon' /></button>
+            <button disabled={isPreviousDisabled} onClick={previousSong}><PreviousIcon className='previous-icon' /></button>
+            <button disabled={noPlayerAvailable || !queue.length} onClick={songStatus.play ? onPause : onPlay}>
                 {songStatus.play ? <PauseIcon className='pause-icon' /> : <PlayIcon className='play-icon' />}
             </button>
-            <button disabled={player === null} onClick={nextSong}><NextIcon className='next-icon' /></button>
-            <button disabled={player === null}><RepeatIcon className='repeat-icon' /></button>
+            <button disabled={isNextDisabled} onClick={nextSong}><NextIcon className='next-icon' /></button>
+            <button disabled={true}><RepeatIcon className='repeat-icon' /></button>
         </div>
     )
 }

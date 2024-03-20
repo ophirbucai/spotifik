@@ -5,36 +5,40 @@
     display: flex;
     justify-content: space-between;
     transition: background-color 200ms ease-in-out;
-    > div {
+
+    >div {
         display: flex;
-        gap: 4px;
+        gap: 8px;
     }
+
     button {
         border-radius: $border-radius-full;
         font-weight: 500;
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        background: rgb(45, 43, 43);
+        background-color: $bg-faded;
         min-height: 32px;
         min-width: 32px;
     }
 
-    .install-icon{
+    .install-icon {
         fill: $coloractive;
     }
 
-    .whatsnew-icon{
+    .whatsnew-icon {
         fill: $coloractive;
     }
 
-    .profile-icon{
+    .profile-icon {
         fill: $coloractive;
     }
-    .goback-icon{
+
+    .goback-icon {
         fill: $coloractive;
     }
-    .goforward-icon{
+
+    .goforward-icon {
         fill: $coloractive;
     }
 

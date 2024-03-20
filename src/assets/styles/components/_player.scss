@@ -5,16 +5,16 @@
 
     button {
         padding: 5px;
-
+        &:disabled {
+            pointer-events: none;
+        }
         &:hover {
             svg:not(.play-icon):not(.pause-icon),
             #volume-icon {
                 fill: white;
             }
         }
-
-        svg,
-        #volume-icon {
+        svg {
             transition: fill 50ms;
         }
 
@@ -31,7 +31,7 @@
             min-width: 32px;
 
             &:hover, &:focus-within {
-                scale: 1.1;
+                box-shadow: 0 0 0 1px white;
             }
         }
 

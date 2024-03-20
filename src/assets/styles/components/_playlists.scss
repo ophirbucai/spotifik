@@ -1,23 +1,34 @@
 .playlists {
-    --column-count: 3;
-    --grid-gap: 12px;
-    --min-container-width: 372px;
+  display: grid;
+  grid-template-columns: repeat(var(--column-count, 4), minmax(0, 1fr));
 
-    display: grid;
-    grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
-    grid-template-rows: 1fr;
-    grid-auto-rows: 0;
-    min-width: var(--min-container-width);
-    grid-gap: var(--grid-gap);
+  .playlist-card {
+    border-radius: $border-radius-small;
+    text-shadow: 0 5px 15px #12121235;
+    transition: background-color 33ms ease-in-out;
+    position: relative;
+    padding: 12px;
 
-    .playlist {
-        display: grid;
-        align-content: end;
-        border-radius: $border-radius;
-        padding: 16px;
-        aspect-ratio: 1;
-        cursor: pointer;
-        background-color: #a7a7a7; //fallback
-        text-shadow: 0 5px 15px #12121235;
+    &:hover {
+      background-color: $bg-highlight;
+      border-color: $bg-highlight;
     }
+
+    .name {
+      height: 1lh;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    small {
+      color: $color-player-faded;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+  }
 }

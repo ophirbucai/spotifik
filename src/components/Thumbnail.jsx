@@ -1,19 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import TrackIcon from '../assets/icons/track.svg'
 import PropTypes from 'prop-types'
 
-export const Thumbnail = ({ youtubeId, alt, large = false }) => {
-    const imgRef = useRef(null)
+export const Thumbnail = ({ youtubeId, alt, onImageLoad, large = false }) => {
     const [showPlaceholder, setShowPlaceholder] = useState(!youtubeId)
+
     function getCoverArt(youtubeId) {
-        return `https://i.ytimg.com/vi/${youtubeId}/mqdefault.jpg`
-    }
-    function onImageLoad(e) {
-        if (e.target.naturalHeight === 90 && e.target.naturalWidth === 120) {
-            setShowPlaceholder(true)
-        } else {
-            imgRef.current.style.visibility = 'visible'
-        }
+        return `/images/${youtubeId}`
     }
 
     useEffect(() => {
@@ -23,12 +16,24 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
     }, [youtubeId])
 
     const src = getCoverArt(youtubeId)
-    const style = { visibility: 'hidden' }
+
     return (
         <div className={'thumbnail' + (large ? ' large' : '')}>
             {showPlaceholder && <TrackIcon className='track-icon' />}
             {!showPlaceholder && youtubeId &&
-                <img key={youtubeId} src={src} alt={alt} ref={imgRef} onLoad={onImageLoad} style={style} />}
+                <img
+                    key={youtubeId}
+                    src={src}
+                    alt={alt}
+                    onLoad={(e) => {
+                        if (e.target.naturalHeight === 90 && e.target.naturalWidth === 120) {
+                            setShowPlaceholder(true)
+                        }
+                        onImageLoad && onImageLoad(e)
+                    }}
+                    onError={() => setShowPlaceholder(true)}
+                />
+            }
         </div>
     )
 }
@@ -37,5 +42,6 @@ export const Thumbnail = ({ youtubeId, alt, large = false }) => {
 Thumbnail.propTypes = {
     youtubeId: PropTypes.string,
     large: PropTypes.bool,
-    alt: PropTypes.string
+    alt: PropTypes.string,
+    onImageLoad: PropTypes.func
 }

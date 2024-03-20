@@ -16,8 +16,12 @@
     }
 
     > main.content {
-        overflow-x: hidden;
+        overflow: clip auto;
+        border-radius: 8px;
+        background-color: $background-base;
         grid-area: main-content;
+        display: grid;
+        grid-auto-rows: auto 1fr;
     }
 
     > footer.now-playing {

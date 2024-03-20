@@ -7,6 +7,7 @@ import { PlayerProgress } from './PlayerProgress.jsx'
 import { PlayerAside } from './PlayerAside.jsx'
 import style from '../assets/styles/modules/youtube.module.scss'
 import { useQueue } from '../store/useQueue.js'
+import { usePlayer } from '../store/usePlayer.js'
 
 const { PlayerState } = YouTube
 
@@ -14,6 +15,7 @@ const initialSongStatus = { play: false, duration: null, currentTime: 0 }
 export const Player = () => {
     const currentTime = useRef(null)
     const { queue: [first, ...queue], remove } = useQueue()
+    const { currentVolume, isMuted } = usePlayer()
     const { track /*error, status*/ } = useGetEntity('track', first)
     const [progress, setProgress] = useState(null)
     const [songStatus, setSongStatus] = useState(initialSongStatus)
@@ -21,10 +23,9 @@ export const Player = () => {
     const updateProgress = useCallback(() => {
         setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
     }, [player])
-
     useEffect(() => {
         if (songStatus.play) {
-            currentTime.current = setTimeout(updateProgress, 100)
+            currentTime.current = setTimeout(updateProgress, 250)
         } else {
             clearTimeout(currentTime.current)
         }
@@ -35,12 +36,12 @@ export const Player = () => {
     const onReady = (e) => {
         setPlayer(e.target)
         e.target.playVideo()
+        e.target.setVolume(isMuted ? 0 : currentVolume)
         const duration = e.target.getDuration()
         setSongStatus({ ...initialSongStatus, duration })
     }
 
     const onStateChange = ({ data }) => {
-        console.log(data)
         switch (data) {
             case PlayerState.ENDED:
                 if (queue.length) {
@@ -48,12 +49,9 @@ export const Player = () => {
                     console.log('next song')
                 } else {
                     clearTimeout(currentTime.current)
-                    setTimeout(() => {
-                        setSongStatus((prev) => ({ ...prev, play: false, currentTime: 0 }))
-                    }, 100)
+                    setTimeout(() => setSongStatus(({ duration }) => ({ ...initialSongStatus, duration })), 250)
                     console.log('no more songs')
                 }
-                setTimeout(() => setSongStatus((prev) => ({ ...prev, play: false, currentTime: 0 })), 250)
                 break
             case PlayerState.PLAYING:
                 setTimeout(() => setProgress(null), 250)

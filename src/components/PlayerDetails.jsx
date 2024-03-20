@@ -7,8 +7,8 @@ export const PlayerDetails = ({ track }) => {
         <div className='player-details'>
             <Thumbnail youtubeId={track?.youtubeId} alt={track?.name} />
             <div className='player-details-info'>
-                <h3>{track?.name}</h3>
-                <p>{track?.artist}</p>
+                <h3>{track?.trackName}</h3>
+                <p>{track?.artist?.name}</p>
             </div>
         </div>
     )
@@ -17,7 +17,7 @@ export const PlayerDetails = ({ track }) => {
 PlayerDetails.propTypes = {
     track: PropTypes.shape({
         youtubeId: PropTypes.string,
-        name: PropTypes.string,
+        trackName: PropTypes.string,
         artist: PropTypes.string
     })
 }

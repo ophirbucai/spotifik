@@ -145,6 +145,7 @@
             flex-direction: column;
             gap: $panel-gap;
             padding-inline: $panel-gap;
+            height: 100%;
         }
 
         &-item {
@@ -184,7 +185,6 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                font-weight: 600;
 
                 &:empty {
                     height: 1em;
@@ -196,12 +196,13 @@
 
             &-name {
                 color: $coloractive;
-                font-size: 1rem;
+                font-weight: 500;
+                font-size: rem(16px);
             }
 
             &-author {
                 color: $colorsubdued;
-                font-size: 13px;
+                font-size: rem(14px);
 
                 &:empty {
                     width: 120px;

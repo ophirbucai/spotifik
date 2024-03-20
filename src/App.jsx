@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout.jsx'
-import { Search, Home, Track, Playlist, Artist, NotFound, Genre } from './pages'
+import { Home, Track, Playlist, Artist, NotFound, Genre, Results, Browse } from './pages'
 import { Suspense } from 'react'
-import { Browse } from './pages/Browse.jsx'
-import { Results } from './pages/Results.jsx'
 
 function App() {
     return (
@@ -11,10 +9,8 @@ function App() {
             <Routes>
                 <Route path='/' element={<Layout />}>
                     <Route index element={<Suspense><Home /></Suspense>} />
-                    <Route path='/search' element={<Suspense><Search /></Suspense>}>
-                        <Route index element={<Browse />} />
-                        <Route path='/search/:term' element={<Results />} />
-                    </Route>
+                    <Route path='/search' element={<Suspense><Browse /></Suspense>} />
+                    <Route path='/search/:term' element={<Suspense><Results /></Suspense>} />
                     <Route path='/genre/:id' element={<Suspense><Genre /></Suspense>} />
                     <Route path='/artist/:id' element={<Suspense><Artist /></Suspense>} />
                     <Route path='/playlist/:id' element={<Suspense><Playlist /></Suspense>} />

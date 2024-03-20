@@ -26,10 +26,10 @@ const LibraryEmpty = () => (
 const LibraryItem = ({ item: { _id, author, name, songs } }) => (
     <li className='library-list-item'>
         <NavLink to={`/playlist/${_id}`} className='library-list-item-wrapper'>
-            <Thumbnail youtubeId={songs[0]?.youtubeId} alt={name} className='library-list-item-cover' />
+            <Thumbnail youtubeId={songs[0]?.youtubeId} alt={name} />
             <div>
                 <p className='library-list-item-name'>{name}</p>
-                <p className='library-list-item-author'>{author}</p>
+                <p className='library-list-item-author'>Playlist • {author}</p>
             </div>
         </NavLink>
     </li>

@@ -15,7 +15,7 @@ export const Sidebar = () => {
         <nav className='sidebar'>
             <Navigation />
             <Library />
-            <button className={'resize-handle'} onMouseDown={handleMouseDown}></button>
+            <button className={'resize-handle'} tabIndex={-1} onMouseDown={handleMouseDown}></button>
         </nav>
     )
 }

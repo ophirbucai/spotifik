@@ -1,9 +1,12 @@
 import GobackIcon from '../assets/icons/goback.svg'
 import GoforwardIcon from '../assets/icons/goforward.svg'
-import { useNavigate, useNavigationType } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useLocation, useNavigate, useNavigationType } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+
+const Search = lazy(() => import('../components/Search.jsx'))
 
 export const MainHeader = () => {
+    const location = useLocation()
     const [historyForward, setHistoryForward] = useState(0)
     const navigate = useNavigate()
     const navType = useNavigationType()
@@ -34,6 +37,7 @@ export const MainHeader = () => {
                     {<GoforwardIcon className='goforward-icon' />}
                 </button>
             </div>
+            {location.pathname.startsWith('/search') && <Suspense><Search /></Suspense>}
         </header>
     )
 }

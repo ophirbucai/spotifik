@@ -1,0 +1,20 @@
+.play-button {
+  border-radius: 9999px;
+  height: 48px;
+  width: 48px;
+  position: relative;
+  background-color: $color-primary-light;
+  transition: background-color 33ms ease-in-out;
+
+  svg {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+  }
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 0 0.1em $color-primary-light-hover;
+    background-color: $color-primary-light-hover
+  }
+}

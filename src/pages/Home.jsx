@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-
-const generateRandomColor = () => Math.floor(Math.random() * 16777215).toString(16)
-
+import { randomColor } from '../utils/randomColor.js'
 export default function Home() {
-    const [colors] = useState(Array(80).fill(null).map(generateRandomColor))
+    const [colors] = useState(Array(80).fill(null).map(randomColor.hex))
     useEffect(() => {
         fetch('/api').then(res => res.text()).then(console.log)
     }, [])
@@ -11,7 +9,7 @@ export default function Home() {
     return (
         <div className='home'>
             {colors.map((color) =>
-                <div className='card' style={{ background: `#${color}` }} key={color}>Hex #{color}</div>
+                <div className='card' style={{ background: `#${color}` }} key={color}></div>
             )}
         </div>
     )

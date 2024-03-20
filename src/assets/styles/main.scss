@@ -2,6 +2,7 @@
 @import 'setup/typography';
 @import 'setup/variables';
 @import 'setup/mixins';
+@import 'setup/functions';
 
 /* Basics */
 @import 'base/helpers';
@@ -11,9 +12,9 @@
 /* Pages */
 @import 'pages/app';
 @import 'pages/home';
-@import 'pages/search';
 @import 'pages/genre';
 @import 'pages/not-found';
+@import 'pages/browse';
 
 /* Components */
 @import 'components/main-header';
@@ -28,3 +29,5 @@
 @import 'components/player-controls';
 @import 'components/player-details';
 @import 'components/player-aside';
+@import 'components/search';
+@import 'components/play-button';

@@ -1,7 +1,7 @@
 export const searchService = {
     getTracksBySearchTerm: (searchTerm) => {
         try {
-            const tracks = dummyTracks.filter(({ name, artist }) => `${name}${artist}`.match(new RegExp(searchTerm, 'gi')))
+            const tracks = dummyTracks.filter(({ name, artist }) => `${name}${artist.name}`.match(new RegExp(searchTerm, 'gi')))
             if (!tracks) return searchService._onError('No track results found for ' + searchTerm + '.')
             return { tracks, status: 'success', error: null }
         } catch (e) {
@@ -119,31 +119,34 @@ const dummyTracks = [
     {
         _id: 'skyfall',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
-        name: 'Skyfall',
+        trackName: 'Skyfall',
         youtubeId: 'DeumyOzKqgI',
-        artist: dummyArtists[0].name,
+        artist: dummyArtists[0],
         trackLength: 60 * 4 + 46,
         explicit: false,
+        dateAt:'1 week ago',
         genre: 'pop'
     },
     {
         _id: 'rolling_in_the_deep',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/74/Adele_-_Rolling_in_the_Deep.png',
-        name: 'Rolling in the Deep',
+        trackName: 'Rolling in the Deep',
         youtubeId: 'bDtjO-R0QSo',
-        artist: dummyArtists[0].name,
+        artist: dummyArtists[0],
         trackLength: 60 * 3 + 48,
         explicit: true,
+        dateAt:'5 days ago',
         genre: 'pop'
     },
     {
         _id: 'talk_is_cheap',
         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/73/Talk_Is_Cheap_%28Chet_Faker%29.jpg',
-        name: 'Talk is Cheap',
+        trackName: 'Talk is Cheap',
         youtubeId: 'aP_-P_BS6KY',
-        artist: dummyArtists[1].name,
+        artist: dummyArtists[1],
         trackLength: 60 * 3 + 39,
         explicit: false,
+        dateAt:'3 days ago',
         genre: 'funk'
     }
 ]
