@@ -1,26 +1,55 @@
+import dummyTracksData from '../server/data/dummyTracks.json'
+import { toKebabCase } from '../utils/toKebabCase.js'
+import axios from 'axios'
+
 export const searchService = {
-    getTracksBySearchTerm: (searchTerm) => {
+    searchAll: (searchTerm) => {
         try {
-            const tracks = dummyTracks.filter(({ name, artist }) => `${name}${artist.name}`.match(new RegExp(searchTerm, 'gi')))
-            if (!tracks) return searchService._onError('No track results found for ' + searchTerm + '.')
-            return { tracks, status: 'success', error: null }
+            const tracks = dummyTracks.filter(({
+                trackName,
+                artistName
+            }) => `${trackName}${artistName}`.match(new RegExp(searchTerm, 'gi')))
+            const artists = dummyArtists.filter(({ name }) => name.match(new RegExp(searchTerm, 'gi')))
+            const playlists = dummyPlaylists.filter(({ name }) => name.match(new RegExp(searchTerm, 'gi')))
+            if (!tracks && !artists && !playlists) return searchService._onError('No results found for ' + searchTerm + '.')
+            return searchService._onSuccess({ tracks, artists, playlists })
         } catch (e) {
             console.log(e)
             return searchService._onError('Something went wrong! Please try again in a few moments.')
         }
     },
-    getEntityById: (type, id) => {
+    getTracksBySearchTerm: (searchTerm) => {
+        try {
+            const tracks = dummyTracks.filter(({
+                trackName,
+                artistName
+            }) => `${trackName}${artistName}`.match(new RegExp(searchTerm, 'gi')))
+            if (!tracks) return searchService._onError('No track results found for ' + searchTerm + '.')
+            console.log(tracks)
+            return searchService._onSuccess(tracks)
+        } catch (e) {
+            console.log(e)
+            return searchService._onError('Something went wrong! Please try again in a few moments.')
+        }
+    },
+    getEntityById: async (type, id) => {
         if (searchService._isInvalidType(type)) {
             return searchService._onError('Could not complete request, type is not supported.')
         }
-        if (!id?.trim()) {
+        if (!id) {
             return searchService._onError('Could not complete request, missing ID in hook.')
         }
         try {
             let result
             switch (type) {
                 case 'track':
-                    result = dummyTracks.find(({ _id }) => _id === id)
+                    var resultIndex = dummyTracks.findIndex(({ _id }) => _id === id)
+                    result = dummyTracks[resultIndex]
+                    if (!result.youtubeId) {
+                        result.youtubeId = await getYoutubeId(result)
+                        if (!result.youtubeId) throw 'No youtubeId found'
+                        dummyTracks[resultIndex] = result
+                    }
                     break
                 case 'artist':
                     result = dummyArtists.find(({ _id }) => _id === id)
@@ -104,109 +133,71 @@ export const searchService = {
         })
 }
 
-const dummyArtists = [
-    {
-        _id: 'adele',
-        name: 'Adele'
-    },
-    {
-        _id: 'chet_faker',
-        name: 'Chet Faker'
+const genres = ['Rock', 'Pop', 'Jazz', 'Classical', 'Electronic',
+    'Blues',
+    'Country',
+    'Reggae',
+    'Folk',
+    'Metal',
+    'Punk',
+    'Indie',
+    'Soul',
+    'Funk',
+    'Techno',
+    'House',
+    'Dubstep',
+    'Disco']
+
+export const dummyGenres = genres.map((name) => ({
+    _id: toKebabCase(name),
+    name
+}))
+
+const getYoutubeId = async ({ trackName, artistName, trackId } = {}) => {
+    try {
+        const { data } = await axios.get('/api/search/youtube', {
+            params: {
+                query: `${artistName} ${trackName}`,
+                trackId
+            }
+        })
+        return data?.youtubeId
+
+    } catch (err) {
+        console.log(err)
     }
-]
+}
 
-const dummyTracks = [
-    {
-        _id: 'skyfall',
-        thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Skyfall_cover.png/220px-Skyfall_cover.png',
-        trackName: 'Skyfall',
-        youtubeId: 'DeumyOzKqgI',
-        artist: dummyArtists[0],
-        trackLength: 60 * 4 + 46,
-        explicit: false,
-        dateAt:'1 week ago',
-        genre: 'pop'
-    },
-    {
-        _id: 'rolling_in_the_deep',
-        thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/74/Adele_-_Rolling_in_the_Deep.png',
-        trackName: 'Rolling in the Deep',
-        youtubeId: 'bDtjO-R0QSo',
-        artist: dummyArtists[0],
-        trackLength: 60 * 3 + 48,
-        explicit: true,
-        dateAt:'5 days ago',
-        genre: 'pop'
-    },
-    {
-        _id: 'talk_is_cheap',
-        thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/73/Talk_Is_Cheap_%28Chet_Faker%29.jpg',
-        trackName: 'Talk is Cheap',
-        youtubeId: 'aP_-P_BS6KY',
-        artist: dummyArtists[1],
-        trackLength: 60 * 3 + 39,
-        explicit: false,
-        dateAt:'3 days ago',
-        genre: 'funk'
-    }
-]
+const dummyTracks = dummyTracksData
 
-export const dummyGenres = [{ _id: 'happy', name: 'Happy', color: 'yellow' }, { _id: 'funk', name: 'Funk', color: 'green' }, {
-    _id: 'ambient',
-    name: 'Ambient',
-    color: 'blue'
-}]
+const dummyArtists = dummyTracksData.reduce((acc, { artistName }) => {
+    if (acc.find(({ name }) => name === artistName)) return acc
+    return [...acc, { _id: toKebabCase(artistName), name: artistName }]
+}, [])
 
-const dummyPlaylists = [
-    {
-        _id: '1',
-        name: 'Adelush Playlist asdsadasdaa',
-        genres: [
-            dummyGenres[0]._id
-        ],
-        songs: [
-            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
-            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
-        ],
-        author: 'Ophir'
-    },
-    {
-        _id: '2',
-        name: 'Happy Moments',
-        genres: [
-            dummyGenres[0]._id
-        ],
-        songs: [
-            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
-        ],
-        author: 'Ophir'
-    },
-    {
-        _id: '3',
-        name: 'Funky Monks',
-        genres: [
-            dummyGenres[1]._id,
-            dummyGenres[0]._id
-        ],
-        songs: [
-            { youtubeId: dummyTracks[2].youtubeId, _id: dummyTracks[2]._id },
-            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id },
-            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id }
-        ],
-        author: 'Ophir'
-    },
-    {
-        _id: '4',
-        name: 'Ambient 1970s',
-        description: 'Music from the early days of Ambient',
-        genres: [
-            dummyGenres[2]._id
-        ],
-        songs: [
-            { youtubeId: dummyTracks[1].youtubeId, _id: dummyTracks[1]._id },
-            { youtubeId: dummyTracks[0].youtubeId, _id: dummyTracks[0]._id }
-        ],
-        author: 'Ophir'
-    }
-]
+const processSongs = async (songs) => {
+    const genreMap = songs.reduce((acc, song) => {
+        if (acc[song.genre]) {
+            acc[song.genre].songs.push(song)
+            acc[song.genre].genres = [...new Set(acc[song.genre].genres, song.primaryGenre)]
+        } else {
+            acc[song.genre] = {
+                _id: song.genre,
+                name: 'Best of ' + song.genre[0].toUpperCase() + song.genre.slice(1, song.genre.length),
+                author: 'Ophir', // TODO: Replace with real author
+                genres: [toKebabCase(song.genre)],
+                songs: [song]
+            }
+        }
+        return acc
+    }, {})
 
+    return await Promise.all(Object.values(genreMap).map(async (playlist) => {
+        if (playlist.songs.length) {
+            playlist.songs[0].youtubeId = await getYoutubeId(playlist.songs[0])
+        }
+        return playlist
+    }))
+}
+
+const dummyPlaylists = await processSongs(dummyTracksData)
