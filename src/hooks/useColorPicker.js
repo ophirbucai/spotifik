@@ -6,7 +6,6 @@ export const useColorPicker = (id) => {
     const onImageLoad = (e) => {
         const untaintedImage = e.target
         const image = new Image()
-        image.crossOrigin = 'Anonymous'
         image.src = untaintedImage.src
         image.onload = () => !color && getDominantColor(image)
         image.onerror = () => setColor('18 18 18')
@@ -49,6 +48,7 @@ export const useColorPicker = (id) => {
 
     useEffect(() => {
         setColor(getColorFromLocalStorage())
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
