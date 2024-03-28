@@ -5,9 +5,9 @@ import { Thumbnail } from './Thumbnail.jsx'
 export const LibraryList = ({ list }) => {
     return (
         <ul className='library-list'>
-            {list ?
-                list.length > 0 ?
-                    list.map(item => <LibraryItem key={item._id} item={item} />)
+            {list
+                ? list?.length > 0
+                    ? list.map(item => <LibraryItem key={item._id} item={item} />)
                     : <LibraryEmpty />
                 : <LibraryItemPlaceholders items={5} />}
         </ul>
@@ -26,7 +26,7 @@ const LibraryEmpty = () => (
 const LibraryItem = ({ item: { _id, author, name, songs } }) => (
     <li className='library-list-item'>
         <NavLink to={`/playlist/${_id}`} className='library-list-item-wrapper'>
-            <Thumbnail youtubeId={songs[0]?.youtubeId} alt={name} />
+            <Thumbnail cover={songs[0]?.artworkUrl100} youtubeId={songs[0]?.youtubeId} alt={name} />
             <div>
                 <p className='library-list-item-name'>{name}</p>
                 <p className='library-list-item-author'>Playlist • {author}</p>
