@@ -1,6 +1,6 @@
 import ClockIcon from '../assets/icons/clock.svg'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGetEntity } from '../hooks/useGetEntity.jsx'
+import { useGetEntity } from '../hooks/useGetEntity'
 import { ErrorMessage } from './Track.jsx'
 import { TrackCard } from '../components/TrackCard.jsx'
 import { Thumbnail } from '../components/Thumbnail.jsx'
@@ -50,8 +50,8 @@ export default function Playlist() {
                             </div>
                             <div className='divider'></div>
                             <div className='playlist__table__content'>
-                                {playlist.songs.map(({ _id }, index) => {
-                                    return <TrackCard key={_id} trackId={_id} index={index + 1} />
+                                {playlist.songs.map((song, index) => {
+                                    return <TrackCard key={song._id} song={song} index={index + 1} />
                                 })}
                             </div>
                         </div>

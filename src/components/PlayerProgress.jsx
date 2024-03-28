@@ -33,7 +33,9 @@ export const PlayerProgress = ({ player, songStatus, progress, setProgress }) =>
                 value={value}
                 onChange={(event) => setProgress(event.target.valueAsNumber)}
             />
-            <div className='progress-time-end'>{player === null ? '-:--' : formatTime(songStatus.duration)}</div>
+            <div className='progress-time-end'>
+                {player === null ? '-:--' : formatTime(songStatus.duration)}
+            </div>
         </div>
     )
 }
@@ -42,5 +44,6 @@ PlayerProgress.propTypes = {
     player: PropTypes.object,
     songStatus: PropTypes.object,
     progress: PropTypes.number,
-    setProgress: PropTypes.func
+    setProgress: PropTypes.func,
+    track: PropTypes.object
 }

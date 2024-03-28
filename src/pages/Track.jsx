@@ -1,4 +1,4 @@
-import { useGetEntity } from '../hooks/useGetEntity.jsx'
+import { useGetEntity } from '../hooks/useGetEntity.js'
 import { Link, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -7,7 +7,7 @@ export default function Track() {
     const { track, error, status } = useGetEntity('track', id)
 
     return (
-        <div className='track'>
+        <div className='track-page'>
             {status === 'loading' && 'Loading track details...'}
             {status === 'error' && <ErrorMessage error={error} />}
             {status === 'success' && (
@@ -32,7 +32,7 @@ export const ErrorMessage = ({ error }) => {
         <div className='wrapper'>
             <div className='wrapper-content'>
                 <h1>Sorry, there was a problem!</h1>
-                <h2>{error}</h2>
+                <h2>{error?.message}</h2>
                 <div>
                     <p>Please <Link to='/help'>reach out</Link> if this error persists, so that we can solve it.</p>
                 </div>

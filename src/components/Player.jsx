@@ -1,6 +1,6 @@
 import YouTube from 'react-youtube'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useGetEntity } from '../hooks/useGetEntity.jsx'
+import { useGetEntity } from '../hooks/useGetEntity.js'
 import { PlayerDetails } from './PlayerDetails.jsx'
 import { PlayerControls } from './PlayerControls.jsx'
 import { PlayerProgress } from './PlayerProgress.jsx'
@@ -23,6 +23,12 @@ export const Player = () => {
     const updateProgress = useCallback(() => {
         setSongStatus((prev) => ({ ...prev, currentTime: player?.getCurrentTime() || 0 }))
     }, [player])
+
+    useEffect(() => {
+        setSongStatus(initialSongStatus)
+
+    }, [first])
+
     useEffect(() => {
         if (songStatus.play) {
             currentTime.current = setTimeout(updateProgress, 250)
@@ -31,7 +37,7 @@ export const Player = () => {
         }
 
         return () => setTimeout(currentTime.current)
-    }, [updateProgress, songStatus])
+    }, [updateProgress, songStatus, track?.youtubeId])
 
     const onReady = (e) => {
         setPlayer(e.target)
@@ -49,7 +55,7 @@ export const Player = () => {
                     console.log('next song')
                 } else {
                     clearTimeout(currentTime.current)
-                    setTimeout(() => setSongStatus(({ duration }) => ({ ...initialSongStatus, duration })), 250)
+                    setTimeout(() => setSongStatus(({ duration }) => ({ ...initialSongStatus, duration })), 500)
                     console.log('no more songs')
                 }
                 break
@@ -68,7 +74,7 @@ export const Player = () => {
             <PlayerDetails track={track} />
             <div className='player-controls'>
                 <PlayerControls player={player} songStatus={songStatus} />
-                <PlayerProgress player={player} songStatus={songStatus} progress={progress} setProgress={setProgress} />
+                <PlayerProgress player={player} songStatus={songStatus} progress={progress} setProgress={setProgress} track={track} />
             </div>
             <PlayerAside player={player} />
             {track && (
