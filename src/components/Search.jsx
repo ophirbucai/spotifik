@@ -1,3 +1,4 @@
+{/* eslint-disable jsx-a11y/no-autofocus */}
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SearchIcon from '../assets/icons/search.svg'
@@ -17,7 +18,7 @@ export default function Search() {
         clearTimeout(timeoutId.current)
         timeoutId.current = setTimeout(() => {
             navigate(term ? `/search/${term}` : '/search')
-        }, 300)
+        }, 500)
     }
 
     useEffect(() => {
@@ -36,6 +37,8 @@ export default function Search() {
                 value={searchTerm}
                 onChange={onSearchChange}
                 autoCorrect='off'
+                autoCapitalize='off'
+                autoFocus
             />
             <SearchIcon className='search-icon' />
         </form>
