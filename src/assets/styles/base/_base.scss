@@ -17,6 +17,7 @@ body {
 
 input {
     @include outline(#fff);
+    font-family: inherit;
 }
 
 button {
