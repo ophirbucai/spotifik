@@ -1,9 +1,10 @@
 main.content:has(.playlist),
 main.content:has(.genre) {
   position: relative;
+
   .main-header {
     top: 0;
-    z-index: 2;
+    z-index: 1;
     position: absolute;
   }
 }
@@ -22,12 +23,16 @@ main.content:has(.genre) {
     display: none;
   }
   @keyframes show {
-    from { opacity: 0; }
-    100% { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   &__content {
-    background: linear-gradient(to bottom, var(--bg-content-top), var(--bg-content-bottom) 50%);
+    background: linear-gradient(to bottom, var(--bg-content-top), var(--bg-content-bottom) 33vh);
   }
 
   &__header {
@@ -42,13 +47,11 @@ main.content:has(.genre) {
     background: linear-gradient(to bottom, var(--bg-header-top), var(--bg-header-bottom));
 
     .thumbnail {
-      grid-column: img;
       align-self: end;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .details {
-      grid-column: details;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -80,29 +83,39 @@ main.content:has(.genre) {
     }
   }
 
-
   &__table {
     padding: 0 16px;
-    --col1: 100%;
+    --col1: 50%;
+    --col2: 10%;
+    display: grid;
+    grid-template-columns: minmax(16px, auto) 1fr [last] minmax(120px, auto);
 
     &__header,
-    &__content .track {
+    &__content,
+    .track {
       display: grid;
-      $gtc: [index] var(--tracklist-index-column-width, 16px) [first] minmax(120px, var(--col1, 4fr)) [last] minmax(120px, var(--col2, 1fr));
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
       grid-template-rows: var(--row-height, 56px);
-      grid-template-columns: $gtc;
       align-items: center;
-      padding: 0 16px;
-      gap: 16px;
     }
 
     &__header {
-      font-size: rem(14px);
+      padding: 0 16px;
+      gap: 16px;
       color: $colorsubdued;
+      font-size: rem(14px);
+      border-bottom: 1px solid hsla(0, 0%, 100%, .1);
+      margin-bottom: 10px;
       --row-height: 35px;
-      white-space: nowrap;
 
-      .five {
+      > :first-child {
+        text-align: end;
+        justify-self: center;
+      }
+
+      > :last-child {
+        grid-column: last;
         justify-self: center;
 
         .clock-icon {
@@ -111,87 +124,82 @@ main.content:has(.genre) {
       }
     }
 
-    .index, .one {
-      grid-column: index;
-      justify-self: end;
-      color: $colorsubdued;
-    }
-
-
-    .track {
-      white-space: nowrap;
-      position: relative;
-
-
-      &:hover {
+    &__content {
+      .track {
+        gap: 16px;
         border-radius: 4px;
-        background-color: hsla(0, 0%, 100%, .1);
+        padding: 0 16px;
 
-        .index {
-          color: transparent;
+        > :first-child {
+          position: relative;
+          justify-self: center;
 
           .btn {
-            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            fill: white;
+            display: none;
           }
         }
-      }
 
-      .index .btn {
-        display: none;
-        top: 50%;
-        transform: translateY(-50%);
-        left: calc(var(--tracklist-index-column-width, 16px) / 2);
-        fill: white;
-        position: absolute;
-
-        svg {
-          width: em(16px);
-          height: em(16px);
-        }
-      }
-
-      .info {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        grid-row: 1;
-        align-self: flex-start;
-        gap: 12px;
-        grid-column: first;
-
-        .thumbnail {
-          width: 40px;
-          height: 40px;
+        > :last-child {
+          grid-column: last;
+          justify-self: center;
         }
 
-        &-song {
-          .artist, .name {
-            &:hover {
-              text-decoration: underline;
-              cursor: pointer;
-              color: white;
-            }
+        > :nth-child(2) {
+          display: inline-grid;
+          grid-template-columns: 40px 1fr;
+          align-items: center;
+          justify-items: start;
+          grid-column-gap: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          .thumbnail {
+            grid-row: span 2;
+          }
+
+          .name, .artist {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            letter-spacing: -0.05px;
+          }
+
+          .name {
+            line-height: 1.2;
+            font-size: rem(14px);
+            font-weight: 600;
           }
 
           .artist {
-            margin-top: 3px;
             color: $colorsubdued;
             font-size: rem(13px);
+            font-weight: 500;
+          }
+        }
+
+        &:hover {
+          background-color: hsla(0, 0%, 100%, .1);
+
+          &:after {
+            top: 0;
+            bottom: 0;
+          }
+
+          > :first-child {
+            color: transparent;
+
+            .btn {
+              display: block;
+            }
           }
         }
       }
-
-      .length {
-        grid-column: last;
-        justify-self: center;
-      }
-    }
-
-    .divider {
-      border-bottom: 1px solid hsla(0, 0%, 100%, .1);
-      position: sticky;
-      z-index: 2;
-      margin-bottom: 16px;
     }
   }
 

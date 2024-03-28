@@ -1,0 +1,76 @@
+.track {
+  display: grid;
+  gap: 16px;
+  border-radius: 4px;
+  padding: 0 16px;
+
+  > :first-child {
+    position: relative;
+    justify-self: center;
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      fill: white;
+      display: none;
+    }
+  }
+
+  > :last-child {
+    grid-column: last;
+    justify-self: center;
+  }
+
+  > :nth-child(2) {
+    display: inline-grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    justify-items: start;
+    grid-column-gap: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .thumbnail {
+      grid-row: span 2;
+    }
+
+    .name, .artist {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      letter-spacing: -0.05px;
+    }
+
+    .name {
+      line-height: 1.2;
+      font-size: rem(14px);
+      font-weight: 600;
+    }
+
+    .artist {
+      color: $colorsubdued;
+      font-size: rem(13px);
+      font-weight: 500;
+    }
+  }
+
+  &:hover {
+    background-color: hsla(0, 0%, 100%, .1);
+
+    &:after {
+      top: 0;
+      bottom: 0;
+    }
+
+    > :first-child {
+      color: transparent;
+
+      .btn {
+        display: block;
+      }
+    }
+  }
+}

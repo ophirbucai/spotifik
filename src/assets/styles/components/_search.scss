@@ -1,12 +1,10 @@
-
 .search {
   position: relative;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 600px;
+  display: flex;
+  flex-basis: 500px;
 
   .search-input {
-    width: 100%;
+    flex: 1;
     background-color: $bg-entity;
     border: none;
     border-radius: $border-radius-full;
@@ -14,6 +12,7 @@
     padding: 6px 36px;
     font-size: rem(13px);
     height: em(48px);
+    font-weight: 500;
     text-overflow: ellipsis;
 
     &::placeholder {
@@ -46,26 +45,3 @@
   }
 }
 
-.search-results {
-  display: flex;
-
-  .search-result {
-    width: 200px;
-    height: 200px;
-    display: grid;
-    grid-template-areas: 'img / title';
-    align-items: end;
-    justify-items: center;
-
-    img {
-      grid-area: img;
-      width: 100%;
-      height: 100%;
-      border-radius: $border-radius;
-    }
-
-    span {
-      grid-area: title;
-    }
-  }
-}
