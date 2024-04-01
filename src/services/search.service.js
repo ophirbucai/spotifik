@@ -55,7 +55,7 @@ export const searchService = {
                     result = dummyArtists.find(({ _id }) => _id === id)
                     break
                 case 'playlist':
-                    result = dummyPlaylists.find(({ _id }) => _id === id)
+                    result = (await searchService.getPlaylists()).find(({ _id }) => _id === id)
                     break
                 case 'album':
                     throw 'Not implemented yet'
@@ -81,8 +81,11 @@ export const searchService = {
             console.log(e)
         }
     },
-    getPlaylists: () => {
+    getPlaylists: async () => {
         try {
+            if (!dummyPlaylists) {
+                dummyPlaylists = await processSongs(dummyTracks)
+            }
             return dummyPlaylists
         } catch (e) {
             console.log(e)
@@ -96,9 +99,9 @@ export const searchService = {
     //         console.log(e)
     //     }
     // },
-    getPlaylistsByGenre: (genre) => {
+    getPlaylistsByGenre: async (genre) => {
         try {
-            const playlists = dummyPlaylists.filter(({ genres }) => genres.includes(genre))
+            const playlists = (await searchService.getPlaylists()).filter(({ genres }) => genres.includes(genre))
             if (!playlists) return searchService._onError('No playlists found for ' + genre + '.')
             return { playlists, status: 'success', error: null }
         } catch (e) {
@@ -200,5 +203,4 @@ const processSongs = async (songs) => {
     }))
 }
 
-let dummyPlaylists;
-(async () => dummyPlaylists = await processSongs(dummyTracksData))()
+let dummyPlaylists = null
