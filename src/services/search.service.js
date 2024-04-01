@@ -200,4 +200,4 @@ const processSongs = async (songs) => {
     }))
 }
 
-const dummyPlaylists = await processSongs(dummyTracksData)
+const dummyPlaylists = (async () => await processSongs(dummyTracksData))()
