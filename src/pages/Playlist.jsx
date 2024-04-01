@@ -7,6 +7,7 @@ import { Thumbnail } from '../components/Thumbnail.jsx'
 import { useQueue } from '../store/useQueue.js'
 import { useColorPicker } from '../hooks/useColorPicker.js'
 import { PlayButton } from '../components/PlayButton.jsx'
+import { useEffect } from 'react'
 
 export default function Playlist() {
     const { id } = useParams()
@@ -14,10 +15,13 @@ export default function Playlist() {
     const { playlist, error, status } = useGetEntity('playlist', id)
     const { color, onImageLoad } = useColorPicker(playlist?.songs[0]?.youtubeId)
     const { add } = useQueue()
-    if (error) {
-        navigate('/404', { relative: 'path' })
-    }
     const count = playlist?.songs?.length
+
+    useEffect(() => {
+        if (error) {
+            navigate('/404', { relative: 'path' })
+        }
+    }, [error, navigate])
     return (
         <>
             {status === 'loading' && 'Loading track details...'}
