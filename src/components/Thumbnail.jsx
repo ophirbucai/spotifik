@@ -2,25 +2,23 @@ import { useEffect, useState } from 'react'
 import TrackIcon from '../assets/icons/track.svg'
 import PropTypes from 'prop-types'
 
-export const Thumbnail = ({ youtubeId, alt, onImageLoad, large = false }) => {
-    const [showPlaceholder, setShowPlaceholder] = useState(!youtubeId)
+export const Thumbnail = ({ youtubeId, cover, alt, onImageLoad, large = false }) => {
+    const [showPlaceholder, setShowPlaceholder] = useState(!youtubeId && !cover)
 
     function getCoverArt(youtubeId) {
-        return `/images/${youtubeId}`
+        return youtubeId ? `/images/${youtubeId}` : cover
     }
 
     useEffect(() => {
-        if (youtubeId) {
-            setShowPlaceholder(false)
-        }
-    }, [youtubeId])
+        setShowPlaceholder(!youtubeId && !cover)
+    }, [youtubeId, cover])
 
     const src = getCoverArt(youtubeId)
 
     return (
         <div className={'thumbnail' + (large ? ' large' : '')}>
             {showPlaceholder && <TrackIcon className='track-icon' />}
-            {!showPlaceholder && youtubeId &&
+            {!showPlaceholder &&
                 <img
                     key={youtubeId}
                     src={src}
@@ -43,5 +41,6 @@ Thumbnail.propTypes = {
     youtubeId: PropTypes.string,
     large: PropTypes.bool,
     alt: PropTypes.string,
-    onImageLoad: PropTypes.func
+    onImageLoad: PropTypes.func,
+    cover: PropTypes.string
 }

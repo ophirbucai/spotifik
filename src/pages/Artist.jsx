@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetEntity } from '../hooks/useGetEntity.jsx'
+import { useGetEntity } from '../hooks/useGetEntity'
 
 export default function Artist() {
     const { id } = useParams()

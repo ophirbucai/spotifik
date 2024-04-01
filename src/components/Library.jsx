@@ -7,16 +7,13 @@ import { LibraryList } from './LibraryList.jsx'
 import RecentsIcon from '../assets/icons/recents.svg'
 import SearchinlibraryIcon from '../assets/icons/searchinlibrary.svg'
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
 export const Library = () => {
     const [playlists, setPlaylists] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchLibrary = async () => {
-            const res = searchService.getPlaylists()
-            await sleep(1000)
+            const res = await searchService.getPlaylists()
             setPlaylists(res)
         }
         fetchLibrary()

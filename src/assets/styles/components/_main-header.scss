@@ -3,10 +3,10 @@
     height: 64px;
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
     transition: background-color 200ms ease-in-out;
 
-    >div {
+    > div {
         display: flex;
         gap: 8px;
     }
