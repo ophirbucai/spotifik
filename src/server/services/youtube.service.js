@@ -1,44 +1,47 @@
-import { google } from 'googleapis'
+import KeyValuePairService from './keyvaluepair.service.js'
+import { youtube } from '../server.js'
 
 export const youtubeService = {
     searchTracks
 }
-const youtube = google.youtube({
-    version: 'v3',
-    auth: 'AIzaSyCmUVMXTAptzORStHfS5s544rkc_GNUgRI',
-})
-async function searchTracks({ artistName, trackName, primaryGenreName, ...track }) {
-    const query = `${artistName} ${trackName}`
-    const { data } = await youtube.videos.list({
+const PATH = '../data/youtubeIds.json'
+
+async function searchTracks(query, trackId) {
+    // const query = `${artistName} ${trackName}`
+    const service = new KeyValuePairService(PATH)
+    const savedYoutubeId = service.get(trackId)
+    if (savedYoutubeId) {
+        return { youtubeId: savedYoutubeId }
+    }
+    // return { youtubeId: 'narFtb5tdTQ' }
+    const { data } = await youtube.search.list({
         part: 'snippet',
         type: 'video',
         videoCategoryId: 10,
         maxResults: 1,
-        q: query,
-        chart: 'mostPopular'
+        q: query
     })
-    console.log(data)
-    if (data.items.length === 1) {
-        
-        return {
-            _id: data.items[0].id,
-            trackName: trackName,
-            youtubeId: data.items[0].id,
-            artistName: artistName,
-            primaryGenre: primaryGenreName,
-            durationMs: track.trackTimeMillis,
-            releaseDate: track.releaseDate,
-            albumName: track.collectionName,
-            artistId: track.artistId,
-            trackId: track.trackId,
-            collectionId: track.collectionId,
-            previewUrl: track.previewUrl,
-            artworkUrl30: track.artworkUrl30,
-            artworkUrl70: track.artworkUrl70,
-            artworkUrl100: track.artworkUrl100
-        }
-        //data.items[0].id.videoId
-    }
+    service.save(trackId, data.items[0].id.videoId)
+    return { youtubeId: data.items[0].id.videoId }
+    // if (data.items.length === 1) {
+    //     return {
+    //         _id: trackId,
+    // trackName: trackName,
+    // youtubeId: data.items[0].id.videoId,
+    // artistName: artistName,
+    // primaryGenre: primaryGenreName,
+    // durationMs: track.trackTimeMillis,
+    // releaseDate: track.releaseDate,
+    // albumName: track.collectionName,
+    // artistId: track.artistId,
+    // trackId: trackId,
+    // collectionId: track.collectionId,
+    // previewUrl: track.previewUrl,
+    // artworkUrl30: track.artworkUrl30,
+    // artworkUrl70: track.artworkUrl70,
+    // artworkUrl100: track.artworkUrl100
+    // }
+    // }
 }
 
 
