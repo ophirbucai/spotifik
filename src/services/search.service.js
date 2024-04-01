@@ -14,7 +14,7 @@ export const searchService = {
             if (!tracks && !artists && !playlists) return searchService._onError('No results found for ' + searchTerm + '.')
             return searchService._onSuccess({ tracks, artists, playlists })
         } catch (e) {
-            console.log(e)
+            console.error(e)
             return searchService._onError('Something went wrong! Please try again in a few moments.')
         }
     },
@@ -28,7 +28,7 @@ export const searchService = {
             console.log(tracks)
             return searchService._onSuccess(tracks)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             return searchService._onError('Something went wrong! Please try again in a few moments.')
         }
     },
@@ -200,4 +200,5 @@ const processSongs = async (songs) => {
     }))
 }
 
-const dummyPlaylists = (async () => await processSongs(dummyTracksData))()
+let dummyPlaylists;
+(async () => dummyPlaylists = await processSongs(dummyTracksData))()
