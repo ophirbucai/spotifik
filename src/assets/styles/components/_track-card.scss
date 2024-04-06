@@ -3,18 +3,36 @@
   gap: 16px;
   border-radius: 4px;
   padding: 0 16px;
+  counter-increment: index;
+  cursor: default;
 
-  > :first-child {
+  .index {
     position: relative;
     justify-self: center;
+    padding: 12px;
+    cursor: default;
+    text-align: center;
+    color: white;
 
-    .btn {
+    svg {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      fill: white;
       display: none;
+    }
+
+    &:after {
+      left: 0;
+      right: 0;
+      position: absolute;
+      text-align: center;
+      content: counter(index);
+      color: $colorsubdued;
+      font-size: rem(14px);
+      font-weight: 500;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
@@ -57,6 +75,22 @@
     }
   }
 
+  @include media($breakpoint: tablet) {
+    .track {
+      position: relative;
+    }
+    .index {
+      position: absolute;
+      aspect-ratio: unset;
+      width: 100%;
+      color: transparent;
+
+      &:after {
+        color: transparent;
+      }
+    }
+  }
+
   &:hover {
     background-color: hsla(0, 0%, 100%, .1);
 
@@ -65,11 +99,13 @@
       bottom: 0;
     }
 
-    > :first-child {
-      color: transparent;
-
-      .btn {
+    .index {
+      svg {
         display: block;
+      }
+
+      &:after {
+        display: none;
       }
     }
   }

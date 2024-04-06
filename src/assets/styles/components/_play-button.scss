@@ -5,6 +5,10 @@
   position: relative;
   background-color: $color-primary-light;
   transition: background-color 33ms ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
 
   svg {
     width: 1.5em;
@@ -16,5 +20,15 @@
   &:focus-within {
     box-shadow: 0 0 0 0.1em $color-primary-light-hover;
     background-color: $color-primary-light-hover
+  }
+
+  &.hover {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin: 0.5em;
+    opacity: 0;
+    transform: translateY(1em);
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   }
 }

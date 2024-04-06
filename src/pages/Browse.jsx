@@ -1,42 +1,43 @@
-import { useEffect, useState } from 'react'
-import { searchService } from '../services/search.service.js'
-import { generateRandomColors } from '../utils/randomColor.js'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { generateRandomColors } from "../utils/randomColor.js";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useColumnCount } from "../hooks/useColumnCount.js";
+import { splitBySpaces } from "../utils/splitBySpaces.jsx";
 
 export default function Browse() {
-    const [colors, setColors] = useState(generateRandomColors())
-    const [genres, setGenres] = useState(null)
-    useEffect(() => {
-        const getGenres = () => {
-            const genres = searchService.getGenres()
-            setGenres(genres)
-        }
-        getGenres()
-    }, [])
+  const [colors, setColors] = useState([]);
+  const [genres, setGenres] = useState(null);
 
-    useEffect(() => {
-        fetch('/api').then(res => res.text()).then(console.log)
-    }, [])
+  useEffect(() => {
+    const getGenres = async () => {
+      const { data: genres } = await axios.get("/api/genre");
+      setColors(generateRandomColors(genres.length));
+      setGenres(genres);
+    };
+    getGenres();
 
-    return (
-        <div className='browse'>
-            <h1>Browse All</h1>
-            <section>
-                {genres && genres.map((genre, i) => (
-                    <Link
-                        to={`/genre/${genre._id}`}
-                        className='card'
-                        style={{ background: `rgb(${colors[i].join(' ')})` }}
-                        key={genre._id}
-                        state={{ color: colors[i] }}
-                    >
-                        {genre.name}
-                    </Link>
-                ))}
-            </section>
-            <button onClick={() => setColors(generateRandomColors(true))} title='Not happy with the colors?'>🪺</button>
-        </div>
-    )
+  }, []);
+
+  return (
+    <div className="browse">
+      <h1>Browse all</h1>
+      <section className="browse__cards">
+        {genres && genres.map((genre, i) => (
+          <Link
+            to={`/genre/${genre.key}`}
+            className="browse__card"
+            style={{ background: `rgb(${colors[i].join(" ")})` }}
+            key={genre.key}
+            state={{ color: colors[i], genre: genre.genre }}
+          >
+            {splitBySpaces(genre.genre)}
+          </Link>
+        ))}
+      </section>
+      <button onClick={() => setColors(generateRandomColors(genres.length, true))} title="Not happy with the colors?">🪺</button>
+    </div>
+  );
 }
 
 

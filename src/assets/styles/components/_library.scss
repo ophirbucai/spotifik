@@ -64,7 +64,7 @@
 
         div[role='group'] {
             pointer-events: all;
-            max-width: var(--sidebar-width, 200px);
+            max-width: var(--sidebar-width, 180px);
             overflow-x: scroll;
             scroll-behavior: smooth;
             flex-wrap: nowrap;
@@ -150,7 +150,7 @@
 
         &-item {
             $cover-size: 48px;
-            $item-width: calc(var(--sidebar-width, 200px) - $cover-size);
+            $item-width: calc(var(--sidebar-width, 180px) - $cover-size);
             @include transition(background-color, 50ms);
 
             &-wrapper {
@@ -219,6 +219,9 @@
             }
 
         }
+    }
+    &-empty {
+        display: none;
     }
 
 }

@@ -16,10 +16,11 @@
     background: linear-gradient(to bottom, var(--bg-header-top), var(--bg-header-bottom));
     padding: 106px 16px 16px 16px;
     h1 {
-      font-size: rem(96px);
-      font-weight: bold;
-      text-transform: capitalize;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+      word-break: break-word;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: clamp(#{rem(42px)}, 10vw, #{rem(96px)});
+      font-weight: 900;
     }
   }
 

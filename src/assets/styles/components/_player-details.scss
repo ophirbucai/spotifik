@@ -12,7 +12,7 @@
   &:after {
     content: '';
     display: block;
-    background-image: linear-gradient(to left, black 0px, transparent 16px);
+    background-image: linear-gradient(to left, var(--bg-base) 0px, transparent 16px);
     pointer-events: none;
     right: 0;
     top: 0;

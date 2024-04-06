@@ -1,46 +1,47 @@
-import GobackIcon from '../assets/icons/goback.svg'
-import GoforwardIcon from '../assets/icons/goforward.svg'
-import { useLocation, useNavigate, useNavigationType } from 'react-router-dom'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import GobackIcon from "../assets/icons/goback.svg";
+import GoforwardIcon from "../assets/icons/goforward.svg";
+import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 
-const Search = lazy(() => import('../components/Search.jsx'))
+const Search = lazy(() => import("../components/Search.jsx"));
 
 export const MainHeader = () => {
-    const location = useLocation()
-    const [historyForward, setHistoryForward] = useState(0)
-    const navigate = useNavigate()
-    const navType = useNavigationType()
+  const location = useLocation();
+  const [historyForward, setHistoryForward] = useState(0);
+  const navigate = useNavigate();
+  const navType = useNavigationType();
 
-    function navigateBack() {
-        setHistoryForward(prev => prev + 1)
-        navigate(-1)
+  function navigateBack() {
+    setHistoryForward(prev => prev + 1);
+    navigate(-1);
+  }
+
+  function navigateForward() {
+    setHistoryForward(prev => prev - 1);
+    navigate(1);
+  }
+
+  useEffect(() => {
+    if (navType === "PUSH") {
+      setHistoryForward(0);
     }
+  }, [navType]);
 
-    function navigateForward() {
-        setHistoryForward(prev => prev - 1)
-        navigate(1)
-    }
-
-    useEffect(() => {
-        if (navType === 'PUSH') {
-            setHistoryForward(0)
-        }
-    }, [navType])
-
-    return (
-        <header className='main-header'>
-            <div>
-                <button onClick={navigateBack} disabled={window.history.state.idx === 0}>
-                    {<GobackIcon className='goback-icon' />}
-                </button>
-                <button onClick={navigateForward} disabled={historyForward <= 0}>
-                    {<GoforwardIcon className='goforward-icon' />}
-                </button>
-            </div>
-            {location.pathname.startsWith('/search') && <Suspense><Search /></Suspense>}
-        </header>
-    )
-}
+  return (
+    <header className="main-header">
+      <div>
+        <button onClick={navigateBack} disabled={window.history.state.idx === 0}>
+          {<GobackIcon className="goback-icon" />}
+        </button>
+        <button onClick={navigateForward} disabled={historyForward <= 0}>
+          {<GoforwardIcon className="goforward-icon" />}
+        </button>
+      </div>
+      {location.pathname.startsWith("/search") && <Suspense><Search /></Suspense>}
+      {location.pathname === "/" && <a style={{ marginLeft: "auto" }} href="mailto:me@develophir.com">Request a Feature</a>}
+    </header>
+  );
+};
 
 
 //TODO: Implement profile, notifications, and install app buttons

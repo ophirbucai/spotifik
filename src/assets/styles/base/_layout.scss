@@ -1,30 +1,111 @@
 .main-layout {
-    background: #000;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
+  background: #000;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
             'sidebar main-content'
             'now-playing now-playing';
-    gap: $panel-gap;
-    height: 100vh;
-    border: solid $panel-gap transparent;
-    box-sizing: border-box;
+  gap: $panel-gap;
+  height: 100vh;
+  border: solid $panel-gap transparent;
+  box-sizing: border-box;
+
+  > nav.sidebar {
+    grid-area: sidebar;
+  }
+
+  > main.content {
+    overflow: clip auto;
+    border-radius: 8px;
+    background-color: $background-base;
+    grid-area: main-content;
+    display: grid;
+    grid-auto-rows: auto 1fr;
+  }
+
+  > footer.now-playing {
+    grid-area: now-playing;
+  }
+
+  @include media(tablet) {
+    grid-template-columns: 100dvw;
+    max-height: 100dvh;
+    gap: 0;
+    border: 0;
+    grid-template-rows: 1fr auto min-content;
+    grid-template-areas:
+            'main-content'
+            'now-playing'
+            'sidebar';
+    > main.content {
+      border-radius: 0;
+      grid-area: main-content;
+
+      .main-header {
+        padding-top: $panel-gap;
+      }
+
+      .genre__header {
+        border-radius: 0;
+      }
+
+      .station__table {
+        grid-template-columns: 1fr auto;
+      }
+    }
+    > footer.now-playing {
+      padding-inline: $panel-gap;
+    }
 
     > nav.sidebar {
-        grid-area: sidebar;
-    }
+      .resize-handle {
+        display: none;
+      }
 
-    > main.content {
-        overflow: clip auto;
-        border-radius: 8px;
-        background-color: $background-base;
-        grid-area: main-content;
-        display: grid;
-        grid-auto-rows: auto 1fr;
-    }
+      .navigation {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        font-size: 0.7rem;
+        letter-spacing: -0.03em;
+        padding: 0;
 
-    > footer.now-playing {
-        grid-area: now-playing;
+        li {
+          flex: 1;
+          padding: 0;
+
+
+          a {
+            gap: 4px;
+            font-weight: 500;
+            flex-direction: column;
+            justify-content: center;
+            padding: $panel-gap;
+
+            &.active {
+              animation: spring-pop-in 0.3s ease-in-out;
+            }
+
+            @keyframes spring-pop-in {
+              0% {
+                transform: scale(0.9);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
+
+            svg {
+
+            }
+          }
+        }
+      }
+
+      .library {
+        display: none;
+      }
     }
+  }
 }

@@ -1,40 +1,65 @@
 .player-controls {
-    max-width: 722px;
-    width: 40%;
-    text-align: center;
-    align-self: center;
+  max-width: 722px;
+  width: 40%;
+  text-align: center;
+  align-self: center;
 
-    &-top {
-        display: flex;
-        justify-content: center;
-        @media screen and (max-width: 480px) {
-            --gap: 8px;
+  &-top {
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 480px) {
+      --gap: 8px;
+    }
+    gap: var(--gap, 16px);
+    margin-bottom: 12px;
+
+    button {
+      color: #000;
+    }
+  }
+
+  @include media($breakpoint: tablet) {
+    .player-controls-mobile {
+      display: flex;
+      gap: 0.2em;
+
+      button {
+        display: inline-block;
+        aspect-ratio: 1;
+
+        svg {
+          width: 1.5em;
+          height: 1.5em;
         }
-        gap: var(--gap, 16px);
-        margin-bottom: 12px;
+      }
+    }
+  }
+
+  &-mobile {
+    display: none;
+  }
+
+  &-bottom {
+    position: relative;
+    margin-bottom: 4px;
+
+    .progress-time-now {
+      right: 100%;
+      transform: translate(-50%, -50%);
     }
 
-    &-bottom {
-        position: relative;
-        margin-bottom: 4px;
-
-        .progress-time-now {
-            right: 100%;
-            transform: translate(-50%, -50%);
-        }
-
-        .progress-time-end {
-            left: 100%;
-            transform: translate(50%, -50%);
-        }
-
-        .progress-time-now,
-        .progress-time-end {
-            white-space: nowrap;
-            top: 50%;
-            position: absolute;
-            font-size: 12px;
-            color: $color-player-faded;
-        }
+    .progress-time-end {
+      left: 100%;
+      transform: translate(50%, -50%);
     }
+
+    .progress-time-now,
+    .progress-time-end {
+      white-space: nowrap;
+      top: 50%;
+      position: absolute;
+      font-size: 12px;
+      color: $color-player-faded;
+    }
+  }
 }

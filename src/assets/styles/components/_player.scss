@@ -1,50 +1,122 @@
-.player {
-    grid-area: now-playing-row;
-    height: 72px;
-    display: flex;
+@include media(tablet) {
+  .now-playing {
+    display: none;
 
-    button {
-        padding: 5px;
-        &:disabled {
-            pointer-events: none;
-        }
-        &:hover {
-            svg:not(.play-icon):not(.pause-icon),
-            #volume-icon {
-                fill: white;
-            }
-        }
-        svg {
-            transition: fill 50ms;
-        }
+    .player {
+      border-radius: $border-radius-small;
 
-        &:has(.play-icon),
-        &:has(.pause-icon) {
-            fill: black;
-            border-radius: $border-radius-full;
-            background-color: white;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
+      .player-details {
+        width: auto;
+        min-width: 0;
+        padding: $panel-gap 0 $panel-gap $panel-gap;
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 12px;
+          height: 100%;}
+      }
+
+      .player-controls {
+        width: auto;
+        padding: $panel-gap $panel-gap $panel-gap 0;
+
+        button {
+          .previous-icon, .next-icon {
+            width: 1em;
+            height: 1em;
+          }
+
+          &:has(.play-icon, .pause-icon) {
+            background: none;
 
             &:hover, &:focus-within {
-                box-shadow: 0 0 0 1px white;
+              scale: 1.04;
+              box-shadow: none;
             }
+          }
         }
+      }
 
+      .player-controls-top,
+      .player-controls-bottom,
+      .player-aside {
+        display: none;
+      }
     }
 
-    .switch-icon,
-    .previous-icon,
-    .repeat-icon,
-    .next-icon, {
-        fill: $icon-player-controls;
+    &:has(.player[data-visible="true"]) {
+      display: block;
+
+      .player {
+        grid-template-columns: 1fr auto;
+        width: 100%;
+        max-width: 100%;
+        justify-content: space-between;
+
+        .player-details {
+          grid-template-columns: 40px auto;
+        }
+      }
+    }
+  }
+}
+
+.player {
+  grid-area: now-playing-row;
+  display: flex;
+  transition: height 300ms;
+  @include media($breakpoint: tablet) {
+    background: rgb(#{var(--bg-base, '18 18 18')} / 45%);
+  }
+
+  button {
+    padding: 5px;
+
+    &:disabled {
+      pointer-events: none;
     }
 
-    #volume-icon {
-        fill: $icon-player-aside;
+    &:hover, &:focus-visible {
+      svg:not(.play-icon):not(.pause-icon),
+      #volume-icon {
+        fill: white;
+      }
     }
+
+    svg {
+      transition: fill 50ms;
+    }
+
+    &:has(.play-icon),
+    &:has(.pause-icon) {
+      fill: black;
+      border-radius: $border-radius-full;
+      background-color: white;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+
+      &:hover, &:focus-within {
+        box-shadow: 0 0 0 1px white;
+      }
+    }
+
+  }
+
+  .switch-icon,
+  .previous-icon,
+  .repeat-icon,
+  .next-icon, {
+    fill: $icon-player-controls;
+  }
+
+  #volume-icon {
+    fill: $icon-player-aside;
+  }
 }

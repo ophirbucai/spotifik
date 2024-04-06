@@ -1,27 +1,35 @@
 .browse {
   padding: 0 16px;
-  margin-top: 16px;
+  margin-top: $panel-gap;
   h1 {
-    font-size: rem(24px);
+    font-size: rem(22px);
     margin-top: 16px;
   }
   section {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 8px;
     margin-top: 16px;
-
-    .card {
-      aspect-ratio: 1;
-      border-radius: 8px;
-      font-size: rem(20px);
-      letter-spacing: -0.02em;
-      font-weight: 700;
-      padding: 16px;
-
-      a {
-        font-weight: 700;
-      }
+  }
+  &__cards {
+    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    @include media(tablet) {
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
+  }
+  &__card {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    font-size: rem(24px);
+    letter-spacing: -0.025em;
+    font-weight: 750;
+    max-width: 100%;
+    word-break: break-word;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    padding: 16px;
+    line-height: 1;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, .1), -1px -1px 0 rgba(0, 0, 0, .02);
   }
 }

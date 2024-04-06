@@ -1,10 +1,17 @@
-import { useGetEntity } from '../hooks/useGetEntity.js'
-import { Link, useParams } from 'react-router-dom'
+// import { useGetEntity } from '../hooks/useGetEntity.js'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 export default function Track() {
-    const { id } = useParams()
-    const { track, error, status } = useGetEntity('track', id)
+    // const { id } = useParams()
+    // const { track, error, status } = useGetEntity('track', id)
+    const track = {
+        name: 'Hello',
+        artist: { name: 'Adele' },
+        thumbnail: 'https://via.placeholder.com/300'
+    }
+    const status = 'success'
+    const error = null
 
     return (
         <div className='track-page'>

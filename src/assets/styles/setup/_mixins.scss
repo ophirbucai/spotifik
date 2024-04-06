@@ -32,20 +32,16 @@
   }
 }
 
-@mixin media($breakpoint) {
-  @if $breakpoint == mobile {
-    @media (max-width: 768px) {
-      @content;
+//desktop first
+@mixin media($breakpoint: tablet) {
+    @if $breakpoint == tablet {
+        @media screen and (max-width: 640px) {
+        @content;
+        }
     }
-  }
-  @if $breakpoint == tablet {
-    @media (min-width: 768px) and (max-width: 1024px) {
-      @content;
+    @if $breakpoint == desktop {
+        @media screen and (min-width: 1025px) {
+        @content;
+        }
     }
-  }
-  @if $breakpoint == desktop {
-    @media (min-width: 1024px) {
-      @content;
-    }
-  }
 }

@@ -1,0 +1,26 @@
+.shimmer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: auto;
+
+  > div {
+    animation: shimmer 1s infinite linear;
+    padding: 8px;
+    flex: 1;
+    color: transparent;
+    border-radius: $border-radius-small;
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+    background: linear-gradient(to right, $bg-library 8%, $bg-library-hover 18%, $bg-library 33%);
+    background-size: 1000px 100%;
+    background-repeat: no-repeat;
+  }
+}

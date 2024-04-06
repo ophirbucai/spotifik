@@ -1,13 +1,16 @@
-.playlists {
+.stations {
   display: grid;
-  grid-template-columns: repeat(var(--column-count, 4), minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--column-width, 180px), 1fr));
 
-  .playlist-card {
+  .station-card {
     border-radius: $border-radius-small;
     text-shadow: 0 5px 15px #12121235;
     transition: background-color 33ms ease-in-out;
-    position: relative;
     padding: 12px;
+
+    .thumbnail {
+      filter: brightness(1.15) saturate(1.1) blur(0.1px);
+    }
 
     &:hover {
       background-color: $bg-highlight;
@@ -15,12 +18,14 @@
     }
 
     .name {
-      height: 1lh;
+      min-height: em(26px);
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      line-height: 1.5;
     }
+
     small {
       color: $color-player-faded;
       -webkit-box-orient: vertical;

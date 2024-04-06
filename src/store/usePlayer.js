@@ -1,8 +1,3 @@
-import { create } from 'zustand'
+// import { create } from "zustand";
 
-export const usePlayer = create((set) => ({
-    isMuted: false,
-    setIsMuted: (value) => set({ isMuted: value }),
-    currentVolume: 100,
-    setCurrentVolume: (value) => set({ currentVolume: value })
-}))
+// Todo: Move usePlayer back to this file after the presentation.
