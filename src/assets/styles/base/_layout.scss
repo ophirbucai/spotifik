@@ -12,6 +12,9 @@
   box-sizing: border-box;
 
   > nav.sidebar {
+    .navigation-wrapper {
+      border-radius: 0;
+    }
     grid-area: sidebar;
   }
 
@@ -43,19 +46,24 @@
       grid-area: main-content;
 
       .main-header {
-        padding-top: $panel-gap;
       }
 
       .genre__header {
         border-radius: 0;
       }
-
-      .station__table {
-        grid-template-columns: 1fr auto;
+      .station {
+        &__header {
+         padding-top: em(80px);
+        }
+        &__table {
+          grid-template-columns: 1fr 80px;
+        }
       }
+
     }
     > footer.now-playing {
       padding-inline: $panel-gap;
+      background: $background-base;
     }
 
     > nav.sidebar {
@@ -64,24 +72,21 @@
       }
 
       .navigation {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         font-size: 0.7rem;
         letter-spacing: -0.03em;
-        padding: 0;
+        padding: 2px $panel-gap;
+        justify-content: space-around;
 
         li {
-          flex: 1;
-          padding: 0;
-
-
           a {
             gap: 4px;
             font-weight: 500;
             flex-direction: column;
             justify-content: center;
-            padding: $panel-gap;
+            text-align: center;
+            white-space: nowrap;
 
             &.active {
               animation: spring-pop-in 0.3s ease-in-out;

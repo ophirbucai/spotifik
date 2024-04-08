@@ -28,14 +28,12 @@ button {
   padding: 0;
   background-color: transparent;
   transition: all 0.2s ease;
+  cursor: pointer;
   @include outline;
-
-  &:not(:disabled) {
-    cursor: pointer;
-  }
 
   &:disabled {
     opacity: 0.5;
+    cursor: default;
   }
 }
 
@@ -59,10 +57,6 @@ h1, h2, h3, h4, h5, h6, p, a {
   display: none;
   visibility: hidden;
 }
-
-//img {
-//  content-visibility: auto;
-//}
 
 
 //:root {

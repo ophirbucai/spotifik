@@ -12,19 +12,14 @@ export function formatTime(seconds) {
 
 export const TrackCard = ({ song }) => {
   const { add } = useQueue();
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 
   return (
-    <li className="track">
-      <button
-        className="index"
-        onClick={() => add(song._id)}
-        onDoubleClick={() => add(song._id)}
-        onTouchEnd={() => add(song._id)}
-        aria-label={`Play ${song.trackName}`}
-      >
+    <button className="track" onClick={() => add(song._id)}>
+      <div className="index" aria-label={`Play ${song.trackName}`}>
         <PlayIcon />
-      </button>
+      </div>
       <div className="info">
         <div className="thumbnail">
           <Thumbnail cover={song.artworkUrl100} youtubeId={""} alt={song.trackName} />
@@ -35,7 +30,7 @@ export const TrackCard = ({ song }) => {
       {/*<div className='album'> Album</div>*/}
       {/*<div className='date'>{new Date(song?.releaseDate).toLocaleDateString('en')}</div>*/}
       <div className="length">{formatTime(Math.round(song.durationMs / 1000))}</div>
-    </li>
+    </button>
   );
 };
 

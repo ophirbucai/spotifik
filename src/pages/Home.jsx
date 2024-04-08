@@ -35,16 +35,15 @@ export default function Home() {
 
   return (
     <div className="home">
-      <section>
+      <Link to="/station/hip-hop">
         <div className="banner play-within">
           <div>
             <h1>50 Years to <span>Hip Hop</span></h1>
             <p>Explore the history of Hip Hop through the decades</p>
           </div>
           <PlayButton hover onClick={(e) => fetchStationAndPlay(e, "hip-hop")} />
-          <Link to="/station/hip-hop" className="link-overlay" />
         </div>
-      </section>
+      </Link>
       <section>
         <h2>Popular stations</h2>
         <div className="stations" ref={containerRef} style={cssVariable}>

@@ -9,6 +9,7 @@ import { PlayButton } from "../components/PlayButton.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Shimmer } from "../components/Shimmer.jsx";
+import { splitBySpaces } from "../utils/splitBySpaces.jsx";
 
 export default function Station() {
   const { id } = useParams();
@@ -51,7 +52,7 @@ export default function Station() {
             />
             <header className="details">
               <small className="entity">Playlist</small>
-              <h1 className="name">{station.name}</h1>
+              <h1 className="name">{splitBySpaces(station.name)}</h1>
               {station.description && <p className="description">{station.description}</p>}
               <div>
                 {station.author && <span className="author">{station.author}</span>}

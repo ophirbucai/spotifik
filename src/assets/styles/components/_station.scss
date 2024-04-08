@@ -50,6 +50,7 @@ main.content:has(.genre) {
     padding: 106px 16px 16px 16px;
     position: relative;
     background: linear-gradient(to bottom, var(--bg-header-top), var(--bg-header-bottom));
+    word-break: break-word;
 
     .thumbnail {
       align-self: end;
@@ -63,7 +64,7 @@ main.content:has(.genre) {
       gap: 8px;
 
       .entity {
-        font-size: 0.8rem;
+        font-size: rem(13px);
         font-weight: 600;
       }
 
@@ -72,17 +73,19 @@ main.content:has(.genre) {
         letter-spacing: -1px;
         font-size: clamp(2rem, 100vw - var(--sidebar-width, 0px) - 750px, 4.5rem);
         line-height: 1;
+        display: inline-flex;
+        flex-wrap: wrap;
       }
 
       .description {
         color: $color-text-faded;
-        font-size: 0.9rem;
+        font-size: rem(14px);
         line-height: 1.4;
       }
 
       .author {
         font-weight: 700;
-        font-size: 0.9rem;
+        font-size: rem(14px);
       }
 
     }

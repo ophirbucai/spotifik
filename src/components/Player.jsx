@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { PlayerDetails } from "./PlayerDetails.jsx";
 import { PlayerControls } from "./PlayerControls.jsx";
 import { PlayerProgress } from "./PlayerProgress.jsx";
-import { PlayerAside, usePlayer } from "./PlayerAside.jsx";
+import { PlayerAside, usePlayer } from "./PlayerAside.tsx";
 import style from "../assets/styles/modules/youtube.module.scss";
 import { useQueue } from "../store/useQueue.js";
 import axios from "axios";
@@ -31,6 +31,7 @@ export const Player = () => {
 
   useEffect(() => {
     const getTrack = async () => {
+      setSongStatus(initialSongStatus);
       if (!first) return;
       setSongStatus(initialSongStatus);
       const { data } = await axios.get("/api/song/" + first);
@@ -40,10 +41,6 @@ export const Player = () => {
 
   }, [first]);
 
-  useEffect(() => {
-    setSongStatus(initialSongStatus);
-
-  }, [first]);
 
   useEffect(() => {
     if (songStatus.play) {
@@ -60,7 +57,7 @@ export const Player = () => {
     e.target.playVideo();
     const duration = e.target.getDuration();
     setSongStatus({ ...initialSongStatus, duration });
-    e.target.setVolume(isMuted ? 0 : currentVolume);
+    e.target.setVolume(isMuted ? 0 : (currentVolume || 50));
   };
 
   const onStateChange = ({ data }) => {

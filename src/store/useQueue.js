@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export const useQueue = create((set) => ({
+export const useQueue = create(persist((set) => ({
   queue: [],
   pastQueue: [],
   /**@param items Accepts parameters as _id: string[] */
@@ -11,6 +12,8 @@ export const useQueue = create((set) => ({
     pastQueue: state.pastQueue.slice(0, -1)
   })),
   addNext: (item) => set((state) => ({ queue: [item, ...state.queue] })),
-  init: (data) => set({ queue: data.queue || [], pastQueue: data.pastQueue || [] }),
+  init: (data) => set({ queue: data.queue || [], pastQueue: data.pastQueue || [] })
+}), {
+  name: "queue",
+  storage: createJSONStorage(() => localStorage, (state) => state)
 }));
-
